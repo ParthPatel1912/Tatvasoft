@@ -302,60 +302,6 @@ h2 {
     text-align: center;
 }
 
-
-/* 
-footer {
-    background-color: #111111;
-}
-
-.footer-main {
-    padding: 20px;
-}
-
-.footer-main .col-md-8 {
-    margin-top: 50px;
-}
-
-.footer-main .col-md-1 {
-    margin-top: 50px;
-    color: white;
-}
-
-.footer-main .col-md-1 .bi {
-    margin: 10px;
-}
-
-.footer-main .col-md-10 ul {
-    list-style-type: none;
-    color: white;
-    text-align: center;
-    margin-top: 30px;
-}
-
-.footer-main .col-md-10 ul li {
-    display: inline;
-    margin: 10px;
-}
-
-.footer-social {
-    margin-right: 50px;
-}
-
-.footer-last-row {
-    margin: 0px 0 20px;
-    height: 60px;
-    padding: 15px 15px 12px 15px;
-    opacity: 0.8;
-    background-color: #292929;
-    color: white;
-    text-align: center;
-}
-
-.footer-last-row .btn {
-    border-radius: 2rem;
-    float: right;
-} */
-
 .footer_section {
     background-color: #111111;
 }
@@ -416,10 +362,15 @@ footer {
     .navbar_main {
         background-color: transparent;
         display: flex;
+        height: 70px;
     }
     #navbarText {
         background-color: gray;
         padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    .home-service-provider {
+        margin-top: -60px;
     }
     .navbar_book {
         background-color: transparent;

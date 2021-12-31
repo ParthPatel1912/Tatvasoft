@@ -250,39 +250,21 @@
     .navbar_main {
         background-color: transparent;
         display: flex;
+        height: 70px;
     }
     #navbarText {
         background-color: gray;
         padding-bottom: 20px;
+        padding-top: 20px;
     }
-    .navbar_book {
-        background-color: transparent;
+    .home-service-provider {
+        margin-top: -60px;
     }
-    .navbar_book,
-    .navbar_prices,
-    .navbar_login,
-    .navbar_helper {
-        border: none;
-    }
-    .navbar .nav-link {
-        padding: 0;
-    }
-    .navbar .nav-item {
-        padding: 8px 5px;
-        margin: 0;
-    }
-    .navbar_login,
-    .navbar_helper {
-        text-align: center;
-        width: fit-content !important;
-        align-items: center !important;
-        margin-top: 7px !important;
-    }
-    .navbar_helper a,
-    .navbar_login a {
-        align-items: center !important;
-        text-align: center;
-        padding: 8px 12px 8px 12px !important;
+}
+
+@media only screen and(max-width: 1197px) {
+    .login-form {
+        padding-top: -200px;
     }
 }
 
