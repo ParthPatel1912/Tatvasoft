@@ -123,6 +123,18 @@
     text-align: center;
 }
 
+.about_back {
+    z-index: -11;
+}
+
+.back_left {
+    left: 0;
+}
+
+.back_right {
+    right: 0;
+}
+
 .Roboto-Bold-30 {
     font-size: 30px;
     font-weight: bold;
