@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Service History</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Google Fonts -->
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+
+    <link href="../1 HomePage/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../1 HomePage/assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/style.css" rel="stylesheet">
+
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').dataTable({
+                "bPaginate": true,
+                "bFilter": false,
+                "bInfo": false,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1] /* 1st one, start by the right */
+                }]
+            });
+
+        })
+    </script>
+</head>
+
+<body id="body">
+
+    <!-- Header -->
+
+    <header class="sticky-top">
+        <div class=" main position-relative">
+            <nav class="navbar navbar-expand-xl home-navbar" id="navbar">
+                <div class="container-fluid navbar_main">
+                    <a class="navbar-brand py-0 ps-4">
+                        <img src="../1 HomePage/assets/img/logo-large.png" class="img-fluid" alt="" height="53px" width="75px">
+                    </a>
+                    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="40"
+                            height="40"
+                            fill="#fff"
+                            class="bi bi-list"
+                            viewBox="0 0 16 16"
+                            >
+                            <path
+                                fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
+                        </svg>
+                    </button>
+                    <div class="collapse navbar-collapse navbar_list" id="navbarText">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                            <li class="nav-item">
+                                <a class="nav-link " href="./Prices.html">Prices & services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Warranty </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Contact</a>
+                            </li>
+                            <li class="nav-item ">
+                                <img src="../1 HomePage/assets/img/icon-notification.png" class=" nav-border nav-link-image">
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="../1 HomePage/assets/img/user.png " alt="united kingdom flag" class="county-flag nav-link-image-user">
+                                </a>
+                                <ul class="dropdown-menu padding-left" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="dropdown-item bordered" href="#">
+                                            Welcome,<br>
+                                            Sandip Patel
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            My Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            My Settings
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="Upcoming-service-welcome">
+        <div class="container">
+            <div class="row text-center">
+                <h1> Welcome, <b>Gaurang!</b></h1>
+            </div>
+        </div>
+    </section>
+
+    <section id="Upcoming-service-list">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-2 service-menu">
+                    <div class="side-menu-item">
+                        Dashboard
+                    </div>
+                    <div class="side-menu-item  side-menu-item-active">
+                        Service History
+                    </div>
+                    <div class="side-menu-item">
+                        Service Schedule
+                    </div>
+                    <div class="side-menu-item">
+                        Favourite Pros
+                    </div>
+                    <div class="side-menu-item">
+                        Invoices Notifications
+                    </div>
+                    <div class="side-menu-item">
+                        Notifications
+                    </div>
+                </div>
+                <div class="col-md-8 table-responsive-lg table-responsive-md table-responsive-sm table-responsive">
+                    <div>
+                        <span class="font-24"> <b> Service History </b> </span>
+                        <span class="float-right">
+                            <input type="button" class="btn dark-blue btn-sm rounded-pill" value="Export"></td>
+                        </span>
+                    </div>
+                    <table id="example" class="table-responsive-lg table-responsive-md table-responsive-sm table-responsive" style="width:100%">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Service Details</th>
+                                <th>Service Provider</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th>Rate SP</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="cancelled"> Cancelled </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                            <tr>
+                                <td class="flex text-left">
+                                    <div><img src="../1 HomePage/assets/img/calendar2.png"><b> 09/04/2018</b> </div>
+                                    <span>12:00 - 18:00</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div class="service-history-icon d-flex"><img src="../1 HomePage/assets/img/cap.png"></div>
+                                        <div><span class="d-block"> lyun Waston </span>
+                                            <div class="padding-star">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star1.png" class="service-history-star-icon">
+                                                <img src="../1 HomePage/assets/img/star2.png" class="service-history-star-icon"> 4
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td class="active-font">
+                                    <div class="bold-blue"> <b>€63</b> </div>
+                                </td>
+                                <td><span class="completed"> Completed </span></td>
+                                <td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="footer_section w-100 footer-line ">
+            <div class="footer_main d-flex justify-content-around align-items-center ">
+                <div class="footer_left ">
+                    <img src="../1 HomePage/assets/img/footer-logo.png " alt=" " height="78 " width="106 ">
+                </div>
+                <div class="footer_mid ">
+                    <ul class="d-flex p-0 text-center ">
+                        <li>
+                            <a href="../1 HomePage/HomePage.html " class="text-decoration-none ">HOME</a>
+                        </li>
+                        <li>
+                            <a href="../5 About/About.html " class="text-decoration-none ">ABOUT</a>
+                        </li>
+                        <li>
+                            <a href="# " class="text-decoration-none ">TESTIMONIAL</a>
+                        </li>
+                        <li>
+                            <a href="../2 FAQ/FAQ.html " class="text-decoration-none ">FAQS</a>
+                        </li>
+                        <li>
+                            <a href="# " class="text-decoration-none ">INSURANCE POLICY</a>
+                        </li>
+                        <li>
+                            <a href="# " class="text-decoration-none ">IMPRESSUM</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer_right d-flex ">
+                    <i class="bi bi-facebook "></i>
+                    <i class="bi bi-instagram "></i>
+                </div>
+            </div>
+
+            <div class="text-center ">
+                <div class=" justify-content-center align-self-center ">
+                    <div class="footer_line justify-content-center "></div>
+                </div>
+            </div>
+
+            <div class="footer_end d-flex align-items-center justify-content-center ">
+                <p class="m-0 text-center ">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</p>
+                <!-- <button class="btn footer_btn rounded-pill ">OK!</button> -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js "></script>
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/ae6d6e0254.js " crossorigin="anonymous "></script>
+</body>
+
+</html>
