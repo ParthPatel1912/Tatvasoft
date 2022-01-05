@@ -258,6 +258,7 @@
 @media (max-width: 1197px) {
     .main {
         background-color: transparent;
+        width: 100vw;
     }
     .navbar_main {
         background-color: transparent;
