@@ -29,7 +29,7 @@
             <nav class="navbar navbar-expand-xl home-navbar" id="navbar">
                 <div class="container-fluid navbar_main">
                     <a class="navbar-brand py-0 ps-4 pt-3">
-                        <img src="../1 HomePage/assets/img/logo-large.png" class="img-fluid" alt="" height="53px" width="75px">
+                        <img src="../1 HomePage/assets/img/logo-large.png" href="../1 HomePage/HomePage.html" class="img-fluid" alt="" height="53px" width="75px">
                     </a>
                     <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                         <svg
@@ -93,7 +93,7 @@
         </div>
     </header>
 
-    <section class="bg img-fluid container-fluid">
+    <!-- <section class="bg img-fluid container-fluid">
         <div class="header-paragraph">
             <h1>Lorem ipsum dolor</h1>
             <ul>
@@ -143,12 +143,67 @@
         <div class="downarrow">
             <img src="assets/img/group-18_5.png">
         </div>
+    </section> -->
+
+    <section class="home img-fluid container-fluid" id="home">
+        <div class="home-content">
+            <div class="home-text">
+                <h1 class="title">Lorem ipsum text</h1>
+                <ul class="List">
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
+                </ul>
+            </div>
+            <div class="text-center button">
+                <button class="">Let's Book a Cleaner</button>
+            </div>
+            <div class="payment-process">
+                <div class="payment-process-box text-center">
+                    <div class="icon-box">
+                        <img src="assets/img/step-1.png" alt="forma-1" class="img-size">
+                    </div>
+                    <h6>Enter your postcode</h6>
+                </div>
+                <div class="arrow icon-box">
+                    <img src="assets/img/step-arrow-1.png" alt="arrow">
+                </div>
+                <div class="payment-process-box text-center">
+                    <div class="icon-box">
+                        <img src="assets/img/step-2.png" alt="group-22" class="img-size">
+                    </div>
+                    <h6>Select your plan</h6>
+                </div>
+                <div class="arrow icon-box">
+                    <img src="assets/img/step-arrow-1.png" alt="arrow-flip" class="rotateImg">
+                </div>
+                <div class="payment-process-box text-center">
+                    <div class="icon-box">
+                        <img src="assets/img/step-3.png" alt="group-22" class="img-size">
+                    </div>
+                    <h6>Pay securely online</h6>
+                </div>
+                <div class="arrow icon-box">
+                    <img src="assets/img/step-arrow-1.png" alt="arrow">
+                </div>
+                <div class="payment-process-box text-center">
+                    <div class="icon-box">
+                        <img src="assets/img/step-4.png" alt="group-22" class="img-size">
+                    </div>
+                    <h6>Enjoy amzing service</h6>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="#helperland">
+                    <img src="assets/img/group-18_5.png" alt="down-arrow">
+                </a>
+            </div>
+        </div>
     </section>
-    </header>
 
     <section class="whyhelperland">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row text-center">
                 <h2> Why Helperland</h2>
             </div>
             <div class="row whyhelperland-option justify-content-center">
@@ -322,20 +377,18 @@
     </section>
 
     <section class="newslatter">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
+        <div class="container">
+            <div class="row">
                 <div class="col-md-1 ">
-                    <i class="bi bi-arrow-up-circle newslatter-size" style="height: 42px; "></i>
+                    <a href="#home" class="link"> <i class="bi bi-arrow-up-circle newslatter-size" style="height: 42px;"></i> </a>
                 </div>
-                <div class="col-md-2 "></div>
-                <div class="col-md-6 ">
-                    <h3>Get Our Newsletter</h3>
-                    <input type="email " placeholder="Your Email ">
-                    <button class="btn btn-sm ">Submit</button>
+                <div class="col-md-6 offset-md-2">
+                    <h2>Get Our Newsletter</h3>
+                        <input type="email" placeholder="Your Email">
+                        <button class="btn btn-sm">Submit</button>
                 </div>
-                <div class="col-md-2 "></div>
-                <div class="col-md-1 ">
-                    <img class="img-fluid " src="assets/img/layer-598.png ">
+                <div class="col-md-1 offset-md-2 text-right ">
+                    <img class="img-fluid" src="assets/img/layer-598.png">
                 </div>
             </div>
         </div>

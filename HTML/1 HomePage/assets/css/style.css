@@ -75,86 +75,97 @@
     background-color: gray;
 }
 
-.bg {
-    width: 1560px;
-    height: 930px;
-    margin: 0 0 87px;
-    padding: 10px 15px 33px 17px;
-    z-index: -10;
-    background: url('../img/Landing-Page-background-image.png');
+.home {
+    height: 100vh;
+    padding: 0px;
 }
 
-.border {
-    padding: 8px;
-    border: 1px solid #FFFFFF80;
-    border-radius: 20px;
+.home .home-content {
+    background: url('../img/Landing-Page-background-image.png') no-repeat center;
+    background-size: cover;
+    height: 110%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    color: white;
+    padding-bottom: 25px;
 }
 
-.header-paragraph {
-    margin-top: 330px;
-    margin-left: 55px;
-    width: 388px;
-    display: block;
-    color: #fff;
+.home-service-provider .home-content {
+    background: url(../img/group) !important;
 }
 
-.header-paragraph ul {
-    list-style-image: url('../img/ic-check.png');
-}
-
-.book-clean {
+.home .home-content .home-text {
+    padding-left: 35px;
     margin-top: 100px;
-    text-align: center;
-    color: #fff;
 }
 
-.book {
-    width: 225px;
-    height: 20px;
-    margin: 16px 7px 157px 0;
-    padding: 18px 33px 17px 31px;
-    opacity: 0.6;
+.home .home-content .home-text ul {
+    padding-left: 0px;
+}
+
+.home .home-content .home-text ul li {
+    list-style: none;
+}
+
+.home .home-content .home-text ul li::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f00c";
+    padding-right: 12px;
+}
+
+.hover-blue :hover {
+    background-color: #00607287;
     border: 1px solid white;
+}
+
+.hover-change :hover {
+    background-color: transparent;
+}
+
+.home .home-content .button button {
+    border: 1px solid white;
+    background-color: #00607287;
+    color: white;
     border-radius: 27px;
-    background-color: #006072;
+    padding: 12px 32px;
+    margin-bottom: 60px;
 }
 
-h2 {
-    text-align: center;
+.home .home-content .payment-process {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 35px;
 }
 
-.payment {
-    margin-top: 7rem;
-    padding-left: 275px;
-    display: block;
+.home .home-content .payment-process .img-size {
+    width: 40px;
 }
 
-.downarrow {
-    margin-top: 275px;
-    text-align: center;
+.home .home-content .payment-process .arrow img {
+    width: 70px;
 }
 
-.icon-box {
-    float: left;
-    width: 52px;
-    height: 55px;
+.home .home-content .payment-process .icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-.icon-box img {
-    margin-bottom: 1rem;
+.home .home-content .payment-process .rotateImg {
+    transform: rotateX(180deg);
 }
 
-.icon-box h6 {
-    color: #fff;
-}
-
-.arrow {
-    margin-top: 20px;
-    float: left;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    width: 85px;
-    height: 23px;
+.home .home-content .down-arrow {
+    border: 1px solid white;
+    padding: 7px 9px;
+    border-radius: 50%;
 }
 
 .whyhelperland {
@@ -411,6 +422,13 @@ h2 {
     }
     .coustomercontain .coustomerborder {
         margin-top: 20px;
+    }
+    .home .home-content {
+        margin-top: -70px;
+        height: 135vh;
+    }
+    .whyhelperland {
+        margin-top: 500px;
     }
 }
 
