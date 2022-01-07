@@ -122,6 +122,10 @@ ul.padding-left {
     margin-top: 50px;
 }
 
+.table tr td {
+    vertical-align: middle;
+}
+
 .bold {
     font-weight: 600;
 }

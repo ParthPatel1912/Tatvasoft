@@ -108,6 +108,10 @@ ul.padding-left {
     background-color: #146371;
 }
 
+.table tr td {
+    vertical-align: middle;
+}
+
 #Upcoming-service-list .container .row .col-md-2 {
     padding: 0px !important;
     background-color: #1D7A8C;
@@ -154,13 +158,13 @@ ul.padding-left {
 }
 
 .completed {
-    background-color: green;
+    background-color: #67B644;
     color: #fff;
     padding: 5px;
 }
 
 .cancelled {
-    background-color: red;
+    background-color: #FF6B6B;
     color: #fff;
     padding: 5px;
 }

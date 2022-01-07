@@ -1,0 +1,114 @@
+.navbar-usermanagement {
+    background-color: #1FB6FF;
+    color: white;
+    height: 60px;
+}
+
+.navbar-usermanagement-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-collapse ul li {
+    margin-left: 20px;
+}
+
+.float-right {
+    float: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+#admin-pannel {
+    padding: 0px;
+}
+
+.side-menu-bar {
+    padding: 0px;
+    color: #646464;
+}
+
+.side-menu-link {
+    color: #646464;
+    text-decoration: none;
+}
+
+.font-blue {
+    color: #1FB6FF;
+}
+
+.border-bottom-admin {
+    padding: 0.5rem;
+    border-bottom: 1px solid black;
+    font-size: 16px;
+}
+
+.admin-pannel-content {
+    background-color: #f2f4f5;
+    color: #646464;
+    padding: 1rem;
+}
+
+.white-background {
+    background-color: white;
+}
+
+.btn-admin {
+    background-color: #1fb6ff;
+    color: #fff;
+}
+
+.btn-admin img {
+    height: 15px;
+    width: 15px;
+}
+
+.Active {
+    background-color: #67B644;
+    color: #fff;
+    padding: 5px;
+}
+
+.InActive {
+    background-color: #FF6B6B;
+    color: #fff;
+    padding: 5px;
+}
+
+.selectdiv {
+    position: relative;
+}
+
+.selectdiv:after {
+    content: '\f078';
+    font: normal normal normal 17px/1 FontAwesome;
+    right: 31px;
+    top: -5px;
+    padding: 15px 0px 0px 8px;
+    position: absolute;
+}
+
+.selectdiv-sidemenu {
+    position: relative;
+}
+
+.table tr td {
+    vertical-align: middle;
+}
+
+.selectdiv-sidemenu:after {
+    content: '\f078';
+    font: normal normal normal 17px/1 FontAwesome;
+    right: 31px;
+    top: 0px;
+    padding: 15px 0px 0px 8px;
+    position: absolute;
+}
+
+.content {
+    padding: 0px 18px;
+    font-size: 14px;
+}
