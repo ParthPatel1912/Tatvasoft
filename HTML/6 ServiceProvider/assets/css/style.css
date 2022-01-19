@@ -151,6 +151,10 @@
     margin-bottom: 60px;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .active {
     background-color: #29626D;
 }

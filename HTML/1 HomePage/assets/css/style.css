@@ -91,9 +91,19 @@
     padding-bottom: 25px;
 }
 
-.home-service-provider .home-content {
-    background: url(../img/group) !important;
+.List {
+    text-align: left;
+    padding-left: 2rem;
+    background-image: url('../../../1 HomePage/assets/img/right-arrow.png');
+    background-position: 0px 20px;
+    background-size: 1rem 1rem;
+    background-repeat: no-repeat;
 }
+
+
+/* .home-service-provider .home-content {
+    background: url(../img/group) !important;
+} */
 
 .home .home-content .home-text {
     padding-left: 35px;
@@ -146,6 +156,10 @@
 
 .home .home-content .payment-process .arrow img {
     width: 70px;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .home .home-content .payment-process .icon-box {

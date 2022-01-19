@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../1 HomePage/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../1 HomePage/assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/style.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <header class="sticky-top">
+        <div class=" main position-relative">
+            <nav class="navbar navbar-expand-xl home-navbar" id="navbar">
+                <div class="container-fluid navbar_main">
+                    <a class="navbar-brand py-0 ps-4" href="../1 HomePage/HomePage.html">
+                        <img src="../1 HomePage/assets/img/logo-large.png" class="img-fluid" alt="" height="53px" width="75px">
+                    </a>
+                    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="40"
+                            height="40"
+                            fill="#fff"
+                            class="bi bi-list"
+                            viewBox="0 0 16 16"
+                            >
+                            <path
+                                fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
+                        </svg>
+                    </button>
+                    <div class="collapse navbar-collapse navbar_list" id="navbarText">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+                            <li class="nav-item navbar_book rounded-pill">
+                                <a class="nav-link text-decoration-none text-light p-0" href="#">Book a Cleaner</a>
+                            </li>
+                            <li class="nav-item navbar_prices rounded-pill">
+                                <a class="nav-link text-decoration-none text-light py-0" href="../3 Prices/Prices.html">Prices</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">Our Guarantee</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">Blog</a>
+                            </li>
+                            <li class="nav-item navbar_contact">
+                                <a class="nav-link text-light" href="../4 Contact/Contact.html">Contact us</a>
+                            </li>
+
+                            <li class="nav-item navbar_login rounded-pill">
+                                <a href="../6 ServiceProvider/ServiceProvider.html" class="py-0 text-decoration-none text-light">Login</a>
+                            </li>
+                            <li class="nav-item navbar_helper rounded-pill">
+                                <a href="../1 HomePage/HomePage.html" class="py-0 text-decoration-none text-light">Become a Helper</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="createaccount">
+        <div class="text-center">
+            <div class=" justify-content-center align-self-center">
+                <h2 class="headingfont"> Create an Account</h2>
+                <div class="separator-line"></div>
+                <img src="../1 HomePage/assets/img/forma-1-copy-5.png" style="padding-top: 5px;">
+                <div class="separator-line"></div>
+            </div>
+        </div>
+        <div class="container pt-5">
+            <div class="row justify-content-center margin-top-50">
+                <div class="col-md-6">
+                    <form class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="inputEmail4" placeholder="First Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Last Name">
+                        </div>
+                        <div class="col-6">
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">+46</div>
+                                </div>
+                                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Phone Number">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="password" class="form-control" id="inputEmail4" placeholder="Password">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="password" class="form-control" placeholder="Cofirm Password">
+                        </div>
+                        <div class="col-12">
+                            <input type="checkbox" name="" id="">I have read the <span class="text-blue">privacy policy.</span>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn rounded-pill marun"><b>Register</b></button>
+                        </div>
+                        <div class="mt-4 text-center">
+                            Already registerd?
+                            <a class="text-blue style-none" href="">Login Now</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</body>
+
+</html>

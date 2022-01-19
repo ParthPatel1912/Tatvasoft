@@ -40,6 +40,10 @@
     color: #1FB6FF;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .border-bottom-admin {
     padding: 0.5rem;
     border-bottom: 1px solid black;

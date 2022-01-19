@@ -56,6 +56,10 @@ body {
     font-family: Roboto-Regular;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .bannerimage {
     z-index: -10;
     padding-top: -20px;

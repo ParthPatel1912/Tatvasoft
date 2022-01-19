@@ -84,6 +84,7 @@ body {
 .euro {
     font-size: 25px;
     font-weight: 800;
+    color: #646464;
 }
 
 .ul-li-right {
@@ -184,6 +185,10 @@ body {
     background-position: 0px 4px;
     background-size: 0.7rem 0.7rem;
     background-repeat: no-repeat;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .text-color {

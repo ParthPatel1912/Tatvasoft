@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <title>Book Service</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../1 HomePage/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../1 HomePage/assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+</head>
+
+<body onload="disablesetupservice()">
+
+    <header class="sticky-top">
+        <div class=" main position-relative">
+            <nav class="navbar navbar-expand-xl home-navbar" id="navbar">
+                <div class="container-fluid navbar_main">
+                    <a class="navbar-brand py-0 ps-4 img-fluid" href="../1 HomePage/HomePage.html">
+                        <img src="../1 HomePage/assets/img/logo-large.png" class="img-fluid" alt="" height="53px" width="75px">
+                    </a>
+                    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="40"
+                            height="40"
+                            fill="#fff"
+                            class="bi bi-list"
+                            viewBox="0 0 16 16"
+                            >
+                            <path
+                                fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
+                        </svg>
+                    </button>
+                    <div class="collapse navbar-collapse navbar_list" id="navbarText">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+                            <li class="nav-item navbar_book rounded-pill">
+                                <a class="nav-link text-decoration-none text-light p-0" href="#">Book a Cleaner</a>
+                            </li>
+                            <li class="nav-item navbar_prices rounded-pill">
+                                <a class="nav-link text-decoration-none text-light py-0" href="../3 Prices/Prices.html">Prices & Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">Warranty</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">Blog</a>
+                            </li>
+                            <li class="nav-item navbar_contact">
+                                <a class="nav-link text-light" href="../4 Contact/Contact.html">Contact us</a>
+                            </li>
+
+                            <li class="nav-item navbar_login rounded-pill">
+                                <a href="../6 ServiceProvider/ServiceProvider.html" class="py-0 text-decoration-none text-light">Login</a>
+                            </li>
+                            <li class="nav-item navbar_helper rounded-pill">
+                                <a href="../1 HomePage/HomePage.html" class="py-0 text-decoration-none text-light">Become a Helper</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="bannerimage" id="bannerimage">
+        <div class="img-fluid">
+            <img src="../1 HomePage/assets/img/book-service-banner.jpg" class="img-fluid" height="370px" width="1560px">
+        </div>
+    </section>
+
+    <section class="container-fluid">
+        <div class="text-center">
+            <div class=" justify-content-center align-self-center">
+                <h2 class="headingfont"> Set up your cleaning service</h2>
+                <div class="separator-line"></div>
+                <img src="../1 HomePage/assets/img/forma-1-copy-5.png" style="padding-top: 5px;">
+                <div class="separator-line"></div>
+            </div>
+        </div>
+
+        <div class="justify-content-center row mt-3 mb-4">
+
+            <div class="col-md-8" id="bookservice">
+
+                <div class="row text-center">
+                    <div>
+                        <button class="btn services-selected" value="0" onclick="gotobacksetupservice()"><img src="../1 HomePage/assets/img/setup-service-white.png"> Set up Service</button>
+                        <button class="btn services" value="1" id="scheduleplan" onclick="gotobackscheduleplan()"><img src="../1 HomePage/assets/img/schedule.png"> Schedule & Plan</button>
+                        <button class="btn services" value="2" id="details" onclick="gotobackyourdetails()"><img src="../1 HomePage/assets/img/details.png"> Details</button>
+                        <button class="btn services" value="3" id="payment"><img src="../1 HomePage/assets/img/payment.png"> Make Payment</button>
+                    </div>
+                </div>
+
+                <section id="setupservicetab" class="container-fluid">
+                    <div class="row mt-4">
+                        <b>Please enter your postal code:</b>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Postal Code">
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button " class="btn rounded-pill active font-white" onclick="gotoscheduleplan()"><b>Check availability</b></button>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="scheduleplantab" class="container-fluid">
+                    <div class="row mt-4">
+                        <b>Select numberof rooms and bath</b>
+                        <div class="col-md-2">
+                            <select class="form-control">
+                                <option value="bed1">bed 1</option>
+                                <option value="bed2">bed 2</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-control">
+                                <option value="bath1">bath 1</option>
+                                <option value="bath2">bath 2</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <b>When do you need the Cleaner?</b>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" placeholder="01/01/2018" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')">
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control">
+                                        <option value="1">1:00</option>
+                                        <option value="2">2:00</option>
+                                        <option value="3">3:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <b>How long to you need for cleaner stay?</b>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select class="form-control">
+                                    <option value="1">1.0 Hrs</option>
+                                    <option value="2">2.0 Hrs</option>
+                                    <option value="3">3.0 Hrs</option>
+                                    <option value="4">4.0 Hrs</option>
+                                    <option value="5">5.0 Hrs</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mt-4 w-100 container-fluid">
+                        <b>Extra Services</b>
+                        <div class="row col-md-12 text-center justify-content-center">
+                            <div class="service-box col-md-2" onclick="checkIfSelected(0)" value="1">
+                                <div class="btn circle">
+                                    <input type="hidden" value="notselected" class="hidden-input">
+                                    <img src="../1 HomePage/assets/img/1.png" alt="" class="img-book-service">
+                                </div>
+                                <h6 class="circle_contain mb-0">Inside cabinets</h6>
+
+                            </div>
+                            <div class="service-box col-md-2" onclick="checkIfSelected(1)" value="1">
+                                <div class="btn circle">
+                                    <input type="hidden" value="notselected" class="hidden-input">
+                                    <img src="../1 HomePage/assets/img/2.png" alt="" class="img-book-service">
+                                </div>
+                                <h6 class="circle_contain mb-0">Inside fridge</h6>
+
+                            </div>
+                            <div class="service-box col-md-2" onclick="checkIfSelected(2)" value="1">
+                                <div class="btn circle">
+                                    <input type="hidden" value="notselected" class="hidden-input">
+                                    <img src="../1 HomePage/assets/img/3.png" style="padding-top:5px;" alt="" class="img-book-service">
+                                </div>
+                                <h6 class="circle_contain mb-0">Inside oven</h6>
+
+                            </div>
+                            <div class="service-box col-md-2" onclick="checkIfSelected(3)" value="1">
+                                <div class="btn circle">
+                                    <input type="hidden" value="notselected" class="hidden-input">
+                                    <img src="../1 HomePage/assets/img/4.png" alt="" class="img-book-service">
+                                </div>
+                                <h6 class="circle_contain mb-0">Laundry Wash dry</h6>
+
+                            </div>
+                            <div class="service-box col-md-2" onclick="checkIfSelected(4)" value="1">
+                                <div class="btn circle">
+                                    <input type="hidden" value="notselected" class="hidden-input">
+                                    <img src="../1 HomePage/assets/img/5.png" alt="" class="img-book-service">
+                                </div>
+                                <h6 class="circle_contain mb-0">Interior windows</h6>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-4">
+                        <b>Comments</b>
+                        <textarea name="comment" class="form-control" id="" cols="10" rows="3"></textarea>
+                    </div>
+
+                    <div class="mt-4">
+                        <input type="checkbox"> I accept <span class="font-blue">I have pets at home</span>
+                    </div>
+
+                    <div class="mt-4 text-right">
+                        <button type="button " class="btn rounded-pill active font-white" onclick="gotoyourDetails()"><b>Continue</b></button>
+                    </div>
+
+                </section>
+
+                <section id="detailstab" class="container-fluid">
+                    <div class="row mt-4">
+                        <h6>Please enter your address so that your helper can find you.</h6>
+                        <div class="col-md-6 border form-control">
+                            <input type="radio" name="address" id="address">
+                            <label for="address"> <b> Address:</b> street 2 40, Troisdorf 53844
+                                <br/>
+                               <b>Phone number:</b> 9988556644
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="button " class="btn rounded-pill activehover "><b>+ Add new Address</b></button>
+                    </div>
+
+                    <div class="mt-4">
+                        <input type="checkbox" name="" id="">My billing address is different from the address I provided.
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-4 text-right">
+                        <button type="button " class="btn rounded-pill active font-white" onclick="gotomakepayment()"><b>Continue</b></button>
+                    </div>
+                </section>
+
+                <section id="paymenttab" class="container-fluid">
+                    <div class="mt-4">
+                        <b>Choose one of the following payment methods.</b>
+                    </div>
+
+                    <div class="row mt-4">
+                        <h6>Discount code (optional)</h6>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="Do you have a discount code">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button " class="btn rounded-pill activehover"><b>Apply</b></button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mt-3">
+                        <div>
+                            <input type="text" class="form-control" placeholder="Card number                                   mm / dd / yyyy">
+                        </div>
+                    </div>
+
+                    <div class="text-right mt-4">
+                        Accepted cards:
+                        <div>
+                            <img src="../1 HomePage/assets/img/ic-flag.png" alt="card">
+                            <img src="../1 HomePage/assets/img/ic-flag.png" alt="card">
+                            <img src="../1 HomePage/assets/img/ic-flag.png" alt="card">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-4 mb-4">
+                        <input type="checkbox" name="" id=""> I accepted terms and conditions, the cancellation policy and the privacy policy. I confirm that Helperland begins with the execution of the contract before the expiry of the revocation period
+                        and that I lose my right of withdrawal as a consumer with full fulfillment of the contract.
+                    </div>
+
+                    <hr>
+
+                    <div class="text-right mt-4">
+                        <button type="button " class="btn rounded-pill active font-white"><b>Complete Booking</b></button>
+
+                    </div>
+                </section>
+
+            </div>
+
+            <div class="col-md-4 payment">
+
+                <section class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="card mb-3">
+                            <span class="paymentheading"><b>Payment Overview</b></span>
+                            <div class="card-body">
+                                <div>12/01/2022 08:00</div>
+                                <div>Duration</div>
+                                <div class="row">
+                                    <div>
+                                        <span class="text-left">Basic</span>
+                                        <span class="text-right">3 Hours</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-left">Basic Inside cabinets (extra)</span>
+                                        <span class="text-right">30 Minutes</span>
+                                    </div>
+                                    <div class="text-center ">
+                                        <div class=" justify-content-center align-self-center ">
+                                            <div class="footer_line justify-content-center "></div>
+                                        </div>
+                                    </div>
+                                    <b>
+                                        <div class="mb-3">
+                                            <span class="text-left">Total service time</span>
+                                            <span class="text-right">35 Hours</span>
+                                        </div> 
+                                    </b>
+                                    <hr>
+                                    <div class="mb-3">
+                                        <span class="text-left">Per cleaning</span>
+                                        <span class="text-right"><b>€54.00</b></span>
+                                    </div>
+                                    <div>
+                                        <span class="text-left">Discount</span>
+                                        <span class="text-right"><b>- €15.00</b></span>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <span class="text-left text-blue">Lump sum Price</span>
+                                        <span class="text-right text-price-blue">€39.00</span>
+                                    </div>
+                                    <div>According to § 19 UStG, no value added tax is charged.</div>
+                                    <div class="mt-3">
+                                        <span class="text-left">Effective Price</span>
+                                        <span class="text-right"><b>€35.70</b></span>
+                                    </div>
+                                    <div class="mt-1">
+                                        <span class="text-red">*</span>You will save 20% according to §35a EStG.
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="basic-service"><img src="../1 HomePage/assets/img/smiley.png">See what is always included</span>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="text-center font-24">
+                                <b>Questions?</b>
+                            </div>
+                            <div class="accordion" id="accordionExample">
+                                <ul class="ul-li">
+
+                                    <li class="padded" onclick="rotateImage" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="true" aria-controls="collapseExample1">
+                                        Which Helperland professional will my place? </li>
+
+                                    <div class="collapse" id="collapseExample1" data-parent="#accordionExample">
+                                        <div class="li-bottom-contain">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet porro ex atque, ipsam, quisquam eligendi, consectetur fugit perspiciatis quo explicabo aliquid accusantium! At, quisquam? Saepe sit quasi voluptas magnam ipsa.
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <li class="padded" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                                        Which Helperland professional will my place? </li>
+
+                                    <div class="collapse" id="collapseExample2" data-parent="#accordionExample">
+                                        <div class="li-bottom-contain">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet porro ex atque, ipsam, quisquam eligendi, consectetur fugit perspiciatis quo explicabo aliquid accusantium! At, quisquam? Saepe sit quasi voluptas magnam ipsa.
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <li class="padded" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+                                        Which Helperland professional will my place? </li>
+
+                                    <div class="collapse" id="collapseExample3" data-parent="#accordionExample">
+                                        <div class="li-bottom-contain">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet porro ex atque, ipsam, quisquam eligendi, consectetur fugit perspiciatis quo explicabo aliquid accusantium! At, quisquam? Saepe sit quasi voluptas magnam ipsa.
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <li class="padded" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">
+                                        Which Helperland professional will my place? </li>
+
+                                    <div class="collapse" id="collapseExample4" data-parent="#accordionExample">
+                                        <div class="li-bottom-contain">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet porro ex atque, ipsam, quisquam eligendi, consectetur fugit perspiciatis quo explicabo aliquid accusantium! At, quisquam? Saepe sit quasi voluptas magnam ipsa.
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <li class="padded" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">
+                                        Which Helperland professional will my place? </li>
+
+                                    <div class="collapse" id="collapseExample5" data-parent="#accordionExample">
+                                        <div class="li-bottom-contain">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet porro ex atque, ipsam, quisquam eligendi, consectetur fugit perspiciatis quo explicabo aliquid accusantium! At, quisquam? Saepe sit quasi voluptas magnam ipsa.
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="mt-2 font-18 text-blue">
+                                        For more help
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="newslatter ">
+        <div class="container-fluid ">
+            <div class="row justify-content-center ">
+                <div class="col-md-1 ">
+                    <i class="bi bi-arrow-up-circle-fill newslatter-size " style="height: 42px; "></i>
+                </div>
+                <div class="col-md-2 "></div>
+                <div class="col-md-6 ">
+                    <h3>Get Our Newsletter</h3>
+                    <input type="email " placeholder="Your Email ">
+                    <button class="btn btn-sm ">Submit</button>
+                </div>
+                <div class="col-md-2 "></div>
+                <div class="col-md-1 ">
+                    <img class="img-fluid " src="../1 HomePage/assets/img/layer-598.png ">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer_section w-100 footer-line ">
+            <div class="footer_main d-flex justify-content-around align-items-center ">
+                <a class="footer_left" href="../1 HomePage/HomePage.html">
+                    <img src="../1 HomePage/assets/img/footer-logo.png " alt=" " height="78 " width="106 ">
+                </a>
+                <div class="footer_mid ">
+                    <ul class="d-flex p-0 text-center ">
+                        <li>
+                            <a href="../1 HomePage/HomePage.html " class="text-decoration-none ">HOME</a>
+                        </li>
+                        <li>
+                            <a href="../5 About/About.html " class="text-decoration-none ">ABOUT</a>
+                        </li>
+                        <li>
+                            <a href="# " class="text-decoration-none ">TESTIMONIAL</a>
+                        </li>
+                        <li>
+                            <a href="../2 FAQ/FAQ.html " class="text-decoration-none ">FAQS</a>
+                        </li>
+                        <li>
+                            <a href="# " class="text-decoration-none ">INSURANCE POLICY</a>
+                        </li>
+                        <li>
+                            <a href="# " class="text-decoration-none ">IMPRESSUM</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer_right d-flex ">
+                    <i class="bi bi-facebook "></i>
+                    <i class="bi bi-instagram "></i>
+                </div>
+            </div>
+
+            <div class="text-center ">
+                <div class=" justify-content-center align-self-center ">
+                    <div class="footer_line justify-content-center "></div>
+                </div>
+            </div>
+
+            <div class="footer_end d-flex align-items-center justify-content-center ">
+                <p class="m-0 text-center ">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</p>
+                <!-- <button class="btn footer_btn rounded-pill ">OK!</button> -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="./assets/js/main.js"></script>
+
+    <!-- JS Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/ae6d6e0254.js " crossorigin="anonymous "></script>
+
+</body>
+
+</html>
