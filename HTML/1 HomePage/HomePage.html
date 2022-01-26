@@ -47,11 +47,10 @@
                     </button>
                     <div class="collapse navbar-collapse navbar_list" id="navbarText">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
-                            <li class="nav-item navbar_book rounded-pill">
+                            <li class="nav-item btnBlueTransparent rounded-pill">
                                 <a class="nav-link text-decoration-none text-light p-0" href="../11 Book Service/">Book a Cleaner</a>
-
                             </li>
-                            <li class="nav-item navbar_prices rounded-pill">
+                            <li class="nav-item btnBorder rounded-pill">
                                 <a class="nav-link text-decoration-none text-light py-0" href="../3 Prices/Prices.html">Prices</a>
                             </li>
                             <li class="nav-item">
@@ -64,10 +63,10 @@
                                 <a class="nav-link text-light" href="../4 Contact/Contact.html">Contact us</a>
                             </li>
 
-                            <li class="nav-item navbar_login rounded-pill">
+                            <li class="nav-item btnBlueTransparent rounded-pill">
                                 <a href="../6 ServiceProvider/ServiceProvider.html" class="py-0 text-decoration-none text-light">Login</a>
                             </li>
-                            <li class="nav-item navbar_helper rounded-pill">
+                            <li class="nav-item btnBlueTransparent rounded-pill">
                                 <a href="../1 HomePage/HomePage.html" class="py-0 text-decoration-none text-light">Become a Helper</a>
                             </li>
                             <li class="nav-item dropdown">
@@ -146,7 +145,7 @@
         </div>
     </section> -->
 
-    <section class="home img-fluid contaiēner-fluid" id="home">
+    <section class="home img-fluid container-fluid" id="home">
         <div class="home-content">
             <div class="home-text">
                 <h1 class="title">Lorem ipsum text</h1>
@@ -211,23 +210,27 @@
                 <!-- <div class="col-md-1"></div> -->
                 <div class="col-md-3">
                     <img src="assets/img/helper-img-1.png" class="img-fluid" height="320px" width="320px">
-                    <p class="whyhelperland-heading row">
-                        Experience & Vetted Professionals
-                    </p>
+                    <span class="whyhelperland-heading row">
+                        <span class="text-center">Experience & Vetted Professionals</span>
+                    </span>
                     <span> Ldominate the industry in scale and scope with an adaptable, extensive network that consistently delivers exceptional results.</span>
                 </div>
                 <div class="col-md-3" style="margin-right: 50px; margin-left: 50px;">
                     <img src="assets/img/group-23.png" alt="" class="img-fluid">
-                    <p class="whyhelperland-heading row">
-                        Secure Online Payment
-                    </p>
-                    <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat alias magni .</p>
+                    <!-- <span class="whyhelperland-heading row">
+                        <span class="text-center">Secure Online Payment</span>
+                    </span>
+                    <span> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat alias magni .</span> -->
+                    <span class="whyhelperland-heading row">
+                        <span class="text-center">Secure Online Payment</span>
+                    </span>
+                    <span>  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat alias magni .</span>
                 </div>
                 <div class="col-md-3">
                     <img src="assets/img/group-24.png" alt="" class="img-fluid">
-                    <p class="whyhelperland-heading row">
-                        Dedicated Customer Service
-                    </p>
+                    <span class="whyhelperland-heading row">
+                        <span class="text-center">Dedicated Customer Service</span>
+                    </span>
                     <span> to our customers and are guided in all we do by their needs. The team is always happy to support you and offer all the information.</span>
                 </div>
                 <!-- <div class="col-md-1"></div> -->
@@ -247,7 +250,7 @@
                     <h3>Lorem ipsum dolor sit amet, consectetur</h3>
                     <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisi sapien, suscipit ut accumsan vitae, pulvinar ac libero. Aliquam erat volutpat. Nullam quis ex odio. Nam bibendum cursus purus, vel efficitur urna finibus vitae. Nullam finibus aliquet pharetra. Morbi in sem dolor. Integer pretium hendrerit ante quis vehicula. </span>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 text-center">
                     <img src="assets/img/group-36.png" class="img-fluid">
                 </div>
             </div>
@@ -429,13 +432,16 @@
                 </div>
             </div>
 
-            <div class="footer_end d-flex align-items-center justify-content-center">
-                <p class="m-0 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam ac. <span><a href="" class="text-decoration-none">Privacy Policy</a></span></p>
-                <button class="btn footer_btn rounded-pill">OK!</button>
-            </div>
-
         </div>
     </footer>
+
+    <section id="footer_end" class="fixed-bottom">
+        <div class="footer_end d-flex align-items-center justify-content-center">
+            <p class="m-0 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam ac. <span><a href="" class="text-decoration-none">Privacy Policy</a></span></p>
+            <button class="btn footer_btn rounded-pill" onclick="footerHide()">OK!</button>
+
+        </div>
+    </section>
 
     <!-- JS -->
     <script src="./assets/js/main.js"></script>

@@ -21,35 +21,8 @@
     position: relative;
 }
 
-.navbar_login {
-    margin-right: 11px !important;
-    border: solid 1px white;
-    padding: 9px 20px;
-    background-color: #29626D;
-}
-
-.navbar_helper {
-    padding: 9px 20px;
-    border: solid 1px white;
-    margin-right: 22px !important;
-    background-color: #29626D;
-}
-
 .navbar_contact {
     margin-right: 12px;
-}
-
-.navbar_prices {
-    margin-right: 11px !important;
-    border: solid 1px white;
-    padding: 9px 20px;
-}
-
-.navbar_book {
-    margin-right: 18px !important;
-    padding: 9px 20px;
-    border: solid 1px white;
-    background-color: #29626D;
 }
 
 body {
@@ -260,7 +233,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) and (min-width: 400px) {
     .footer_mid ul {
         display: grid !important;
         grid-template-columns: 1fr 2fr 1fr;
@@ -273,6 +246,29 @@ body {
         height: fit-content !important;
         padding: 20px 0px;
         justify-content: space-between !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .footer_mid ul {
+        display: grid !important;
+        gap: 0px 10px;
+        padding: 20px 0 !important;
+        margin: 0;
+    }
+    .footer_main {
+        flex-direction: column;
+        height: fit-content !important;
+        padding: 20px 0px;
+        justify-content: space-between !important;
+    }
+    .footer_end {
+        flex-direction: column;
+        padding: 0 10px;
+        height: 150px;
+    }
+    .footer_btn {
+        margin-top: 100px;
     }
 }
 

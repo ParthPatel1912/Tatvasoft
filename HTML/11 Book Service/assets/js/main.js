@@ -3,10 +3,11 @@ function disablesetupservice() {
     var btns = header.getElementsByClassName("btn");
     btns[0].className += " services-selected";
     document.getElementById("setupservicetab").style.display = "block";
-    btns[0].disabled = true;
-    btns[1].disabled = true;
-    btns[2].disabled = true;
-    btns[3].disabled = true;
+    document.getElementById("arrow-setupservice").style.display = "block";
+    btns[0].style.pointerEvents = "none";
+    btns[1].style.pointerEvents = "none";
+    btns[2].style.pointerEvents = "none";
+    btns[3].style.pointerEvents = "none";
 }
 
 function gotoscheduleplan() {
@@ -16,9 +17,13 @@ function gotoscheduleplan() {
     var hidediv = document.getElementById("setupservicetab");
     hidediv.style.display = "none";
     document.getElementById("scheduleplantab").style.display = "block";
+    document.getElementById("arrow-setupservice").style.display = "none";
+    document.getElementById("arrow-scheduleplan").style.display = "block";
     var imgs = header.getElementsByTagName("img");
     imgs[1].src = "../1 HomePage/assets/img/schedule-white.png";
+    btns[0].style.pointerEvents = "auto";
     btns[0].disabled = false;
+    btns[1].disabled = false;
 }
 
 function gotoyourDetails() {
@@ -28,8 +33,12 @@ function gotoyourDetails() {
     var imgs = header.getElementsByTagName("img");
     imgs[2].src = "../1 HomePage/assets/img/details-white.png";
     document.getElementById("scheduleplantab").style.display = "none";
+    document.getElementById("arrow-scheduleplan").style.display = "none";
+    document.getElementById("arrow-detail").style.display = "block";
     document.getElementById("detailstab").style.display = "block";
+    btns[1].style.pointerEvents = "auto";
     btns[1].disabled = false;
+    btns[2].disabled = false;
 }
 
 function gotomakepayment() {
@@ -39,8 +48,12 @@ function gotomakepayment() {
     imgs[3].src = "../1 HomePage/assets/img/payment-white.png";
     btns[3].className += " services-selected";
     document.getElementById("detailstab").style.display = "none";
+    document.getElementById("arrow-detail").style.display = "none";
+    document.getElementById("arrow-payment").style.display = "block";
     document.getElementById("paymenttab").style.display = "block";
+    btns[2].style.pointerEvents = "auto";
     btns[2].disabled = false;
+    btns[3].disabled = false;
 }
 
 function checkIfSelected(para) {
@@ -70,19 +83,26 @@ function gotobacksetupservice() {
     hidediv.style.display = "none";
     hidediv2.style.display = "none";
     hidediv3.style.display = "none";
-    // console.log(btns[1].value);
-    btns[1].disabled = true;
-    // imgs[1].src = "../1 HomePage/assets/img/schedule.png";
-    // btns[1].className += " services";
-    // console.log(btns[2].value);
-    btns[2].disabled = true;
-    // imgs[2].src = "../1 HomePage/assets/img/details.png";
-    // btns[2].className += " services";
-    // console.log(btns[3].value);
     btns[3].disabled = true;
+    btns[2].disabled = true;
+    btns[1].disabled = true;
+    // btns[3].style.pointerEvents = "none";
     // imgs[3].src = "../1 HomePage/assets/img/payment.png";
-    // btns[3].className += " services";
+    // btns[3].className += "";
+    // btns[3].className += "services";
+    // btns[2].style.pointerEvents = "none";
+    // imgs[2].src = "../1 HomePage/assets/img/details.png";
+    // btns[2].className += "";
+    // btns[2].className += "services";
+    // btns[1].style.pointerEvents = "none";
+    // imgs[1].src = "../1 HomePage/assets/img/schedule.png";
+    // btns[1].className += "";
+    // btns[1].className += "services";
     document.getElementById("setupservicetab").style.display = "block";
+    document.getElementById("arrow-detail").style.display = "none";
+    document.getElementById("arrow-setupservice").style.display = "block";
+    document.getElementById("arrow-scheduleplan").style.display = "none";
+    document.getElementById("arrow-payment").style.display = "none";
 }
 
 function gotobackscheduleplan() {
@@ -95,15 +115,21 @@ function gotobackscheduleplan() {
     hidediv.style.display = "none";
     hidediv2.style.display = "none";
     hidediv3.style.display = "none";
-    btns[2].disabled = true;
-    // imgs[2].src = "../1 HomePage/assets/img/details.png";
-    // btns[2].className += "";
-    // btns[2].className += " services";
     btns[3].disabled = true;
+    btns[2].disabled = true;
+    // btns[3].style.pointerEvents = "none";
     // imgs[3].src = "../1 HomePage/assets/img/payment.png";
     // btns[3].className += "";
     // btns[3].className += " services";
+    // btns[2].style.pointerEvents = "none";
+    // imgs[2].src = "../1 HomePage/assets/img/details.png";
+    // btns[2].className += "";
+    // btns[2].className += " services";
     document.getElementById("scheduleplantab").style.display = "block";
+    document.getElementById("arrow-detail").style.display = "none";
+    document.getElementById("arrow-setupservice").style.display = "none";
+    document.getElementById("arrow-scheduleplan").style.display = "block";
+    document.getElementById("arrow-payment").style.display = "none";
 
     // if (btns[1].className == " services-selected") {
     //     document.getElementById("scheduleplantab").style.display = "block";
@@ -125,10 +151,15 @@ function gotobackyourdetails() {
     hidediv2.style.display = "none";
     hidediv3.style.display = "none";
     btns[3].disabled = true;
+    // btns[3].style.pointerEvents = "none";
     // imgs[3].src = "../1 HomePage/assets/img/payment.png";
     // btns[3].className += "";
     // btns[3].className += " services";
     document.getElementById("detailstab").style.display = "block";
+    document.getElementById("arrow-detail").style.display = "block";
+    document.getElementById("arrow-setupservice").style.display = "none";
+    document.getElementById("arrow-scheduleplan").style.display = "none";
+    document.getElementById("arrow-payment").style.display = "none";
 
     // if (btns[2].className == " services-selected") {
     //     document.getElementById("detailstab").style.display = "block";
