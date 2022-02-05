@@ -1,4 +1,15 @@
-    <?php include 'header.php';?>
+    <?php 
+        include 'header.php';
+        require_once 'message_error.php';
+
+        if(isset($_SESSION['base_url'])){
+            $_SESSION['base_url'] = "";
+            $_SESSION['base_url'] = "?controller=Helperland&function=Contact";
+        }
+        else{
+            $_SESSION['base_url'] = "?controller=Helperland&function=Contact";
+        }
+    ?>
     <title>Contact</title>
 
     <section class="bannerimage" id="bannerImage">
@@ -54,34 +65,50 @@
         <div class="container">
             <div class="row justify-content-center margin-top-50">
                 <div class="col-md-6">
-                    <form action="<?= $base_url."?controller=Helperland&function=Insert_ContactUs"?>" method="POST" class="row g-3">
+                    <?php
+                        flash('contact')
+                    ?> 
+                    <form action="<?= $base_url."?controller=Contact&function=Insert_Contact"?>" method="POST"
+                        class="row g-3 mt-3" id="Contact">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="inputFirstName" placeholder="First Name" required name="FirstName">
+                            <input type="text" class="form-control" id="FirstName" placeholder="First Name"
+                                 name="FirstName" value="<?php if(isset($_POST['FirstName'])){echo $_POST['FirstName'];} ?>" >
+                            <div class="text-center FirstName-error"></div>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Last Name" required name="LastName">
+                            <input type="text" class="form-control" id="LastName" placeholder="Last Name"
+                                 name="LastName">
+                            <div class="text-center LastName-error"></div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">+46</div>
                                 </div>
-                                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Phone Number" required name="PhoneNumber">
+                                <input type="number" class="form-control"
+                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    maxlength="10" id="PhoneNumber" placeholder="Phone Number"  name="PhoneNumber">
                             </div>
+                            <div class="text-center PhoneNumber-error"></div>
                         </div>
-                        <div class="col-6">
-                            <input type="email" class="form-control" placeholder="Email" required name="Email">
+                        <div class="col-md-6">
+                            <!-- <input type="email" class="form-control" id="Email" placeholder="Email address" name="Email"> -->
+                            <input type="email" class="form-control" name="Email" id="EmailAddress" placeholder="Email Address">
+                            <div class="text-center Email-error"></div>
                         </div>
                         <div class="col-md-12">
-                            <select onchange="location = this.value;" class="form-control" required name="Subject">
+                            <select onchange="location = this.value;" class="form-control"  name="Subject">
                                 <option value="subject">Subject</option>
                             </select>
+                            <div class="text-center Subject-error"></div>
                         </div>
                         <div class="col-12">
-                            <textarea rows="4" cols="65" class="form-control" placeholder="message" required name="Message"></textarea>
+                            <textarea rows="4" cols="65" class="form-control" id="Message"  placeholder="message"
+                                name="Message"></textarea>
+                            <div class="text-center Message-error"></div>
                         </div>
                         <div class="col-12 text-center">
-                            <button type="submit" class="btn rounded-pill btnBlue">Submit</button>
+                            <button type="submit" class="btn rounded-pill btnBlue" id="submit">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -95,23 +122,6 @@
         </div>
     </section>
 
-    <section class="newslatter">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-1 ">
-                </div>
-                <div class="col-md-2 "></div>
-                <div class="col-md-6 ">
-                    <h3 class="headingfont">Get Our Newsletter</h3>
-                    <input type="email " placeholder="Your Email ">
-                    <button class="btn btn-sm ">Submit</button>
-                </div>
-                <div class="col-md-2 "></div>
-                <div class="col-md-1 ">
-
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php include 'newslatter-small.php' ?>
 
     <?php include 'footer.php';?>

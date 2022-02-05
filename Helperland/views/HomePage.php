@@ -1,4 +1,14 @@
-    <?php include 'header_transparent.php';?>
+    <?php 
+        include 'header_transparent.php';
+
+        if(isset($_SESSION['base_url'])){
+            $_SESSION['base_url'] = "";
+            $_SESSION['base_url'] = "?controller=Helperland&function=HomePage";
+        }
+        else{
+            $_SESSION['base_url'] = "?controller=Helperland&function=HomePage";
+        }
+    ?>
     <title>Home Page</title>
    
     <section class="home img-fluid container-fluid" id="home">
@@ -12,7 +22,7 @@
                 </ul>
             </div>
             <div class="text-center button">
-                <a href="../11 Book Service/BookService.html"><button class="">Let's Book a Cleaner</button></a>
+                <a href="<?= $base_url."?controller=Helperland&function=BookService"?>"><button class="">Let's Book a Cleaner</button></a>
             </div>
             <div class="payment-process">
                 <div class="payment-process-box text-center">
@@ -236,23 +246,7 @@
         </div>
     </section>
 
-    <section class="newslatter">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-1 ">
-                    <a href="#home" class="link"> <i class="bi bi-arrow-up-circle newslatter-size" style="height: 42px;"></i> </a>
-                </div>
-                <div class="col-md-6 offset-md-2">
-                    <h2>Get Our Newsletter</h3>
-                        <input type="email" placeholder="Your Email">
-                        <button class="btn btn-sm">Submit</button>
-                </div>
-                <div class="col-md-1 offset-md-2 text-right ">
-                    <img class="img-fluid" src="../assets/img/layer-598.png">
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php include 'newslatter.php' ?>
 
     <section id="footer_end" class="fixed-bottom">
         <div class="footer_end d-flex align-items-center justify-content-center">

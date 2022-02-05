@@ -1,3 +1,9 @@
+<?php if(!isset($_SESSION))
+        {
+            session_start();
+        } 
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +34,10 @@
 
     <?php $base_url = 'http://localhost:8088/'; ?>
 
+    <?php include 'Login.php';?>
+    <?php include 'ForgotPassword.php' ?>
+    <?php include 'ResetPassword.php' ?>
+
 </head>
 
 <body id="body">
@@ -38,7 +48,7 @@
         <div class=" main position-relative">
             <nav class="navbar navbar-expand-xl home-navbar" id="navbar">
                 <div class="container-fluid navbar_main">
-                    <a class="navbar-brand py-0 ps-4" href="HomePage.php">
+                    <a class="navbar-brand py-0 ps-4" href="<?= $base_url."?controller=Helperland&function=HomePage"?>">
                         <img src="../assets/img/logo-large.png" class="img-fluid" alt="" height="53px" width="75px">
                     </a>
                     <img src="../assets/img/icon-notification.png" class=" display-sm display-sm-notification text-right nav-border nav-link-image">
@@ -69,7 +79,7 @@
                                 <a class="nav-link" href="#"> Dashboard</a>
                             </li>
                             <li class="nav-item display-sm">
-                                <a class="nav-link" href="ServiceHistory.php"> Service History</a>
+                                <a class="nav-link" href="<?= $base_url."?controller=Helperland&function=ServiceHistory"?>"> Service History</a>
                             </li>
                             <li class="nav-item display-sm">
                                 <a class="nav-link" href="#"> Service Schedule</a>
@@ -91,7 +101,7 @@
                                 <a class="nav-link" href="#"> Logout</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="Prices.php">Prices & services</a>
+                                <a class="nav-link " href="<?= $base_url."?controller=Helperland&function=Prices"?>">Prices & services</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Warranty </a>

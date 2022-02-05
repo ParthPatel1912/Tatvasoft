@@ -1,4 +1,14 @@
-    <?php include 'header_admin.php';?>
+    <?php 
+        include 'header_admin.php';
+    
+        if(isset($_SESSION['base_url'])){
+            $_SESSION['base_url'] = "";
+            $_SESSION['base_url'] = "?controller=Helperland&function=ServiceRequets";
+        }
+        else{
+            $_SESSION['base_url'] = "?controller=Helperland&function=ServiceRequets";
+        }
+    ?>
     <title>Service Requests</title>
 
     <section id="admin-pannel">

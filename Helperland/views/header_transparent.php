@@ -1,3 +1,9 @@
+<?php if(!isset($_SESSION))
+        {
+            session_start();
+        } 
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -21,8 +27,9 @@
     
     <?php $base_url = 'http://localhost:8088/'; ?>
 
-    <?php include 'Login.php';?>
+    <?php include 'Login.php' ?>
     <?php include 'ForgotPassword.php' ?>
+    <?php include 'ResetPassword.php' ?>
 
 </head>
 
@@ -32,7 +39,7 @@
         <div class=" main position-relative">
             <nav class="navbar navbar-expand-xl home-navbar" id="home-navbar">
                 <div class="container-fluid navbar_main_homepage">
-                    <a class="navbar-brand py-0 ps-4 pt-3" href="HomePage.php">
+                    <a class="navbar-brand py-0 ps-4 pt-3" href="<?= $base_url."?controller=Helperland&function=HomePage"?>">
                         <img src="../assets/img/logo-large.png" class="img-fluid" alt="" height="53px" width="75px">
                     </a>
                     <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,10 +59,10 @@
                     <div class="collapse navbar-collapse navbar_list_homepage" id="navbarText">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
                             <li class="nav-item btnBlueTransparent rounded-pill">
-                                <a class="nav-link text-decoration-none text-light p-0" href="BookService.php">Book a Cleaner</a>
+                                <a class="nav-link text-decoration-none text-light p-0" href="<?= $base_url."?controller=Helperland&function=BookService"?>">Book a Cleaner</a>
                             </li>
                             <li class="nav-item btnBorder rounded-pill">
-                                <a class="nav-link text-decoration-none text-light py-0" href="Prices.php">Prices</a>
+                                <a class="nav-link text-decoration-none text-light py-0" href="<?= $base_url."?controller=Helperland&function=Prices"?>">Prices</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="#">Our Guarantee</a>
@@ -64,14 +71,14 @@
                                 <a class="nav-link text-light" href="#">Blog</a>
                             </li>
                             <li class="nav-item navbar_contact">
-                                <a class="nav-link text-light" href="Contact.php">Contact us</a>
+                                <a class="nav-link text-light" href="<?= $base_url."?controller=Helperland&function=Contact"?>">Contact us</a>
                             </li>
 
                             <li class="nav-item btnBlueTransparent rounded-pill">
-                                <a href="" data-toggle="modal" data-target="#LoginModel" class="py-0 text-decoration-none text-light">Login</a>
+                                <a href="#LoginModal" data-toggle="modal" data-target="#LoginModal" data-dismiss="modal" onclick="LoginModal()" class="py-0 text-decoration-none text-light">Login</a>
                             </li>
                             <li class="nav-item btnBlueTransparent rounded-pill">
-                                <a href="ServiceProvider.php" class="py-0 text-decoration-none text-light">Become a Helper</a>
+                                <a href="<?= $base_url."?controller=Helperland&function=ServiceProvider"?>" class="py-0 text-decoration-none text-light">Become a Helper</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

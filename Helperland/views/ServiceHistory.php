@@ -1,4 +1,14 @@
-    <?php include 'header_notification.php';?>
+    <?php 
+        include 'header_notification.php';
+        
+        if(isset($_SESSION['base_url'])){
+            $_SESSION['base_url'] = "";
+            $_SESSION['base_url'] = "?controller=Helperland&function=ServiceHistory";
+        }
+        else{
+            $_SESSION['base_url'] = "?controller=Helperland&function=ServiceHistory";
+        }
+    ?>
     <title>Service History</title>
 
     <section id="service-history-welcome">

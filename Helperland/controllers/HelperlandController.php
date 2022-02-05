@@ -13,26 +13,64 @@ class HelperlandController{
         header('location: views/HomePage.php');
     }
 
-    public function Insert_ContactUs()
+    public function About()
     {
-        if (isset($_POST)){
-            $base_url = 'http://localhost:8088/views/Contact.php';
-            $FirstName =  $_POST['FirstName'];
-            $LastName =  $_POST['LastName'];
-            $array = [
-                'Name' => $FirstName . " " . $LastName,
-                'Email' => $_POST['Email'],
-                'Subject' => $_POST['Subject'],
-                'PhoneNumber' => $_POST['PhoneNumber'],
-                'Message' => $_POST['Message'],
-                'CreatedOn' => date('Y-m-d H:i:s')
-            ];
-            $this->model->insert_contactUs('contactus', $array);
-            header('Location: ' . $base_url);
-        }
-        else{
-            echo 'Error Occurring in Data';
-        }
+        header('Location: views/About.php');
+    }
+
+    public function BookService()
+    {
+        header('Location: views/BookService.php');
+    }
+
+    public function Contact()
+    {
+        header('Location: views/Contact.php');
+    }
+
+    public function CreateAccount()
+    {
+        header('Location: views/CreateAccount.php');
+    }
+
+    public function FAQ()
+    {
+        header('Location: views/FAQ.php');
+    }
+
+    public function HomePage()
+    {
+        header('Location: views/HomePage.php');
+    }
+
+    public function Prices()
+    {
+        header('Location: views/Prices.php');
+    }
+
+    public function ServiceHistory()
+    {
+        header('Location: views/ServiceHistory.php');
+    }
+
+    public function ServiceProvider()
+    {
+        header('Location: views/ServiceProvider.php');
+    }
+
+    public function ServiceRequets()
+    {
+        header('Location: views/ServiceRequets.php');
+    }
+
+    public function UpcomingServices()
+    {
+        header('Location: views/UpcomingServices.php');
+    }
+
+    public function UserManagement()
+    {
+        header('Location: views/UserManagement.php');
     }
 }
 

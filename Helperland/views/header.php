@@ -1,3 +1,9 @@
+<?php if(!isset($_SESSION))
+        {
+            session_start();
+        } 
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -19,6 +25,7 @@
 
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.2/jquery.contextMenu.min.css" integrity="sha512-SWjZLElR5l3FxoO9Bt9Dy3plCWlBi1Mc9/OlojDPwryZxO0ydpZgvXMLhV6jdEyULGNWjKgZWiX/AMzIvZ4JuA==" crossorigin="anonymous"
         referrerpolicy="no-referrer" />
@@ -31,17 +38,17 @@
 
     <?php include 'Login.php';?>
     <?php include 'ForgotPassword.php' ?>
-    
+    <?php include 'ResetPassword.php' ?>
+
 </head>
 
-<!-- <body onload="disablesetupservice()"> -->
-<body>
+<body onload="disablesetupservice()">
 
     <header class="sticky-top">
         <div class=" main position-relative">
             <nav class="navbar navbar-expand-xl home-navbar" id="navbar">
                 <div class="container-fluid navbar_main">
-                    <a class="navbar-brand py-0 ps-4" href="HomePage.php">
+                    <a class="navbar-brand py-0 ps-4" href="<?= $base_url."?controller=Helperland&function=HomePage"?>">
                         <img src="../assets/img/logo-large.png" class="img-fluid" alt="" height="53px" width="75px">
                     </a>
                     <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,10 +68,10 @@
                     <div class="collapse navbar-collapse navbar_list" id="navbarText">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
                             <li class="nav-item btnBlue rounded-pill">
-                                <a class="nav-link text-decoration-none text-light p-0" href="#">Book a Cleaner</a>
+                                <a class="nav-link text-decoration-none text-light p-0" href="<?= $base_url."?controller=Helperland&function=BookService"?>">Book a Cleaner</a>
                             </li>
                             <li class="nav-item btnBorder rounded-pill">
-                                <a class="nav-link text-decoration-none text-light py-0" href="Prices.php">Prices</a>
+                                <a class="nav-link text-decoration-none text-light py-0" href="<?= $base_url."?controller=Helperland&function=Prices"?>">Prices</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="#">Our Guarantee</a>
@@ -73,14 +80,14 @@
                                 <a class="nav-link text-light" href="#">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="Contact.php">Contact us</a>
+                                <a class="nav-link text-light" href="<?= $base_url."?controller=Helperland&function=Contact"?>">Contact us</a>
                             </li>
 
                             <li class="nav-item btnBlue rounded-pill">
-                                <a href="" data-toggle="modal" data-target="#LoginModel" class="py-0 text-decoration-none text-light">Login</a>
+                                <a href="#LoginModal" data-toggle="modal" data-target="#LoginModal"  data-dismiss="modal" onclick="LoginModal()" class="py-0 text-decoration-none text-light">Login</a>
                             </li>
                             <li class="nav-item btnBlue rounded-pill">
-                                <a href="ServiceProvider.php" class="py-0 text-decoration-none text-light">Become a Helper</a>
+                                <a href="<?= $base_url."?controller=Helperland&function=ServiceProvider"?>" class="py-0 text-decoration-none text-light">Become a Helper</a>
                             </li>
                         </ul>
                     </div>

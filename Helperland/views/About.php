@@ -1,4 +1,14 @@
-    <?php include'header.php';?>
+    <?php 
+        include 'header.php';
+        
+        if(isset($_SESSION['base_url'])){
+            $_SESSION['base_url'] = "";
+            $_SESSION['base_url'] = "?controller=Helperland&function=About";
+        }
+        else{
+            $_SESSION['base_url'] = "?controller=Helperland&function=About";
+        }
+    ?>
     <title>About</title>
 
     <section class="bannerimage_about" id="bannerimage">
@@ -49,23 +59,6 @@
         </div>
     </section>
 
-    <section class="newslatter">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-1 ">
-                </div>
-                <div class="col-md-2 "></div>
-                <div class="col-md-6 ">
-                    <h3 class="headingfont">Get Our Newsletter</h3>
-                    <input type="email " placeholder="Your Email ">
-                    <button class="btn btn-sm ">Submit</button>
-                </div>
-                <div class="col-md-2 "></div>
-                <div class="col-md-1 ">
-
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php include 'newslatter-small.php' ?>
 
     <?php include 'footer.php';?>

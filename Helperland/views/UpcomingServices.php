@@ -1,4 +1,14 @@
-    <?php include 'header_notification.php';?>
+    <?php 
+        include 'header_notification.php';
+
+        if(isset($_SESSION['base_url'])){
+            $_SESSION['base_url'] = "";
+            $_SESSION['base_url'] = "?controller=Helperland&function=UpcomingServices";
+        }
+        else{
+            $_SESSION['base_url'] = "?controller=Helperland&function=UpcomingServices";
+        }
+    ?>
     <title>Upcoming Service</title>
 
     <section id="Upcoming-service-welcome">
@@ -26,7 +36,7 @@
                         Service Schedule
                     </div>
                     <div class="side-menu-item">
-                        Service History
+                       <a href="<?= $base_url."?controller=Helperland&function=ServiceHistory"?>">Service History</a> 
                     </div>
                     <div class="side-menu-item">
                         My Ratings

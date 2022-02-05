@@ -1,3 +1,9 @@
+<?php if(!isset($_SESSION))
+        {
+            session_start();
+        } 
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -32,6 +38,10 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
     <?php $base_url = 'http://localhost:8088/'; ?>
+
+    <?php include 'Login.php';?>
+    <?php include 'ForgotPassword.php' ?>
+    <?php include 'ResetPassword.php' ?>
 
 </head>
 

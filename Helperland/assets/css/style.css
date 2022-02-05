@@ -731,6 +731,7 @@ ul.padding-left {
     justify-content: end;
     color: white;
     padding-bottom: 25px;
+    display: flow-root;
 }
 
 .hover-blue :hover {
@@ -749,6 +750,7 @@ ul.padding-left {
     margin-left: 36.1%;
     background: white;
     color: #4f4f4f;
+    margin-top: 80px;
 }
 
 .font-white {
@@ -793,7 +795,7 @@ ul.padding-left {
 }
 
 #how-it-work {
-    margin-top: 100px;
+    margin-top: 150px;
 }
 
 .how-it-work-image {
@@ -1255,6 +1257,17 @@ ul.padding-left {
     overflow: visible;
 }
 
+.ImageTextBox {
+    position: relative;
+    width: 100%;
+}
+
+.ImageTextBox span {
+    position: absolute !important;
+    top: 8px;
+    right: 8px;
+}
+
 
 /* news latter section */
 
@@ -1527,4 +1540,16 @@ ul.padding-left {
         margin-top: 100px;
         text-align: center;
     }
+}
+
+
+/* ----------------------- Validation section 
+   ------------------------------------------ */
+
+.valid-inputBorder {
+    border: 1px solid #1d7a8c !important;
+}
+
+.invalid-inputBorder {
+    border: 1px solid red !important;
 }

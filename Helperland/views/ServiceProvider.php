@@ -1,4 +1,15 @@
-    <?php include 'header_transparent.php';?>
+    <?php 
+        include 'header_transparent.php';
+        require_once 'message_error.php';
+
+        if(isset($_SESSION['base_url'])){
+            $_SESSION['base_url'] = "";
+            $_SESSION['base_url'] = "?controller=Helperland&function=ServiceProvider";
+        }
+        else{
+            $_SESSION['base_url'] = "?controller=Helperland&function=ServiceProvider";
+        }
+    ?>
     <title>Service Provider</title>
 
     <section class="home home-service-provider ">
@@ -6,15 +17,22 @@
             <div class="d-flex flex-wrap login-form p-3">
                 <div class="container">
                     <h3 class="text-center mb-3">Register Now!</h3>
-                    <form action="">
+                    <?php
+                        flash('serviceProvider')
+                    ?>
+                    <form class="form-inline mt-2" style="height:max-content" action="<?= $base_url."?controller=User&function=InsertServiceProvider"?>" method="POST" id="serviceProvider">
                         <div class="form-group mb-2">
-                            <input class="form-control" type="text" id="id1" placeholder="First Name">
+                            <input class="form-control" type="text" id="FirstName" placeholder="First Name"  name="FirstName">
+                            <div class="text-center FirstName-error"></div>
                         </div>
                         <div class="form-group mb-2">
-                            <input class="form-control" type="text" id="id2" placeholder="Last Name">
+                            <input class="form-control" type="text" id="LastName" placeholder="Last Name"  name="LastName">
+                            <div class="text-center LastName-error"></div>
                         </div>
                         <div class="form-group mb-2">
-                            <input class="form-control" type="text" id="id2" placeholder="Enter Address">
+                            <input class="form-control check_email" type="email" id="EmailAddress" placeholder="Email Address"  name="EmailAddress">
+                            <div class="text-center Email-error"></div>
+                            <div class="text-center Email-valid-error"></div>
                         </div>
                         <div class="form-group mb-2">
                             <div class="col-auto">
@@ -22,22 +40,27 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">+46</div>
                                     </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Phone Number">
+                                    <input type="number" class="form-control" id="PhoneNumber" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    maxlength="10" placeholder="Phone Number"  name="PhoneNumber">
                                 </div>
-                            </div>
+                            <div class="text-center PhoneNumber-error"></div>
                         </div>
                         <div class="form-group mb-2">
-                            <input class="form-control" type="password" id="id2" placeholder="Password">
+                            <input class="form-control" type="password" id="Password" minlength="8" maxlength="14" placeholder="Password"  name="Password">
+                            <div class="text-center Password-error"></div>
                         </div>
                         <div class="form-group mb-2">
-                            <input class="form-control" type="password" id="id2" placeholder="Confirm Password">
+                            <input class="form-control" type="password" id="ConfirmPassword" minlength="8" maxlength="14" placeholder="Confirm Password"  name="ConfirmPassword">
+                            <div class="text-center ConfirmPassword-error"></div>
                         </div>
                         <div class="form-group mb-2">
-                            <input type="checkbox"> Send me newsletters from Helperland <br>
-                            <input type="checkbox"> I accept <span class="font-blue">terms and conditions & privacy policy</span>
+                            <input type="checkbox" id="chkNews" name="chkNews" > Send me newsletters from Helperland
+                            <div class="text-left CheckboxNews-error"></div>
+                            <input type="checkbox" id="chkPrivacy" name="chkPrivacy" > I accept <a class="font-blue text-decoration-none">terms and conditions & privacy policy</a>
+                            <div class="text-left Checkbox-error"></div>
                         </div>
                         <div class="container text-center">
-                            <button type="button " class="btn rounded-pill active font-white">Get Started</button>
+                            <button type="submit" class="btn rounded-pill active font-white" id="GetStarted-btn">Get Started</button>
                         </div>
                     </form>
 
@@ -98,23 +121,6 @@
         </div>
     </section>
 
-    <section class="newslatter">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-1 ">
-                </div>
-                <div class="col-md-2 "></div>
-                <div class="col-md-6 ">
-                    <h3 class="headingfont">Get Our Newsletter</h3>
-                    <input type="email " placeholder="Your Email ">
-                    <button class="btn btn-sm ">Submit</button>
-                </div>
-                <div class="col-md-2 "></div>
-                <div class="col-md-1 ">
-
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php include 'newslatter-small.php' ?>
 
     <?php include 'footer.php';?>

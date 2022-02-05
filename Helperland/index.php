@@ -32,3 +32,5 @@ if(file_exists('controllers/'.$controller.'Controller.php')){
 }else{
     echo 'Controller Not Found';
 }
+
+?>
