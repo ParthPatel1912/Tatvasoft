@@ -17,7 +17,7 @@
                 </div>
                     <form action="<?= $base_url."?controller=User&function=ResetPasswordwithKey"?>" method="POST">
                         
-                        <input type="text" class="form-control" id="Resetkey" name="Resetkey" placeholder="Reset key" value="<?php if(isset($_GET['resetkey'])){echo $_GET['resetkey'];} ?>"   >
+                        <input type="text" class="form-control" id="Resetkey" name="Resetkey" placeholder="Reset key" value="<?php if(isset($_GET['resetkey'])){echo $_GET['resetkey'];} ?>" readonly hidden >
 
                         <div class="form-group ImageTextBox mb-2">
                             <span class="bi bi-lock-fill icon"></span>

@@ -9,7 +9,7 @@
    <h6 style='font-size:18px;'>Please Click This and Reset Your Password </h6>
    <br/>
 
-   <a href='http://localhost:8088/views/HomePage.php?controller=User&function=ResetPassword&resetkey=$resetkey#ResetModal'> Reset password Link</a>
+   <a href='http://localhost:8088/views/HomePage.php?controller=User&function=ResetPasswordwithKey&resetkey=$resetkey#ResetModal'> Reset password Link</a>
  </div>
     ";
   //Set content-type header for sending HTML email

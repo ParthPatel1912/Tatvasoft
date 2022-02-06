@@ -74,10 +74,14 @@
                                 <img src="../assets/img/user.png ">
                             </li>
                             <li>
-                                James Smith
+                                <?php 
+                                    if ($_SESSION['UserrName'] ) { 
+                                        echo $_SESSION['UserrName'];   
+                                    }
+                                ?>
                             </li>
                             <li>
-                                <img src="../assets/img/logout.png">
+                               <a href=""><img src="../assets/img/logout.png"></a>
                             </li>
                         </ul>
                     </div>

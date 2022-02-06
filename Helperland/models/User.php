@@ -31,7 +31,7 @@ class UserModel{
         return $count;
     }
 
-    public function insert_customer($table,$array)
+    public function insert_user($table,$array)
     {
         $sql_query = "INSERT INTO $table (FirstName, LastName, Email, Password, Mobile, UserTypeId, IsRegisteredUser, CreatedDate, ModifiedDate, ModifiedBy, IsActive, Resetkey, Status) 
         VALUES (:FirstName, :LastName, :EmailAddress, :Password, :PhoneNumber, :UserTypeId, :IsRegisteredUser, now(), now(), '', :IsActive, :Resetkey, :Status)";
@@ -57,7 +57,7 @@ class UserModel{
         $base_urlAdmin = "?controller=Helperland&function=UserManagement";
         $base_urlLoginModal = $_SESSION['base_url'].'#LoginModal';
         
-        $sql_query = "select * from $table where Email = '$EmailAddress' and Password = '$Password'";
+        $sql_query = "select * from $table where Email = '$EmailAddress'";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
         $row = $statement->fetch(PDO::FETCH_ASSOC);
@@ -65,29 +65,31 @@ class UserModel{
         $FirstName = $row['FirstName'];
         $LastName = $row['LastName'];
         $Name = $FirstName . " " . $LastName;
+        $_SESSION['UserrName'] = $Name;
         $UserTypeId = $row['UserTypeId'];
 
         if ($count == 1){
 
-        //if (password_verify($Password, $row['Password'])) {
+            if (password_verify($Password, $row['Password'])) {
 
-            if($UserTypeId == 1){
-                $_SESSION['user_msg'] = "Welcome, Admin";
-                $_SESSION['user_txt'] = $Name;
-                $_SESSION['user_status'] = "success";
-                header('Location: '. $base_urlAdmin);
-            }
-            else if($UserTypeId == 2){
-                $_SESSION['user_msg'] = "Welcome, Service Provider";
-                $_SESSION['user_txt'] = $Name;
-                $_SESSION['user_status'] = "success";
-                header('Location: '. $base_urlService);
-            }
-            else{
-                $_SESSION['user_msg'] = "Welcome, Coustomer";
-                $_SESSION['user_txt'] = $Name;
-                $_SESSION['user_status'] = "success";
-                header('Location: '. $base_urlCoustomer);
+                if($UserTypeId == 1){
+                    $_SESSION['user_msg'] = "Welcome, Admin";
+                    $_SESSION['user_txt'] = $Name;
+                    $_SESSION['user_status'] = "success";
+                    header('Location: '. $base_urlAdmin);
+                }
+                else if($UserTypeId == 2){
+                    $_SESSION['user_msg'] = "Welcome, Service Provider";
+                    $_SESSION['user_txt'] = $Name;
+                    $_SESSION['user_status'] = "success";
+                    header('Location: '. $base_urlService);
+                }
+                else{
+                    $_SESSION['user_msg'] = "Welcome, Coustomer";
+                    $_SESSION['user_txt'] = $Name;
+                    $_SESSION['user_status'] = "success";
+                    header('Location: '. $base_urlCoustomer);
+                }
             }
         }
 
@@ -109,13 +111,25 @@ class UserModel{
 
     public function CheckEmailPassword($table, $EmailAddress, $Password)
     {
-        $sql_query = "select * from $table where Email = '$EmailAddress' and Password = '$Password'";
+        $sql_query = "select * from $table where Email = '$EmailAddress'";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
         $row = $statement->fetch(PDO::FETCH_ASSOC);
         $count = $statement->rowCount();
 
-        return $count;
+        if ($count == 1) {
+            if (password_verify($Password, $row['Password'])) {
+                return $count;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
+
+        
     }
 
     public function checkEmailForgot($table,$EmailAddress)

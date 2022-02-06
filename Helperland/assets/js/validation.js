@@ -206,7 +206,7 @@ $(document).ready(function() {
     });
 
     $("#chkPrivacy").on('input', function() {
-        if ($('input[type=checkbox]:checked').length != 1) {
+        if ($('input[type=checkbox]:checked').length == 1) {
             $('.Checkbox-error').addClass('text-red').text("You Must agree with Privacy");
         } else {
             $('.Checkbox-error').removeClass('text-red').text("");
@@ -215,7 +215,7 @@ $(document).ready(function() {
 
     if (window.location.href.indexOf('CreateAccount.php') != -1) {
         $('input').on('input', function(e) {
-            if ($('input[type=checkbox]:checked').length == 1) {
+            if ($('input[type=checkbox]:checked').length != 1) {
                 if ($('#CreateAccount').find('.valid-inputBorder').length == 6) {
                     $('#Register-btn').removeAttr('disabled');
 
@@ -232,7 +232,7 @@ $(document).ready(function() {
 
     if (window.location.href.indexOf('ServiceProvider.php') != -1) {
         $('input').on('input', function(e) {
-            if ($('input[type=checkbox]:checked').length == 1) {
+            if ($('input[type=checkbox]:checked').length != 1) {
 
                 if ($('#serviceProvider').find('.valid-inputBorder').length == 6) {
                     $('#GetStarted-btn').removeAttr('disabled');

@@ -123,7 +123,9 @@
                                     <li>
                                         <a class="dropdown-item bordered" href="#">
                                             Welcome,<br>
-                                            Sandip Patel
+                                            <?php if ($_SESSION['UserrName'] ) { 
+                                                echo $_SESSION['UserrName'];   
+                                            }?>
                                         </a>
                                     </li>
                                     <li>
@@ -138,7 +140,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="#">
-                                            Logout
+                                            <a href="">Logout</a>
                                         </a>
                                     </li>
                                 </ul>

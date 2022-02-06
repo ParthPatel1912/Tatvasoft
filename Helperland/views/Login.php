@@ -18,14 +18,31 @@
                     <form action="<?= $base_url."?controller=User&function=Login"?>" method="POST" id="Login">
                         <div class="form-group ImageTextBox mb-2">
                             <span class="bi bi-person-fill icon"></span>
-                            <input type="email" class="form-control check_emailLogin" id="emailAddressLogin" placeholder="Email" name="EmailAddress">
+                            <input type="email" class="form-control check_emailLogin" id="emailAddressLogin" placeholder="Email" name="EmailAddress"
+                               value="<?php 
+                                    if(isset($_COOKIE['EmailAddressCookie'])){
+                                        echo $_COOKIE['EmailAddressCookie'];
+                                    }
+                               ?>" >
                         </div>
                         <div class="form-group ImageTextBox mb-2">
                             <span class="bi bi-lock-fill icon"></span>
-                            <input type="password" class="form-control check_passwordLogin" minlength="8" maxlength="14" id="password" placeholder="Password" name="Password">
+                            <input type="password" class="form-control check_passwordLogin" minlength="8" maxlength="14" id="password" placeholder="Password" name="Password"
+                               value="<?php 
+                                    if(isset($_COOKIE['PasswordCookie'])){
+                                        echo $_COOKIE['PasswordCookie'];
+                                    }
+                               ?>" >
                         </div>
                         <div class="form-group mb-2">
-                            <input type="checkbox" name="Check" id="ckeckSave"> Save
+                            <?php  if(isset($_COOKIE)) { ?>
+                                <input type="checkbox" name="ChkRemember" checked id="ckeckSave"> Remember Me
+                            <?php } ?>
+                                
+                            <?php  if(!isset($_COOKIE)) { ?>
+                                <input type="checkbox" name="ChkRemember" id="ckeckSave"> Remember Me
+                            <?php } ?>
+
                         </div>
                         <div class="container text-center">
                             <button type="submit" class="btn rounded-pill active font-white" id="Login-btn" style="width: 100%;">Log

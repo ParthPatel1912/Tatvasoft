@@ -38,7 +38,7 @@ class UserController{
             $ConfirmPassword = trim($_POST['ConfirmPassword']);
             $chkPrivacy = trim( $_POST['chkPrivacy']);
 
-            //'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
+            $PasswordCrypt = password_hash($Password, PASSWORD_BCRYPT);
 
             $error = "";
 
@@ -107,7 +107,7 @@ class UserController{
                         'LastName' => $LastName,
                         'EmailAddress' => $EmailAddress,
                         'PhoneNumber' => $PhoneNumber,
-                        'Password' => $Password,
+                        'Password' => $PasswordCrypt,
                         'Resetkey' => $resetkey,
                         'UserTypeId' => '3',
                         'Status' => 'New',
@@ -143,6 +143,8 @@ class UserController{
             $Password = trim($_POST['Password']);
             $ConfirmPassword = trim($_POST['ConfirmPassword']);
             $chkPrivacy = trim($_POST['chkPrivacy']);
+
+            $PasswordCrypt = password_hash($Password, PASSWORD_BCRYPT);
 
             $error = "";
 
@@ -212,14 +214,14 @@ class UserController{
                         'LastName' => $LastName,
                         'EmailAddress' => $EmailAddress,
                         'PhoneNumber' => $PhoneNumber,
-                        'Password' => $Password,
+                        'Password' => $PasswordCrypt,
                         'Resetkey' => $resetkey,
                         'UserTypeId' => '2',
                         'Status' => 'New',
                         'IsActive' => 'No',
                         'IsRegisteredUser' => 'yes'
                     ];
-                    $result = $this->model->insert_customer('user', $array);
+                    $result = $this->model->insert_user('user', $array);
                     $_SESSION['status_msg'] = $result[0];
                     $_SESSION['status_txt'] = $result[1]; 
                     $_SESSION['status'] = $result[2];
@@ -240,6 +242,12 @@ class UserController{
         if (isset($_POST)) {
             $EmailAddress = trim($_POST['EmailAddress']);
             $Password = trim($_POST['Password']);
+
+            if (isset($_POST['ChkRemember'])) {
+                setcookie('EmailAddressCookie', $EmailAddress, time() + 2592000, '/');
+                setcookie('PasswordCookie', $Password, time() + 2592000, '/');
+            }
+
             $result = $this->model->CheckLogin('user',$EmailAddress, $Password);
 
             $_SESSION['user_msg'] = $result[0];
@@ -253,6 +261,7 @@ class UserController{
         if (isset($_POST)) {
             $EmailAddress = trim($_POST['EmailAddress']);
             $Password = $_POST['Password'];
+
             $count = $this->model->CheckEmailPassword('user',$EmailAddress, $Password);
 
             if ($count == 1) {
@@ -308,11 +317,11 @@ class UserController{
         }
     }
 
-    public function ResetPassword()
-    {
-        $Resetkey = $_GET['resetkey'];
-        include('./views/ResetPassword.php');
-    }
+    // public function ResetPassword()
+    // {
+    //     $Resetkey = $_GET['resetkey'];
+    //     include('./views/ResetPassword.php');
+    // }
 
     public function ResetPasswordwithKey()
     {
@@ -323,6 +332,8 @@ class UserController{
             $Resetkey = trim($_POST['Resetkey']);
             $Password = trim($_POST['Password']);
             $ConfirmPassword = trim($_POST['ConfirmPassword']);
+
+            $PasswordCrypt = password_hash($Password, PASSWORD_BCRYPT);
 
             $error = "";
 
@@ -358,13 +369,11 @@ class UserController{
                 echo $error;
             }
             else{
-
-            // echo("<script>alert('".$Resetkey."')</script>");
             
                 if($Password == $ConfirmPassword)
                 {
                     $array = [
-                        'Password' => $Password,
+                        'Password' => $PasswordCrypt,
                         'Resetkey' => $Resetkey,
                     ];
                     $result = $this->model->ResetPassword('user',$array);
