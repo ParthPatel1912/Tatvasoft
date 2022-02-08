@@ -1,7 +1,8 @@
-<?php if(!isset($_SESSION))
+<?php
+        if(!isset($_SESSION))
         {
             session_start();
-        } 
+        }
 ?>
 
 <!DOCTYPE html>
@@ -75,13 +76,22 @@
                             </li>
                             <li>
                                 <?php 
-                                    if ($_SESSION['UserrName'] ) { 
-                                        echo $_SESSION['UserrName'];   
+                                    if (isset($_SESSION['UserName'])) { 
+                                        echo $_SESSION['UserName']." ";   
+                                    }
+                                    else{
+                                        echo 'Admin';
                                     }
                                 ?>
                             </li>
                             <li>
-                               <a href=""><img src="../assets/img/logout.png"></a>
+                               <!-- <a> -->
+                               <form method="POST" action="<?= $base_url."?controller=User&function=Logout"?>" >
+                                    <button class="nav-link btn btn-link" name="logout" type="submit">
+                                        <img src="../assets/img/logout.png">
+                                    </button>
+                                </form>
+                                <!-- </a> -->
                             </li>
                         </ul>
                     </div>

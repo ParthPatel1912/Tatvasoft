@@ -1,3 +1,10 @@
+<?php
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
+?>
+
 <!-- JS -->
     <script>
         <?php require('../assets/js/main.js');?>
@@ -5,15 +12,15 @@
         <?php require('../assets/js/validation.js');?>
     </script>
 
-<?php  if (isset($_SESSION['status_msg']) && isset($_SESSION['status_txt']) && isset($_SESSION['status'])){ ?>
+<?php  if (isset($_SESSION['message_title']) && isset($_SESSION['message_text']) && isset($_SESSION['message_icon'])){ ?>
     <script>
         $(document).ready(function() {
 
             Swal.fire({
             position: 'top-end',
-            title: '<?php echo $_SESSION['status_msg']; ?>',
-            text: '<?php echo $_SESSION['status_txt']; ?>',
-            icon: '<?php echo $_SESSION['status']; ?>',
+            title: '<?php echo $_SESSION['message_title']; ?>',
+            text: '<?php echo $_SESSION['message_text']; ?>',
+            icon: '<?php echo $_SESSION['message_icon']; ?>',
             showConfirmButton: false,
             timer: 1500
             })
@@ -21,29 +28,29 @@
         });
     </script>
     <?php } 
-    unset($_SESSION['status_msg']);
-    unset($_SESSION['status_txt']);
-    unset($_SESSION['status']);
+    unset($_SESSION['message_title']);
+    unset($_SESSION['message_text']);
+    unset($_SESSION['message_icon']);
     ?>
 
 
-<?php  if (isset($_SESSION['user_msg']) && isset($_SESSION['user_txt']) && isset($_SESSION['user_status'])){ ?>
+<?php  if (isset($_SESSION['user_title']) && isset($_SESSION['user_text']) && isset($_SESSION['user_icon'])){ ?>
     <script>
         $(document).ready(function() {
 
             Swal.fire({
-            title: '<?php echo $_SESSION['user_msg']; ?>',
-            text: '<?php echo $_SESSION['user_txt']; ?>',
-            icon: '<?php echo $_SESSION['user_status']; ?>',
+            title: '<?php echo $_SESSION['user_title']; ?>',
+            text: '<?php echo $_SESSION['user_text']; ?>',
+            icon: '<?php echo $_SESSION['user_icon']; ?>',
             confirmButtonText: 'Done'
             })
 
         });
     </script>
     <?php } 
-    unset($_SESSION['user_msg']);
-    unset($_SESSION['user_txt']);
-    unset($_SESSION['user_status']);
+    unset($_SESSION['user_title']);
+    unset($_SESSION['user_text']);
+    unset($_SESSION['user_icon']);
     ?>
 
 <!-- JS Bootstrap -->

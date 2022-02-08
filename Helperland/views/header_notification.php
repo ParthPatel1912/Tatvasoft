@@ -1,7 +1,8 @@
-<?php if(!isset($_SESSION))
+<?php
+        if(!isset($_SESSION))
         {
             session_start();
-        } 
+        }
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +70,16 @@
                     <div class="collapse navbar-collapse navbar_list" id="navbarText">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-left">
                             <li class="nav-item display-sm">
-                                <a class="nav-link" href="#"> Welcome, Sandeep</a>
+                                <a class="nav-link" href="#"> Welcome, 
+                                <?php 
+                                    if (isset($_SESSION['UserName'])) { 
+                                        echo $_SESSION['UserName'];   
+                                    }
+                                    else{
+                                        echo 'Service Provider OR Coustomer';
+                                    }
+                                ?>
+                                </a>
                             </li>
                             <li class="nav-item display-sm">
                                 <a class="nav-link rounded-link active" href="#">Book now </a>
@@ -98,7 +108,10 @@
                                 <a class="nav-link" href="#"> My Setting </a>
                             </li>
                             <li class="nav-item display-sm">
-                                <a class="nav-link" href="#"> Logout</a>
+                                <!-- <a class="nav-link" href="#"> Logout</a> -->
+                                <form method="POST" action="<?= $base_url."?controller=User&function=Logout"?>" >
+                                    <button class="nav-link btn btn-link" name="logout" type="submit">Logout</button>
+                                </form>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="<?= $base_url."?controller=Helperland&function=Prices"?>">Prices & services</a>
@@ -123,9 +136,13 @@
                                     <li>
                                         <a class="dropdown-item bordered" href="#">
                                             Welcome,<br>
-                                            <?php if ($_SESSION['UserrName'] ) { 
-                                                echo $_SESSION['UserrName'];   
-                                            }?>
+                                            <?php if (isset($_SESSION['UserName'])) { 
+                                                echo $_SESSION['UserName'];   
+                                            }
+                                                else{
+                                                    echo 'Service Provider OR Coustomer';
+                                                }
+                                            ?>
                                         </a>
                                     </li>
                                     <li>
@@ -140,7 +157,10 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="#">
-                                            <a href="">Logout</a>
+                                            <!-- Logout -->
+                                            <form method="POST" action="<?= $base_url."?controller=User&function=Logout"?>" >
+                                                <button class="btn" name="logout" type="submit">Logout</button>
+                                            </form>
                                         </a>
                                     </li>
                                 </ul>

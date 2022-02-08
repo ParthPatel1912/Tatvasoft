@@ -1,6 +1,6 @@
 <?php 
 
-class ContactModel{
+class BookModel{
 
     function __construct()
     {
@@ -20,16 +20,6 @@ class ContactModel{
        }catch(PDOException $e){
                 echo $e->getMessage();
        }
-    }
-
-    function insert_contact($table,$array){
-        $sql_query = "INSERT INTO $table(Name, Email, Subject, PhoneNumber, Message, CreatedOn)
-        VALUES (:Name, :Email, :Subject, :PhoneNumber, :Message, now())";
-        $statement= $this->conn->prepare($sql_query);
-        $result = $statement->execute($array);
-
-        
-        return $result;
     }
 }
 

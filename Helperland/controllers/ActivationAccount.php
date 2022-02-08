@@ -1,15 +1,18 @@
 <?php
   $to = $EmailAddress;
-  $subject = "Forgot Password for Helperland";
+  $subject = "Activation Account for Helperland";
 
   $body = "
   <div>
-  <h5 style='font-size:22px;'>Hi, $Name .Click below Link for Reset Your Password</h5>
 
-   <h6 style='font-size:18px;'>Please Click This and Reset Your Password </h6>
+   <h5 style='font-size:22px;'>Click below Link and Active Your Account </h6>
+   <br/>
+   <br/>
    <br/>
 
-   <a href='http://localhost:8088/views/HomePage.php?controller=User&function=ResetPasswordwithKey&resetkey=$resetkey#ResetModal'> Reset password Link</a>
+   <a href='http://localhost:8088/?controller=User&function=ActivateAccount&resetkey=$resetkey'> Active account Link</a>
+
+   <h6 style='font-size:18px;'>Thanks For registering in Helperland!</h6>
  </div>
     ";
   //Set content-type header for sending HTML email

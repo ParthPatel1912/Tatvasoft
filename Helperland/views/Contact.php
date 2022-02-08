@@ -1,5 +1,16 @@
-    <?php 
-        include 'header.php';
+    <?php
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['UserName'])) {
+            include 'header.php';
+        }
+        if (isset($_SESSION['UserName'])) { 
+            include 'header_notification.php';
+        }
+        
         require_once 'message_error.php';
 
         if(isset($_SESSION['base_url'])){

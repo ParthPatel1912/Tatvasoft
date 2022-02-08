@@ -6,12 +6,15 @@ class ContactController{
     {
         include('models/Contact.php');
         $this->model = new ContactModel();
-        session_start();
+        if(!isset($_SESSION))
+        {
+            session_start();
+        } 
     }
 
     public function Insert_Contact()
     {
-        $base_url = 'http://localhost:8088/?controller=Helperland&function=Contact';
+        $base_url = '?controller=Helperland&function=Contact';
         if (isset($_POST)){
             $FirstName =  trim($_POST['FirstName']);
             $LastName =  trim($_POST['LastName']);
@@ -59,16 +62,24 @@ class ContactController{
                     'Message' => $Message
                 ];
                 $result = $this->model->insert_contact('contactus', $array);
-                $_SESSION['status_msg'] = $result[0];
-                $_SESSION['status_txt'] = $result[1]; 
-                $_SESSION['status'] = $result[2];
+                
+                if ($result) {
+                    $_SESSION['message_title'] = "Message Sent Succesfully";
+                    $_SESSION['message_text'] = "";
+                    $_SESSION['message_icon'] = "success";
+                } 
+                else {
+                    $_SESSION['message_title'] = "Your Message is not Sent";
+                    $_SESSION['message_text'] = "Please Try Again";
+                    $_SESSION['message_icon'] = "error";
+                }
                 header('Location: ' . $base_url);
             }
         }
         else{
-            $_SESSION['status_msg'] = "Your Message is not Sent";
-            $_SESSION['status_txt'] = "Please Try Again";
-            $_SESSION['status'] = "error";
+            $_SESSION['message_title'] = "Your Message is not Sent";
+            $_SESSION['message_text'] = "Please Try Again";
+            $_SESSION['message_icon'] = "error";
             header('Location: ' . $base_url);
         }
     }

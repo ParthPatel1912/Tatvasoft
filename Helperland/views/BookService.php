@@ -1,5 +1,16 @@
-    <?php 
-        include 'header.php';
+    <?php
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['UserName'])) { 
+            include 'header.php';
+        }
+        if (isset($_SESSION['UserName'])) { 
+            include 'header_notification.php';
+        }
+        
 
         if(isset($_SESSION['base_url'])){
             $_SESSION['base_url'] = "";
@@ -308,7 +319,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <span class="basic-service"><img src="../assets/img/smiley.png">See what is always included</span>
+                            <span class="basic-service"><img src="../assets/img/smiley.png"> See what is always included</span>
                         </div>
 
                         <div class="mt-4">
@@ -368,7 +379,7 @@
                                     </div>
                                     <hr>
                                     <div class="mt-2 font-18 text-blue">
-                                        For more help
+                                        <a href="<?= $base_url."?controller=Helperland&function=FAQ"?>" class="text-decoration-none">For more help</a>
                                     </div>
                                 </ul>
                             </div>

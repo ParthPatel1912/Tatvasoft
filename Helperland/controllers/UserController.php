@@ -7,16 +7,19 @@ class UserController{
     {
         include('models/User.php');
         $this->model = new UserModel();
-        session_start();
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
     }
 
     public function CheckEmail()
     {
         if(isset($_POST)){
             $EmailAddress = trim($_POST['EmailAddress']);
-            $count = $this->model->checkEmail('user',$EmailAddress);
+            $result = $this->model->checkEmail('user',$EmailAddress);
 
-            if($count > 0){
+            if($result > 0){
                 echo "Email Already Exists. Please Try Another Email";
             } else {
                 echo "Email You can Use";
@@ -29,7 +32,7 @@ class UserController{
         $base_url = '?controller=Helperland&function=CreateAccount#LoginModal';
         $base_url_createAccount = '?controller=Helperland&function=CreateAccount';
 
-        if(isset($_POST)){   
+        if(isset($_POST)){
             $FirstName = trim($_POST['FirstName']);
             $LastName  = trim($_POST['LastName']);
             $EmailAddress = trim($_POST['EmailAddress']);
@@ -111,22 +114,36 @@ class UserController{
                         'Resetkey' => $resetkey,
                         'UserTypeId' => '3',
                         'Status' => 'New',
-                        'IsActive' => 'No',
+                        'IsActive' => 'Yes',
                         'IsRegisteredUser' => 'yes'
                     ];
-                    $result = $this->model->insert_customer('user', $array);
-                    $_SESSION['status_msg'] = $result[0];
-                    $_SESSION['status_txt'] = $result[1]; 
-                    $_SESSION['status'] = $result[2];
-                    header('Location: ' . $base_url);
+                    $result = $this->model->insert_user('user', $array);
+
+                    if ($result) {
+                        $_SESSION['message_title'] = "Your Account has been Created";
+                        $_SESSION['message_text'] = "Please Login now";
+                        $_SESSION['message_icon'] = "success";
+                        header('Location: ' . $base_url);
+                    } else {
+                        $_SESSION['message_title'] = "Your Account is not Created";
+                        $_SESSION['message_text'] = "Please Try Again";
+                        $_SESSION['message_icon'] = "alert";
+                        header('Location: ' . $base_url_createAccount);
+                    }
                 }
                 else{
-                    $_SESSION['status_msg'] = "Email Already Exists";
-                    $_SESSION['status_txt'] = "Try Another Email";
-                    $_SESSION['status'] = "error";
+                    $_SESSION['message_title'] = "Email Already Exists";
+                    $_SESSION['message_text'] = "Try Another Email";
+                    $_SESSION['message_icon'] = "error";
                     header('Location: ' . $base_url_createAccount);
                 }
             }
+        }
+        else{
+            $_SESSION['message_title'] = "Your Message is not Sent";
+            $_SESSION['message_text'] = "Please Try Again";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $base_url_createAccount);
         }
     }
 
@@ -206,7 +223,7 @@ class UserController{
 
             else{
 
-                $resetkey = bin2hex(random_bytes(15));
+                $Resetkey = bin2hex(random_bytes(15));
                 $count = $this->model->checkEmail('user',$EmailAddress);
                 if($count == 0){
                     $array = [
@@ -215,30 +232,49 @@ class UserController{
                         'EmailAddress' => $EmailAddress,
                         'PhoneNumber' => $PhoneNumber,
                         'Password' => $PasswordCrypt,
-                        'Resetkey' => $resetkey,
+                        'Resetkey' => $Resetkey,
                         'UserTypeId' => '2',
                         'Status' => 'New',
                         'IsActive' => 'No',
                         'IsRegisteredUser' => 'yes'
                     ];
                     $result = $this->model->insert_user('user', $array);
-                    $_SESSION['status_msg'] = $result[0];
-                    $_SESSION['status_txt'] = $result[1]; 
-                    $_SESSION['status'] = $result[2];
-                    header('Location: ' . $base_url);
+                    if ($result) {
+                        $_SESSION['message_title'] = "Your Account has been Created";
+                        $_SESSION['message_text'] = "Please Verify Your Email";
+                        $_SESSION['message_icon'] = "success";
+                        include('ActivationAccount.php');
+                        header('Location: ' . $base_url);
+                    } else {
+                        $_SESSION['message_title'] = "Your Account is not Created";
+                        $_SESSION['message_text'] = "Please Try Again";
+                        $_SESSION['message_icon'] = "alert";
+                        header('Location: ' . $base_url_serviceProvider);
+                    }
                 }
                 else{
-                    $_SESSION['status_msg'] = "Email Already Exists";
-                    $_SESSION['status_txt'] = "Try Another Email";
-                    $_SESSION['status'] = "error";
+                    $_SESSION['message_title'] = "Email Already Exists";
+                    $_SESSION['message_text'] = "Try Another Email";
+                    $_SESSION['message_icon'] = "error";
                     header('Location: ' . $base_url_serviceProvider);
                 }
             }
+        }
+        else{
+            $_SESSION['message_title'] = "Your Message is not Sent";
+            $_SESSION['message_text'] = "Please Try Again";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $base_url_serviceProvider);
         }
     }
 
     public function Login()
     {
+        $base_urlCoustomer = "?controller=Helperland&function=ServiceHistory";
+        $base_urlService = "?controller=Helperland&function=UpcomingServices";
+        $base_urlAdmin = "?controller=Helperland&function=UserManagement";
+        $base_urlLoginModal = $_SESSION['base_url'].'#LoginModal';
+
         if (isset($_POST)) {
             $EmailAddress = trim($_POST['EmailAddress']);
             $Password = trim($_POST['Password']);
@@ -250,9 +286,54 @@ class UserController{
 
             $result = $this->model->CheckLogin('user',$EmailAddress, $Password);
 
-            $_SESSION['user_msg'] = $result[0];
-            $_SESSION['user_txt'] = $result[1]; 
-            $_SESSION['user_status'] = $result[2];
+            $count = $result[0];
+            $UserTypeId = $result[1];
+            $Name = $result[2];
+            $IsActive = $result[3];
+
+            if ($count == 1){
+
+                if($IsActive == "Yes"){
+
+                    if($UserTypeId == 1){
+                        $_SESSION['user_title'] = "Welcome, Admin";
+                        $_SESSION['user_text'] = $Name;
+                        $_SESSION['user_icon'] = "success";
+                        header('Location: '. $base_urlAdmin);
+                    }
+                    else if($UserTypeId == 2){
+                        $_SESSION['user_title'] = "Welcome, Service Provider";
+                        $_SESSION['user_text'] = $Name;
+                        $_SESSION['user_icon'] = "success";
+                        header('Location: '. $base_urlService);
+                    }
+                    else{
+                        $_SESSION['user_title'] = "Welcome, Coustomer";
+                        $_SESSION['user_text'] = $Name;
+                        $_SESSION['user_icon'] = "success";
+                        header('Location: '. $base_urlCoustomer);
+                    }
+                }
+                else{
+                    $_SESSION['user_title'] = "Please Active your Account";
+                    $_SESSION['user_text'] = "Mail sent in ".$EmailAddress;
+                    $_SESSION['user_icon'] = "error";
+                    header('Location: '. $base_urlLoginModal);
+                }
+            }
+            else {
+
+                $_SESSION['user_title'] = "User does not exists";
+                $_SESSION['user_text'] = "Please Enter Valid User";
+                $_SESSION['user_icon'] = "error";
+                header('Location: '. $base_urlLoginModal);
+            }
+        }
+        else{
+            $_SESSION['message_title'] = "Your Message is not Sent";
+            $_SESSION['message_text'] = "Please Try Again";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $base_urlLoginModal);
         }
     }
 
@@ -262,14 +343,17 @@ class UserController{
             $EmailAddress = trim($_POST['EmailAddress']);
             $Password = $_POST['Password'];
 
-            $count = $this->model->CheckEmailPassword('user',$EmailAddress, $Password);
+            $result = $this->model->CheckEmailPassword('user',$EmailAddress, $Password);
 
-            if ($count == 1) {
+            if ($result == 1) {
                 echo "Email and Password both match";
             }
             else {
                 echo "Please enter valid Email and Password";
             }
+        }
+        else{
+           echo "Your Message is not Sent";
         }
     }
 
@@ -277,13 +361,16 @@ class UserController{
     {
         if(isset($_POST)){
             $EmailAddress = trim($_POST['EmailAddress']);
-            $count = $this->model->checkEmailForgot('user',$EmailAddress);
+            $result = $this->model->checkEmailForgot('user',$EmailAddress);
 
-            if($count == 1){
+            if($result == 1){
                 echo "Email Exist";
             } else {
                 echo "Email doesn't Exists. Please Try Another Email";
             }
+        }
+        else{
+            echo "Message is not sent";
         }
     }
 
@@ -302,26 +389,26 @@ class UserController{
 
             if($count == 1){
                 include('ForgotPassword.php');
-                $_SESSION['status_msg'] = "Reset Password Link has been sent successfully on!";
-                $_SESSION['status_txt'] = $EmailAddress;
-                $_SESSION['status'] = "success";
+                $_SESSION['message_title'] = "Reset Password Link has been sent successfully on!";
+                $_SESSION['message_text'] = $EmailAddress;
+                $_SESSION['message_icon'] = "success";
                 header('Location:' . $base_url);
                 
             }
             else{
-                $_SESSION['status_msg'] = "Please Enter Valid Email";
-                $_SESSION['status_txt'] = "";
-                $_SESSION['status'] = "error";
+                $_SESSION['message_title'] = "Please Enter Valid Email OR";
+                $_SESSION['message_text'] = "First Varify your Email ID";
+                $_SESSION['message_icon'] = "error";
                 header('Location:' . $base_urlForgot);
             }
         }
+        else{
+            $_SESSION['message_title'] = "Your Message is not Sent";
+            $_SESSION['message_text'] = "Please Try Again";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $base_urlForgot);
+        }
     }
-
-    // public function ResetPassword()
-    // {
-    //     $Resetkey = $_GET['resetkey'];
-    //     include('./views/ResetPassword.php');
-    // }
 
     public function ResetPasswordwithKey()
     {
@@ -376,21 +463,84 @@ class UserController{
                         'Password' => $PasswordCrypt,
                         'Resetkey' => $Resetkey,
                     ];
-                    $result = $this->model->ResetPassword('user',$array);
-                    $_SESSION['status_msg'] = $result[0];
-                    $_SESSION['status_txt'] = $result[1]; 
-                    $_SESSION['status'] = $result[2];
+                    $result = $this->model->ResetPassword('user',$array,$Resetkey);
+
+                    if ($result) {
+                        $_SESSION['message_title'] = "Password Updated Successfully";
+                        $_SESSION['message_text'] = "";
+                        $_SESSION['message_icon'] = "success";
+                    } else {
+                        $_SESSION['message_title'] = "Password Not Updated OR ";
+                        $_SESSION['message_text'] = "First Varify your Email ID";
+                        $_SESSION['message_icon'] = "warning";
+                    }
                     header('Location:' . $base_urlLoginModal);
                 }
                 else {
-                    $_SESSION['status_msg'] = "Password Not Match";
-                    $_SESSION['status_txt'] = "Please Try Again"; 
-                    $_SESSION['status'] = "warning";
+                    $_SESSION['message_title'] = "Password Not Match";
+                    $_SESSION['message_text'] = "Please Try Again"; 
+                    $_SESSION['message_icon'] = "warning";
                     header('Location:' . $base_urlResetModal);
                 }
             }
         }
+        else{
+            $_SESSION['message_title'] = "Your Message is not Sent";
+            $_SESSION['message_text'] = "Please Try Again";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $base_urlResetModal);
+        }
     }
+
+    public function ActivateAccount()
+    {
+        $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';
+        $base_url_createAccount = '?controller=Helperland&function=CreateAccount';
+
+        if (isset($_GET)) {
+            $Resetkey = $_GET['resetkey'];
+            $result = $this->model->ActivationAccount('user',$Resetkey);
+
+            if ($result) {
+                $_SESSION['message_title'] = "Congratulation, Your Account verification is successfull!! ";
+                $_SESSION['message_text'] = "You Can Login Now";
+                $_SESSION['message_icon'] = "success";
+                header('Location:' . $base_urlLoginModal);
+            } else {
+                $_SESSION['message_title'] = "You alredy Varified it";
+                $_SESSION['message_text'] = "Your account is not need Varification";
+                $_SESSION['message_icon'] = "error";
+                header('Location:' . $base_url_createAccount);
+            }
+        }
+        else{
+            $_SESSION['message_title'] = "Your Message is not Sent";
+            $_SESSION['message_text'] = "Please Try Again";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $base_url_createAccount);
+        }
+    }
+
+    public function Logout()
+    {
+        $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';
+        
+        if(isset($_POST)){
+            unset($_SESSION['UserName']);
+            $_SESSION['message_title'] = "You are Logged Out";
+            $_SESSION['message_text'] = "";
+            $_SESSION['message_icon'] = "success";
+            // $_SESSION['msg'] = "You are Logged Out"; 
+            header('Location:'.$base_urlLoginModal);
+        }
+        else{
+            $_SESSION['message_title'] = "Your Message is not Sent";
+            $_SESSION['message_text'] = "Please Try Again";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $base_urlLoginModal);
+        }
+    }
+
 }
 
 ?>

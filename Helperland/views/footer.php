@@ -1,22 +1,29 @@
+<?php
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
+?>
+
 <footer>
         <div class="footer_section w-100 footer-line">
             <div class="footer_main d-flex justify-content-around align-items-center">
-                <a class="footer_left" href="HomePage.php">
+                <a class="footer_left" href="<?= $base_url."?controller=Helperland&function=HomePage"?>">
                     <img src="../assets/img/footer-logo.png" alt="" height="78" width="106">
                 </a>
                 <div class="footer_mid">
                     <ul class="d-flex p-0 text-center">
                         <li>
-                            <a href="HomePage.php" class="text-decoration-none">HOME</a>
+                            <a href="<?= $base_url."?controller=Helperland&function=HomePage"?>" class="text-decoration-none">HOME</a>
                         </li>
                         <li>
-                            <a href="About.php" class="text-decoration-none">ABOUT</a>
+                            <a href="<?= $base_url."?controller=Helperland&function=About"?>" class="text-decoration-none">ABOUT</a>
                         </li>
                         <li>
                             <a href="#" class="text-decoration-none">TESTIMONIAL</a>
                         </li>
                         <li>
-                            <a href="FAQ.php" class="text-decoration-none">FAQS</a>
+                            <a href="<?= $base_url."?controller=Helperland&function=FAQ"?>" class="text-decoration-none">FAQS</a>
                         </li>
                         <li>
                             <a href="#" class="text-decoration-none">INSURANCE POLICY</a>
@@ -52,15 +59,15 @@
         <?php require('../assets/js/validation.js');?>
     </script>
 
-<?php  if (isset($_SESSION['status_msg']) && isset($_SESSION['status_txt']) && isset($_SESSION['status'])){ ?>
+<?php  if (isset($_SESSION['message_title']) && isset($_SESSION['message_text']) && isset($_SESSION['message_icon'])){ ?>
     <script>
         $(document).ready(function() {
 
             Swal.fire({
             position: 'top-end',
-            title: '<?php echo $_SESSION['status_msg']; ?>',
-            text: '<?php echo $_SESSION['status_txt']; ?>',
-            icon: '<?php echo $_SESSION['status']; ?>',
+            title: '<?php echo $_SESSION['message_title']; ?>',
+            text: '<?php echo $_SESSION['message_text']; ?>',
+            icon: '<?php echo $_SESSION['message_icon']; ?>',
             showConfirmButton: false,
             timer: 1500
             })
@@ -68,29 +75,29 @@
         });
     </script>
     <?php } 
-    unset($_SESSION['status_msg']);
-    unset($_SESSION['status_txt']);
-    unset($_SESSION['status']);
+    unset($_SESSION['message_title']);
+    unset($_SESSION['message_text']);
+    unset($_SESSION['message_icon']);
     ?>
 
 
-<?php  if (isset($_SESSION['user_msg']) && isset($_SESSION['user_txt']) && isset($_SESSION['user_status'])){ ?>
+<?php  if (isset($_SESSION['user_title']) && isset($_SESSION['user_text']) && isset($_SESSION['user_icon'])){ ?>
     <script>
         $(document).ready(function() {
 
             Swal.fire({
-            title: '<?php echo $_SESSION['user_msg']; ?>',
-            text: '<?php echo $_SESSION['user_txt']; ?>',
-            icon: '<?php echo $_SESSION['user_status']; ?>',
+            title: '<?php echo $_SESSION['user_title']; ?>',
+            text: '<?php echo $_SESSION['user_text']; ?>',
+            icon: '<?php echo $_SESSION['user_icon']; ?>',
             confirmButtonText: 'Done'
             })
 
         });
     </script>
     <?php } 
-    unset($_SESSION['user_msg']);
-    unset($_SESSION['user_txt']);
-    unset($_SESSION['user_status']);
+    unset($_SESSION['user_title']);
+    unset($_SESSION['user_text']);
+    unset($_SESSION['user_icon']);
     ?>
 
 
