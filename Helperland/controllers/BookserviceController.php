@@ -192,6 +192,8 @@ class BookserviceController{
             $ServiceProvider = array_slice($ServiceProviderId,1);
             $ExtraServices = array_slice($ExtraService,1);
 
+            $service = join(", ",$ExtraServices);
+
             $error = "";
 
             if($AddressId == ""){

@@ -75,7 +75,7 @@
                                 <input type="number" minlength="6" maxlength="6"
                                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                     id="zipcode" class="form-control check_zipcode" placeholder="Postal Code"
-                                    name="Zipcode" value="360005">
+                                    name="Zipcode">
                                 <div class="text-center Zipcode-error"></div>
                             </div>
                             <div class="col-md-6">
@@ -183,7 +183,7 @@
                             <div class="row col-md-12 text-center justify-content-center">
                                 <div class="service-box col-md-2" onclick="checkIfSelected(0)" value="1">
                                     <div class="btn circle">
-                                        <input type="hidden" value="notselected" class="hidden-input" id="cabinet">
+                                        <input type="hidden" value="notselected" class="hidden-input" id="inside-cabinet">
                                         <img src="../assets/img/1.png" alt="" class="img-book-service">
                                     </div>
                                     <h6 class="circle_text mb-0">Inside cabinets</h6>
@@ -191,7 +191,7 @@
                                 </div>
                                 <div class="service-box col-md-2" onclick="checkIfSelected(1)" value="1">
                                     <div class="btn circle">
-                                        <input type="hidden" value="notselected" class="hidden-input" id="fridge">
+                                        <input type="hidden" value="notselected" class="hidden-input" id="inside-fridge">
                                         <img src="../assets/img/2.png" alt="" class="img-book-service">
                                     </div>
                                     <h6 class="circle_text mb-0">Inside fridge</h6>
@@ -199,7 +199,7 @@
                                 </div>
                                 <div class="service-box col-md-2" onclick="checkIfSelected(2)" value="1">
                                     <div class="btn circle">
-                                        <input type="hidden" value="notselected" class="hidden-input" id="oven">
+                                        <input type="hidden" value="notselected" class="hidden-input" id="inside-oven">
                                         <img src="../assets/img/3.png" style="padding-top:5px;" alt=""
                                             class="img-book-service">
                                     </div>
@@ -208,7 +208,7 @@
                                 </div>
                                 <div class="service-box col-md-2" onclick="checkIfSelected(3)" value="1">
                                     <div class="btn circle">
-                                        <input type="hidden" value="notselected" class="hidden-input" id="laundrywash">
+                                        <input type="hidden" value="notselected" class="hidden-input" id="laundry-wash">
                                         <img src="../assets/img/4.png" alt="" class="img-book-service">
                                     </div>
                                     <h6 class="circle_text mb-0">Laundry Wash dry</h6>
@@ -216,7 +216,7 @@
                                 </div>
                                 <div class="service-box col-md-2" onclick="checkIfSelected(4)" value="1">
                                     <div class="btn circle">
-                                        <input type="hidden" value="notselected" class="hidden-input" id="interiorwindow">
+                                        <input type="hidden" value="notselected" class="hidden-input" id="interior-window">
                                         <img src="../assets/img/5.png" alt="" class="img-book-service">
                                     </div>
                                     <h6 class="circle_text mb-0">Interior windows</h6>

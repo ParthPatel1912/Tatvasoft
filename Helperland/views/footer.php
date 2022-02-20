@@ -60,10 +60,10 @@
     </script>
 
     <div id="iframeloading" 
-        style="top: 50%;
-        display: none;
+        style="top: 35%;
+        display:none;
         position: fixed;
-        left: 50%;
+        left: 40%;
         height: 100%;">
         <img src="../assets/img/Double Ring.gif" alt="loading" />
     </div>

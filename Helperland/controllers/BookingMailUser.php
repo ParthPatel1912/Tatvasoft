@@ -80,8 +80,13 @@ $body = "<h5 style='font-size:22px;'>Your Helperland Booking Has Been Completed 
                 </tr>
 
                 <tr>
-                    <td>Extra Services count: </td> 
+                    <td>Extra Services count </td> 
                     <td> $ExtraServicesCount</td>
+                </tr>
+
+                <tr>
+                    <td>Extra selected Services  </td> 
+                    <td> $service </td>
                 </tr>
                     
                 <tr>
