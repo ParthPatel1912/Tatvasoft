@@ -58,8 +58,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- fontawesome -->
-<script src="https://kit.fontawesome.com/ae6d6e0254.js " crossorigin="anonymous "></script>
 </body>
 
 </html>

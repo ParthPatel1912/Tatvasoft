@@ -22,7 +22,7 @@
     <link href="../assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css?v=2" rel="stylesheet">
 
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
 
@@ -34,6 +34,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.2/jquery.contextMenu.min.js" integrity="sha512-kvg/Lknti7OoAw0GqMBP8B+7cGHvp4M9O9V6nAYG91FZVDMW3Xkkq5qrdMhrXiawahqU7IZ5CNsY/wWy1PpGTQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/jquery.ui.position.min.js" integrity="sha512-2NZDd1dAB6xu/KFmVhHk+R00JDnC1S9jTfcROXKDTYYTXTkKRLnT5ykFv8CdWWKZB7LeFkxYcvJH+x95klrH1Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/e6dbed9bdc.js" crossorigin="anonymous"></script>
 
     <?php $base_url = 'http://localhost:8088/'; ?>
 

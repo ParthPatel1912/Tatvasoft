@@ -597,6 +597,22 @@ ul.padding-left {
     margin-bottom: 10px;
 }
 
+.round {
+    height: 108px;
+    width: 108px;
+    margin-top: 40px;
+    padding-top: 30px;
+    /* background-color: #bbb; */
+    border-radius: 50%;
+    border: 2px solid gray;
+    display: inline-block;
+    margin-bottom: 50px;
+}
+
+.round img {
+    margin-bottom: 10px;
+}
+
 .circle_contain {
     margin-top: -20px;
     text-align: center !important;
@@ -1250,6 +1266,19 @@ ul.padding-left {
     color: #646464;
 }
 
+.selectdiv-calendar {
+    position: relative;
+}
+
+.selectdiv-calendar:after {
+    content: '\f073';
+    font: normal normal normal 17px/1 FontAwesome;
+    right: 31px;
+    top: -5px;
+    padding: 15px 0px 0px 8px;
+    position: absolute;
+}
+
 
 /* Login section */
 
@@ -1442,6 +1471,12 @@ ul.padding-left {
     .home-service-provider {
         margin-top: -60px;
     }
+    #Payment {
+        margin-top: 30px !important;
+    }
+    #checkAvaibility-btn {
+        margin-top: 15px !important;
+    }
 }
 
 
@@ -1552,4 +1587,17 @@ ul.padding-left {
 
 .invalid-inputBorder {
     border: 1px solid red !important;
+}
+
+
+/* remove arrow in input type = number */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

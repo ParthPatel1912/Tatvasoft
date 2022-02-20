@@ -13,6 +13,7 @@
                 <div class="container">
                 <div id="LoginError" class="alert alert-danger alert-dismissible fade show collapse" role="alert">
                     <span class="Login-error"></span>
+                     
                     <button type="button" class="btn-close" id="close-alert" aria-label="Close"></button>
                 </div>
                     <form action="<?= $base_url."?controller=User&function=Login"?>" method="POST" id="Login">
@@ -36,16 +37,16 @@
                         </div>
                         <div class="form-group mb-2">
                             <?php  if(isset($_COOKIE)) { ?>
-                                <input type="checkbox" name="ChkRemember" checked id="ckeckSave"> Remember Me
+                                <label><input type="checkbox" name="ChkRemember" checked id="ckeckSave"> Remember Me</label>
                             <?php } ?>
                                 
                             <?php  if(!isset($_COOKIE)) { ?>
-                                <input type="checkbox" name="ChkRemember" id="ckeckSave"> Remember Me
+                                <label><input type="checkbox" name="ChkRemember" id="ckeckSave"> Remember Me</label>
                             <?php } ?>
 
                         </div>
                         <div class="container text-center">
-                            <button type="submit" class="btn rounded-pill active font-white" id="Login-btn" style="width: 100%;">Log
+                            <button type="submit" class="btn rounded-pill active font-white LLL" id="Login-btn" style="width: 100%;">Log
                                 in</button>
                         </div>
                     </form>

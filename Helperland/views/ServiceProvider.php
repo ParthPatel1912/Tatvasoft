@@ -65,9 +65,9 @@
                             <div class="text-center ConfirmPassword-error"></div>
                         </div>
                         <div class="form-group mb-2">
-                            <input type="checkbox" id="chkNews" name="chkNews" > Send me newsletters from Helperland
+                            <label><input type="checkbox" id="chkNews" name="chkNews" > Send me newsletters from Helperland</label>
                             <div class="text-left CheckboxNews-error"></div>
-                            <input type="checkbox" id="chkPrivacy" name="chkPrivacy" > I accept <a class="font-blue text-decoration-none">terms and conditions & privacy policy</a>
+                            <label><input type="checkbox" id="chkPrivacy" name="chkPrivacy" > I accept <a class="font-blue text-decoration-none" href="">terms and conditions & privacy policy</a></label>
                             <div class="text-left Checkbox-error"></div>
                         </div>
                         <div class="container text-center">

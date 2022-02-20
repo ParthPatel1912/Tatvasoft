@@ -33,6 +33,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/e6dbed9bdc.js" crossorigin="anonymous"></script>
+
+
     <?php $base_url = 'http://localhost:8088/'; ?>
 
     <?php include 'Login.php';?>
@@ -41,7 +45,7 @@
 
 </head>
 
-<body id="body">
+<body id="body"  onload="disablesetupservice()">
 
     <!-- Header -->
 
@@ -82,7 +86,7 @@
                                 </a>
                             </li>
                             <li class="nav-item display-sm">
-                                <a class="nav-link rounded-link active" href="#">Book now </a>
+                                <a class="nav-link rounded-link active" href="<?= $base_url."?controller=Helperland&function=BookService"?>">Book now </a>
                             </li>
 
                             <li class="nav-item display-sm">
@@ -113,6 +117,9 @@
                                     <button class="nav-link btn btn-link" name="logout" type="submit">Logout</button>
                                 </form>
                             </li>
+                            <li class="nav-item display-non-sm btnBlue rounded-pill">
+                                <a class="nav-link text-decoration-none text-light p-0" href="<?= $base_url."?controller=Helperland&function=BookService"?>">Book Now</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="<?= $base_url."?controller=Helperland&function=Prices"?>">Prices & services</a>
                             </li>
@@ -123,7 +130,7 @@
                                 <a class="nav-link" href="#">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"> Contact</a>
+                                <a class="nav-link" href="<?= $base_url."?controller=Helperland&function=Contact"?>"> Contact</a>
                             </li>
                             <li class="nav-item display-non-sm">
                                 <img src="../assets/img/icon-notification.png" class=" nav-border nav-link-image">
@@ -159,7 +166,7 @@
                                         <a class="dropdown-item" href="#">
                                             <!-- Logout -->
                                             <form method="POST" action="<?= $base_url."?controller=User&function=Logout"?>" >
-                                                <button class="btn" name="logout" type="submit">Logout</button>
+                                                <button class="btn border-0" name="logout" type="submit">Logout</button>
                                             </form>
                                         </a>
                                     </li>

@@ -1,5 +1,3 @@
-<?php require '/tatvasoft/Project/PHP/views/message_error.php' ?>
-
 <?php 
 
 class UserController{
@@ -117,7 +115,28 @@ class UserController{
                         'IsActive' => 'Yes',
                         'IsRegisteredUser' => 'yes'
                     ];
+                    
+                    ?>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#iframeloading").show();   
+                        });
+                    </script>
+
+                    <?php
+
                     $result = $this->model->insert_user('user', $array);
+
+                    ?>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#iframeloading").hide();   
+                        });
+                    </script>
+
+                    <?php
 
                     if ($result) {
                         $_SESSION['message_title'] = "Your Account has been Created";
@@ -181,7 +200,7 @@ class UserController{
                 $error .= "<li>Please enter phone number.</li>";
             }
             else if(strlen($PhoneNumber)<10){
-                $error .= "Phone number shoud be 10 digit.</li>";
+                $error .= "<li>Phone number shoud be 10 digit.</li>";
             }
             if($Password == ""){
                 $error .= '<li>Please enter Password.</li>';
@@ -238,12 +257,34 @@ class UserController{
                         'IsActive' => 'No',
                         'IsRegisteredUser' => 'yes'
                     ];
+
+                    ?>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#iframeloading").show();   
+                        });
+                    </script>
+
+                    <?php
+
                     $result = $this->model->insert_user('user', $array);
+
+                    ?>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#iframeloading").hide();   
+                        });
+                    </script>
+
+                    <?php
+
                     if ($result) {
                         $_SESSION['message_title'] = "Your Account has been Created";
                         $_SESSION['message_text'] = "Please Verify Your Email";
                         $_SESSION['message_icon'] = "success";
-                        include('ActivationAccount.php');
+                        include('VerifyAccount.php');
                         header('Location: ' . $base_url);
                     } else {
                         $_SESSION['message_title'] = "Your Account is not Created";
@@ -385,7 +426,7 @@ class UserController{
 
             $count = $result[0];
             $Name = $result[1]; 
-            $resetkey = $result[2];
+            $Resetkey = $result[2];
 
             if($count == 1){
                 include('ForgotPassword.php');
@@ -495,7 +536,7 @@ class UserController{
     public function ActivateAccount()
     {
         $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';
-        $base_url_createAccount = '?controller=Helperland&function=CreateAccount';
+        $base_url_ServiceProvider = '?controller=Helperland&function=ServiceProvider';
 
         if (isset($_GET)) {
             $Resetkey = $_GET['resetkey'];
@@ -510,14 +551,14 @@ class UserController{
                 $_SESSION['message_title'] = "You alredy Varified it";
                 $_SESSION['message_text'] = "Your account is not need Varification";
                 $_SESSION['message_icon'] = "error";
-                header('Location:' . $base_url_createAccount);
+                header('Location:' . $base_url_ServiceProvider);
             }
         }
         else{
             $_SESSION['message_title'] = "Your Message is not Sent";
             $_SESSION['message_text'] = "Please Try Again";
             $_SESSION['message_icon'] = "error";
-            header('Location: ' . $base_url_createAccount);
+            header('Location: ' . $base_url_ServiceProvider);
         }
     }
 
@@ -527,6 +568,7 @@ class UserController{
         
         if(isset($_POST)){
             unset($_SESSION['UserName']);
+            unset($_SESSION['UserId']);
             $_SESSION['message_title'] = "You are Logged Out";
             $_SESSION['message_text'] = "";
             $_SESSION['message_icon'] = "success";
@@ -538,6 +580,24 @@ class UserController{
             $_SESSION['message_text'] = "Please Try Again";
             $_SESSION['message_icon'] = "error";
             header('Location: ' . $base_urlLoginModal);
+        }
+    }
+
+    public function BookService()
+    {
+        $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';
+        $base_url = '?controller=Helperland&function=BookService';
+        if(!isset($_SESSION['UserName'])){
+            echo "Login not-success";
+            // $_SESSION['message_title'] = "Please Login now";
+            // $_SESSION['message_text'] = "";
+            // $_SESSION['message_icon'] = "error";
+            // header('Location: ' . $base_urlLoginModal);
+        }
+
+        if(isset($_SESSION['UserName'])){
+            echo "Login successfull";
+            // header('Location: ' . $base_url);
         }
     }
 

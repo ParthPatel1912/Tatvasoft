@@ -70,8 +70,8 @@
                             <div class="text-center ConfirmPassword-error"></div>
                         </div>
                         <div class="col-12">
-                            <input type="checkbox" id="chkPrivacy" name="chkPrivacy" > 
-                            I have read the <a class="text-blue text-decoration-none" href="">privacy policy.</a>
+                            <label><input type="checkbox" id="chkPrivacy" name="chkPrivacy" > 
+                            I have read the <a class="text-blue text-decoration-none" href="">privacy policy.</a></label>
                             <div class="text-left Checkbox-error"></div>
                         </div>
                         <div class="col-12 text-center">

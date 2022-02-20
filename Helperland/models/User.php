@@ -52,7 +52,7 @@ class UserModel{
         $FirstName = $row['FirstName'];
         $LastName = $row['LastName'];
         $Name = $FirstName . " " . $LastName;
-        $_SESSION['UserName'] = $Name;
+        $UserId = $row['UserId'];
         $UserTypeId = $row['UserTypeId'];
         $IsActive = $row['IsActive'];
 
@@ -60,6 +60,8 @@ class UserModel{
 
             if (password_verify($Password, $row['Password'])) {
 
+                $_SESSION['UserName'] = $Name;
+                $_SESSION['UserId'] = $UserId;
                 return array($count,$UserTypeId,$Name,$IsActive);
             }
         }
