@@ -73,7 +73,8 @@
         $(document).ready(function() {
 
             Swal.fire({
-            position: 'top-end',
+            position: 'center',
+            grow: 'false',
             title: '<?php echo $_SESSION['message_title']; ?>',
             text: '<?php echo $_SESSION['message_text']; ?>',
             icon: '<?php echo $_SESSION['message_icon']; ?>',

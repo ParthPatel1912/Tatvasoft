@@ -5,6 +5,10 @@ class HelperlandController{
     {
         include('models/Helperland.php');
         $this->model = new HelperlandModel();
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
     }
     
     public function Helperland()
@@ -71,6 +75,55 @@ class HelperlandController{
     public function UserManagement()
     {
         header('Location: views/UserManagement.php');
+    }
+
+    public function CustomerServiceDashboard()
+    {
+        header('Location: views/CustomerServiceDashboard.php');
+    }
+
+    public function CustomerSetting()
+    {
+        header('Location: views/CustomerSetting.php');
+    }
+
+    public function FavouriteProns()
+    {
+        header('Location: views/FavouriteProns.php');
+    }
+
+    public function BookServiceCheckLogin()
+    {
+        $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';
+        $base_url = '?controller=Helperland&function=BookService';
+        if(!isset($_SESSION['UserName'])){
+            echo "Login not-success";
+            // $_SESSION['message_title'] = "Please Login now";
+            // $_SESSION['message_text'] = "";
+            // $_SESSION['message_icon'] = "error";
+            // header('Location: ' . $base_urlLoginModal);
+        }
+
+        if(isset($_SESSION['UserName'])){
+            echo "Login successfull";
+            // header('Location: ' . $base_url);
+        }
+    }
+
+    public function LoginServiceProvider()
+    {
+        $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';
+        $base_url = '?controller=Helperland&function=UpcomingServices';
+        if(!isset($_SESSION['UserName'])){
+            $_SESSION['message_title'] = "Please Login now";
+            $_SESSION['message_text'] = "";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $base_urlLoginModal);
+        }
+
+        if(isset($_SESSION['UserName'])){
+            header('Location: ' . $base_url);
+        }
     }
 }
 

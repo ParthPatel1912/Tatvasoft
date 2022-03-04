@@ -321,24 +321,11 @@
                                             </div>
                                             <input type="number" class="form-control" id="PhoneNumber"
                                                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                                maxlength="10" placeholder="Phone Number" name="ooo">
+                                                maxlength="10" placeholder="Phone Number" name="">
                                         </div>
                                         <div class="text-center PhoneNumber-error"></div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <input type="text" class="form-control"
-                                                value="<?php
-                                                    if (isset($_SESSION['UserId'])) {
-                                                        echo $_SESSION['UserId'];
-                                                    }
-                                                ?>"
-                                                id="UserId" name="UserId" readonly hidden >
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    
                                 </div>
                                 <div class="row">
                                     <div class="mt-4 float-left">

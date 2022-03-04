@@ -79,7 +79,7 @@
                             </li>
 
                             <li class="nav-item btnBlueTransparent rounded-pill">
-                                <a href="#LoginModal" data-toggle="modal" data-target="#LoginModal" data-dismiss="modal" onclick="LoginModal()" class="py-0 text-decoration-none text-light">Login</a>
+                                <a href="#LoginModal" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#LoginModal" data-dismiss="modal" onclick="LoginModal()" class="py-0 text-decoration-none text-light">Login</a>
                             </li>
                             <li class="nav-item btnBlueTransparent rounded-pill">
                                 <a href="<?= $base_url."?controller=Helperland&function=ServiceProvider"?>" class="py-0 text-decoration-none text-light">Become a Helper</a>

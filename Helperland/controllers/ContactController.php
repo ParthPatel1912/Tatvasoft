@@ -29,8 +29,14 @@ class ContactController{
                 $error .= "<li>Please enter first name.</li>";
                 
             }
+            elseif(!preg_match("/^[a-zA-Z]*$/",$FirstName)){
+                $error .= "<li>Please enter first name without space.</li>";
+            }
             if($LastName == "") {
                 $error .= "<li>Please enter last name.</li>";
+            }
+            elseif(!preg_match("/^[a-zA-Z]*$/",$LastName)){
+                $error .= "<li>Please enter last name without space.</li>";
             }
             if($Email == ""){
                 $error .= "<li>Please enter email address.</li>";
@@ -61,7 +67,28 @@ class ContactController{
                     'PhoneNumber' => $PhoneNumber,
                     'Message' => $Message
                 ];
+
+                ?>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#iframeloading").show();   
+                        });
+                    </script>
+
+                <?php
+
                 $result = $this->model->insert_contact('contactus', $array);
+
+                ?>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#iframeloading").hide();   
+                        });
+                    </script>
+
+                <?php
                 
                 if ($result) {
                     $_SESSION['message_title'] = "Message Sent Succesfully";

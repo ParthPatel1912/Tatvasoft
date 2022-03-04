@@ -2,6 +2,10 @@ body {
     font-family: Roboto-Regular;
 }
 
+textarea {
+    resize: none;
+}
+
 .text-center {
     text-align: center;
 }
@@ -28,6 +32,10 @@ body {
 
 .text-red {
     color: #ff0000;
+}
+
+.text-white {
+    color: #fff;
 }
 
 .text-blue {
@@ -949,6 +957,11 @@ ul.padding-left {
     color: #fff;
 }
 
+.lite-red {
+    background-color: #eb467d;
+    color: #fff;
+}
+
 
 /* user management */
 
@@ -1298,6 +1311,29 @@ ul.padding-left {
 }
 
 
+/* coustomer settings */
+
+.border-bottom-blue {
+    border-bottom: 2px solid #1D7A8C !important;
+}
+
+.tab-content {
+    background-color: transparent !important;
+}
+
+.tab-pane {
+    background-color: transparent !important;
+    color: #111111;
+}
+
+
+/* favourite prons */
+
+.favourite-border {
+    border: 2px solid gray;
+}
+
+
 /* news latter section */
 
 .newslatter {
@@ -1589,6 +1625,43 @@ ul.padding-left {
     border: 1px solid red !important;
 }
 
+.golden-star {
+    color: #fc0
+}
+
+
+/* star ratin for rate sp in service history */
+
+#RateSP .bi-star-fill {
+    font-size: 1.6em;
+}
+
+#RateSP .bi-star-half {
+    font-size: 1.6em;
+}
+
+#RateSP label {
+    font-size: 1.2em;
+}
+
+.ratings1:hover i,
+.ratings2:hover i,
+.ratings3:hover i {
+    color: #fc0
+}
+
+.ratings1 i:hover,
+.ratings2 i:hover,
+.ratings3 i:hover {
+    color: #fc0
+}
+
+.ratings1 i:hover~i,
+.ratings2 i:hover~i,
+.ratings3 i:hover~i {
+    color: black;
+}
+
 
 /* remove arrow in input type = number */
 
@@ -1600,4 +1673,79 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+
+/* Data table css */
+
+#service-history .bottom {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.paginate_button {
+    border-radius: 50% !important;
+}
+
+.paginate_button:hover {
+    background: #1D7A8C !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: #1D7A8C !important;
+    color: #fff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right;
+    text-align: right;
+    padding-top: 0.25em;
+}
+
+.dataTables_paginate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    cursor: default;
+    color: #666 !important;
+    border: 1px solid transparent;
+    background: transparent;
+    box-shadow: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.first {
+    content: url(../img/first-page.png);
+    padding: 15px 14px 14px 16px;
+    border-radius: 50%;
+    border: 1px solid #e1e1e1;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous {
+    content: url(../img/keyboard-right-arrow-button-copy.png);
+    padding: 15px 14px 14px 16px;
+    border-radius: 50%;
+    border: 1px solid #e1e1e1;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+    content: url(../img/keyboard-right-arrow-button-copy.png);
+    padding: 15px 14px 14px 16px;
+    border-radius: 50%;
+    border: 1px solid #e1e1e1;
+    transform: rotate(180deg);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.last {
+    content: url(../img/first-page.png);
+    padding: 15px 14px 14px 16px;
+    border-radius: 50%;
+    border: 1px solid #e1e1e1;
+    transform: rotate(180deg);
 }

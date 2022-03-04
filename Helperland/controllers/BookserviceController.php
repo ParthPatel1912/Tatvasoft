@@ -56,7 +56,7 @@ class BookserviceController{
                 echo "<select class='form-control' name='CityId' id='CityId' readonly>";
                 echo "<option value='" . $CityId . "'>" . $CityName . "</option>";
                 echo "</select>";
-                echo "<select class='form-control' name='StateId' id='StateId' readonly hidden >";
+                echo "<select class='form-control' name='StateId' id='StateId' readonly >";
                 echo "<option value='" . $StateId . "'>" . $StateId . "</option>";
                 echo "</select>";
             }
@@ -69,7 +69,7 @@ class BookserviceController{
 
         foreach($result as $address){ ?>
             <div class="col-md-6 mb-2 border form-control" >
-                <input type='radio' checked name="address" value='<?php echo $address['AddressId'] ?>' >
+                <input type='radio' name="address" class="address" value='<?php echo $address['AddressId'] ?>' >
                     <b> Address:</b>
                     <?php echo " ".$address['AddressLine1']."  ".$address['AddressLine2'].", ".$address['CityName']."  ".$address['StateName']." - ".$address['PostalCode']." "; ?>
                     <br />
@@ -85,7 +85,7 @@ class BookserviceController{
     public function InsertAddress()
     {
         if(isset($_POST)){
-            $UserId = trim($_POST['UserId']);
+            
             $AddressLine1  = trim($_POST['AddressLine1']);
             $AddressLine2 = trim($_POST['AddressLine2']);
             $CityId = trim($_POST['CityId']);
@@ -98,13 +98,13 @@ class BookserviceController{
             if($AddressLine1 == "") {
                 $error .= "<li>Please enter street name.</li>";
             }
-            else if(!preg_match("/^[a-zA-Z0-9-]*$/", $AddressLine1)){
+            else if(!preg_match("/^[a-zA-Z0-9- ]*$/", $AddressLine1)){
                 $error .= '<li>Enter a valid street name.</li>';
             }
             if($AddressLine2 == "") {
                 $error .= "<li>Please enter house name.</li>";
             }
-            else if(!preg_match("/^[a-zA-Z0-9-]*$/", $AddressLine2)){
+            else if(!preg_match("/^[a-zA-Z0-9- ]*$/", $AddressLine2)){
                 $error .= '<li>Enter a valid house name.</li>';
             }
             if($Mobile == "") {
@@ -120,7 +120,7 @@ class BookserviceController{
             else{
 
                 $array = [
-                    'UserId' => $UserId,
+                    'UserId' => $_SESSION['UserId'],
                     'AddressLine1' => $AddressLine1,
                     'AddressLine2'=> $AddressLine2,
                     'CityId' => $CityId,
@@ -163,7 +163,7 @@ class BookserviceController{
     public function AddServiceRequest()
     {
         if(isset($_POST)){
-            $UserId = trim($_POST['UserId']);
+            $UserId = trim($_SESSION['UserId']);
             $ServiceStartDate = trim($_POST['ServiceStartDate']);
             $SelectTime = trim($_POST['SelectTime']);
             $TotalHour = trim($_POST['TotalHour']);
@@ -190,9 +190,12 @@ class BookserviceController{
             $PaymentDue = trim($_POST['PaymentDue']);
 
             $ServiceProvider = array_slice($ServiceProviderId,1);
+
+            $FavouriteServiceProvider = implode(',',$ServiceProvider);
+
             $ExtraServices = array_slice($ExtraService,1);
 
-            $service = join(", ",$ExtraServices);
+            // $service = join(", ",$ExtraServices);
 
             $error = "";
 
@@ -228,6 +231,7 @@ class BookserviceController{
                 'RecordVersion' => $RecordVersion,
                 'PaymentDue' => $PaymentDue,
                 'RefundedAmount' => $RefundedAmount,
+                'Favourite' => $FavouriteServiceProvider,
             ];
 
             $result = $this->model->InsertServiceRequest('servicerequest', $array);
@@ -242,63 +246,50 @@ class BookserviceController{
             $Address = " ".$UserAddress['AddressLine1']."  ".$UserAddress['AddressLine2'].", ".$UserAddress['CityName']."  ".$UserAddress['StateName']." - ".$UserAddress['PostalCode']." ";
             $MobileNo = " ".$UserAddress['Mobile']." ";
 
-                if($result){
-                    $this->model->InsertAddressIdByServiceRequestId('servicerequestaddress',$result,$AddressId);
+            if($result){
+                $this->model->InsertAddressIdByServiceRequestId('servicerequestaddress',$result,$AddressId);
 
-                    if(sizeof($ExtraServices)>0){
-                        $this->model->InsertExtraServiceByServiceRequesstId('servicerequestextra',$result,$ExtraServices);                        
-                    }
-
-                    include('BookingMailUser.php');
-
-                    if(sizeof($ServiceProvider)>0){
-                        $userServiceprovider = $this->model->GetUsersServiceproviderList('user',$ServiceProvider);
-
-                        if(count($userServiceprovider)){
-                            foreach($userServiceprovider as $usp){
-                                $ServiceRequestsId = $result;
-                                $SPEmail = $usp['Email'];
-                                include('BookingMailServiceProvider.php');
-                            }
-                        }
-
-                        echo $result;
-                    }
-
-                    else{
-                        if(count($Activeserviceprovider)){
-                            foreach($Activeserviceprovider as $asp){
-                                $ServiceRequestsId = $result;
-                                $SPEmail = $asp['Email'];
-                                include('BookingMailServiceProvider.php');
-                            }
-                        }
-
-                        echo $result;
-                    }
+                if(sizeof($ExtraServices)>0){
+                    $allExtraServices = implode(", ",$ExtraServices);
+                    $this->model->InsertExtraServiceByServiceRequesstId('servicerequestextra',$result,$allExtraServices);
                 }
+
+                include('BookingMailUser.php');
+
+                if(sizeof($ServiceProvider)>0){
+                    $userServiceprovider = $this->model->GetUsersServiceproviderList('user',$ServiceProvider);
+
+                    if(count($userServiceprovider)){
+                        foreach($userServiceprovider as $usp){
+                            $ServiceRequestsId = $result;
+                            $SPEmail = $usp['Email'];
+                            include('BookingMailServiceProvider.php');
+                        }
+                    }
+
+                    echo $result;
+                }
+
                 else{
-                    echo 'data not inserted';
+                    if(count($Activeserviceprovider)){
+                        foreach($Activeserviceprovider as $asp){
+                            $ServiceRequestsId = $result;
+                            $SPEmail = $asp['Email'];
+                            include('BookingMailServiceProvider.php');
+                        }
+                    }
+
+                    echo $result;
                 }
+            }
+            else{
+                echo 'data not inserted';
+            }
             }
         }
     }
 
-    public function LoginServiceProvider()
-    {
-        $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';
-        $base_url = '?controller=Helperland&function=UpcomingServices';
-        if(!isset($_SESSION['UserName'])){
-            $_SESSION['message_title'] = "Please Login now";
-            $_SESSION['message_text'] = "";
-            $_SESSION['message_icon'] = "error";
-            header('Location: ' . $base_urlLoginModal);
-        }
-
-        if(isset($_SESSION['UserName'])){
-            header('Location: ' . $base_url);
-        }
-    }
+    
 }
 
 ?>

@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     $('#FirstName').on('input', function() {
         var FirstName = $(this).val();
-        var validName = /^[a-zA-Z ]*$/;
+        var validName = /^[a-zA-Z]*$/;
         if (FirstName.length == 0) {
             $('.FirstName-error').addClass('text-red').text("First Name is required");
             $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     $('#LastName').on('input', function() {
         var LastName = $(this).val();
-        var validName = /^[a-zA-Z ]*$/;
+        var validName = /^[a-zA-Z]*$/;
         if (LastName.length == '') {
             $('.LastName-error').addClass('text-red').text("Last Name is required");
             $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
@@ -104,6 +104,17 @@ $(document).ready(function() {
             $(this).removeClass('invalid-inputBorder').addClass('valid-inputBorder');
         }
     });
+
+    if (window.location.href.indexOf('Contact.php') != -1) {
+        $('input, textarea').on('input', function(e) {
+            if ($('#Contact').find('.valid-inputBorder').length == 5) {
+                $('#submit').removeAttr('disabled');
+            } else {
+                e.preventDefault();
+                $('#submit').attr('disabled', 'disabled');
+            }
+        });
+    }
 
 
     // Create account
@@ -428,7 +439,7 @@ $(document).ready(function() {
 
     $('#AddressLine1').on('input', function() {
         var AddressLine1 = $(this).val();
-        var validAddress = /^[a-zA-Z0-9-]*$/;
+        var validAddress = /^[a-zA-Z0-9- ]*$/;
         if (AddressLine1.length == 0) {
             $('.AddressLine1-error').addClass('text-red').text('Street is required');
             $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
@@ -449,7 +460,7 @@ $(document).ready(function() {
 
     $('#AddressLine2').on('input', function() {
         var AddressLine2 = $(this).val();
-        var validAddress = /^[a-zA-Z0-9-]*$/;
+        var validAddress = /^[a-zA-Z0-9- ]*$/;
         if (AddressLine2.length == 0) {
             $('.AddressLine2-error').addClass('text-red').text('House is required');
             $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
@@ -465,6 +476,53 @@ $(document).ready(function() {
         } else {
             $('.AddressLine2-error').empty();
             $(this).removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+        }
+    });
+
+    $('#password-setting').on('input', function() {
+        var Password = $(this).val();
+        var uppercasePassword = /(?=.*?[A-Z])/;
+        var lowercasePassword = /(?=.*?[a-z])/;
+        var digitPassword = /(?=.*?[0-9])/;
+        var spacesPassword = /^$|\s+/;
+        var symbolPassword = /(?=.*?[#?!@$%^&*-])/;
+        var minEightPassword = /.{8,}/;
+        if (Password.length == 0) {
+            $('.Password-setting-error').addClass('text-red').text('Password is required');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else if (Password.trim().length == 0) {
+            $('.Password-setting-error').addClass('text-red').text("Password is required without space");
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else if (!uppercasePassword.test(Password)) {
+            $('.Password-setting-error').addClass('text-red').text('At least one Uppercase');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else if (!lowercasePassword.test(Password)) {
+            $('.Password-setting-error').addClass('text-red').text('At least one Lowercase');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else if (!digitPassword.test(Password)) {
+            $('.Password-setting-error').addClass('text-red').text('At least one digit');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else if (!symbolPassword.test(Password)) {
+            $('.Password-setting-error').addClass('text-red').text('At least one special character');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else if (spacesPassword.test(Password)) {
+            $('.Password-setting-error').addClass('text-red').text('Whitespaces are not allowed');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else if (!minEightPassword.test(Password)) {
+            $('.Password-setting-error').addClass('text-red').text('Minimum 8 length password');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else {
+            $('.Password-setting-error').empty();
+            $(this).addClass('valid-inputBorder').removeClass('invalid-inputBorder');
+
         }
     });
 
@@ -521,32 +579,1235 @@ $(document).ready(function() {
         changeBed();
     });
 
-    $("#Hrs").on("click", function() {
-        checkLessTime();
-        changeBasicHours();
-        checkTotalTime();
-        checkPrice();
-    });
-
     $("#Hrs").on("change", function() {
-        checkLessTime();
         changeTotalHours();
         checkTotalTime();
         checkPrice();
     });
 
+    $("#Hrs").on("click", function() {
+        changeBasicHours();
+        checkTotalTime();
+        checkPrice();
+        window.time = $('#Hrs').val();
+    });
+
     if (window.location.href.indexOf('BookService.php') != -1) {
         $('input').on('input', function(e) {
+
             if ($('input[type=checkbox][name="chkPrivacy"]:checked').length == 1) {
                 if ($('#BookService').find('.valid-inputBorder').length == 2) {
                     $('#Complete').removeAttr('disabled');
+                } else {
+                    e.preventDefault();
+                    $('#Complete').attr('disabled', 'disabled');
                 }
             } else {
                 e.preventDefault();
                 $('#Complete').attr('disabled', 'disabled');
             }
+            // $('#CheckAdress').attr('disabled', 'disabled');
+
+            if ($("input[name='address']:checked").length = 1) {
+                $('#CheckAdress').attr('disabled', 'disabled');
+                $('.address-error').addClass('text-red').text('Please Select Address');
+
+            } else {
+                $('#CheckAdress').removeAttr('disabled');
+                $('.address-error').empty();
+
+            }
+
+            $('body').on('click', '.address', function() {
+                $('#CheckAdress').removeAttr('disabled');
+                $('.address-error').empty();
+
+            })
+
         });
     }
+
+
+    // customer setting
+
+
+    $('.birth').on("click", function() {
+        if (($('#day').val() == "Day" || $('#month').val() == "Month" || $(
+                '#year').val() == "Year")) {
+            $('.birth-error').addClass('text-red').text("Enter Valid Birthdate");
+            $('#save-detail').addClass('disabled');
+
+        } else {
+            $('.birth-error').empty();
+            $('#save-detail').removeClass('disabled');
+
+        }
+        if ($('#day').val() != "Day") {
+            $('#day').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+        } else {
+            $('#day').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+        }
+
+        if ($('#month').val() != "Month") {
+            $('#month').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+        } else {
+            $('#month').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+        }
+
+        if ($('#year').val() != "Year") {
+            $('#year').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+        } else {
+            $('#year').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+        }
+    });
+
+    $('.language').on("click", function() {
+
+        if ($('#Language').val() == "") {
+            $('#Language').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+            $('.language-error').addClass('text-red').text("Enter Valid language");
+            $('#save-detail').addClass('disabled');
+
+        } else {
+            $('#Language').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+            $('.language-error').empty();
+            $('#save-detail').removeClass('disabled');
+
+        }
+
+    });
+
+    $('#Details').on('input', function() {
+        if ($('#Details').find('.invalid-inputBorder').length > 0) {
+            $('#save-detail').addClass('disabled');
+
+        } else {
+            $('#save-detail').removeClass('disabled');
+
+        }
+
+    });
+
+    $('#ChangePassword').on('input', function() {
+        if ($('#ChangePassword').find('.valid-inputBorder').length == 3) {
+            $('#change-password').removeClass('disabled');
+            $('#change-password').css('pointerEvents', 'auto');
+
+        } else {
+            $('#change-password').addClass('disabled');
+            $('#change-password').css('pointerEvents', 'auto');
+
+        }
+
+    });
+
+    if (window.location.href.indexOf('CustomerSetting.php') != -1) {
+        $.ajax({
+
+            url: URL + "?controller=Customer&function=FillCoustomerData",
+            data: {
+
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#FirstName').val(response[0]);
+                $('#LastName').val(response[1]);
+                $('#EmailAddress').val(response[2]);
+                $('#PhoneNumber').val(response[3]);
+                $('#day').val(response[4]);
+                $('#month').val(response[5]);
+                $('#year').val(response[6]);
+                $('#Language').val(response[7]);
+                addValidDetail();
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=AddressList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#allAddress').html(response);
+            }
+        });
+
+        $('#change-password').css('pointerEvents', 'none');
+
+    }
+
+    $('#phonenumber').on('input', function() {
+        var phonenumber = $(this).val();
+        var validNumber = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+        if (phonenumber.length == 0) {
+            $('.PhoneNumber-error').addClass('text-red').text('Mobile Number is required');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else if (phonenumber.trim().length == 0) {
+            $('.PhoneNumber-error').addClass('text-red').text('Mobile Number is required without space');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else if (!validNumber.test(phonenumber)) {
+            $('.PhoneNumber-error').addClass('text-red').text('Invalid Mobile Number');
+            $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+        } else {
+            $('.PhoneNumber-error').empty();
+            $(this).removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+        }
+    });
+
+    $('#allAddress').on('click', ".Editaddress", function() {
+        AddressId = $(this).attr('id');
+        $('#AddressTitle').text('Edit Address');
+        $("#save").css("display", "none");
+        $("#edit").css("display", "block");
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Customer&function=EditAddressData",
+            data: {
+                'AddressId': AddressId,
+            },
+            dataType: "json",
+            success: function(response) {
+                $("#AddressLine1").val(response[0]);
+                $("#AddressLine2").val(response[1]);
+                $('#Zipcode').val(response[2]);
+                $('#phonenumber').val(response[3]);
+                $('#CityId').html(response[4]);
+                $('#StateId').html(response[6]);
+            }
+        });
+
+        addValidAddress();
+
+        $('#edit').on('click', function() {
+
+            var AddressLine1 = $('#AddressLine1').val();
+            var AddressLine2 = $('#AddressLine2').val();
+            var CityId = $('#CityId').val();
+            var PostalCode = $('#Zipcode').val();
+            var Mobile = $('#phonenumber').val();
+            var StateId = $('#StateId').val();
+
+            $.ajax({
+                type: 'POST',
+                url: URL + "?controller=Customer&function=UpdateAddress",
+                data: {
+                    'AddressId': AddressId,
+                    'AddressLine1': AddressLine1,
+                    'AddressLine2': AddressLine2,
+                    'CityId': CityId,
+                    'StateId': StateId,
+                    'PostalCode': PostalCode,
+                    'Mobile': Mobile,
+                },
+                success: function(response) {
+                    if ($.trim(response) == "Address updated successfully") {
+
+                        Swal.fire({
+                            position: 'center',
+                            title: 'Address updated Succesfully',
+                            text: '',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        Swal.fire({
+                            position: 'center',
+                            title: 'Address not updated',
+                            text: 'Please Try Again',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+
+                    // alert(response);
+                }
+            });
+
+            $.ajax({
+                url: URL + "?controller=Customer&function=AddressList",
+                data: {
+
+                },
+                success: function(response) {
+                    $('#allAddress').html(response);
+                }
+            });
+        });
+    });
+
+    $('#Zipcode').on('input', function() {
+        var zipcode = $(this).val();
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Customer&function=CheckAvaibility",
+            data: {
+                'Zipcode': zipcode,
+            },
+            success: function(response) {
+                if ($.trim(response) == "Sevice Available") {
+                    $('#Zipcode').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+                    $('.Zipcode-error').empty();
+                    if ($('#address').find('.valid-inputBorder').length == 4) {
+                        $('#save').removeClass('disabled');
+                        $('#edit').removeClass('disabled');
+                    }
+
+                } else {
+                    $('#Zipcode').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+                    $('.Zipcode-error').addClass('text-red').text(response);
+                    $('#save').addClass('disabled');
+                    $('#edit').addClass('disabled');
+
+                }
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Customer&function=CheckCity",
+            data: {
+                'Zipcode': zipcode,
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('#CityId').html(response[0]);
+                $('#StateId').html(response[1]);
+            }
+        });
+    });
+
+    $('#address').on('input', function() {
+        if ($('#address').find('.valid-inputBorder').length == 4) {
+            $('#save').add('#edit').removeClass('disabled');
+
+        } else {
+            $('#save').add('#edit').addClass('disabled');
+
+        }
+
+    });
+
+    $('.Addaddress').on('click', function() {
+        $('#AddressTitle').text('Add New Address');
+        $("#edit").css("display", "none");
+        $("#save").css("display", "block");
+
+        cleanValueForNewAddress();
+    });
+
+    $('#save').on('click', function() {
+        var AddressLine1 = $('#AddressLine1').val();
+        var AddressLine2 = $('#AddressLine2').val();
+        var CityId = $('#CityId').val();
+        var PostalCode = $('#Zipcode').val();
+        var Mobile = $('#phonenumber').val();
+        var StateId = $('#StateId').val();
+
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Customer&function=InsertAddress",
+            data: {
+                'AddressLine1': AddressLine1,
+                'AddressLine2': AddressLine2,
+                'CityId': CityId,
+                'StateId': StateId,
+                'PostalCode': PostalCode,
+                'Mobile': Mobile,
+            },
+            success: function(response) {
+                if ($.trim(response) == "Address added successfully") {
+
+                    Swal.fire({
+                        position: 'center',
+                        title: 'Address added Succesfully',
+                        text: '',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        title: 'Address not added',
+                        text: 'Please Try Again',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=AddressList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#allAddress').html(response);
+            }
+        });
+    });
+
+    $('#allAddress').on('click', ".Deleteaddress", function() {
+        AddressId = $(this).attr('id');
+        $('#delete').on('click', function() {
+            $.ajax({
+                type: 'POST',
+                url: URL + "?controller=Customer&function=DeleteAddress",
+                data: {
+                    'AddressId': AddressId,
+                },
+                success: function(response) {
+                    if ($.trim(response) == "Address deleted successfully") {
+                        Swal.fire({
+                            position: 'center',
+                            title: 'Address deleted Succesfully',
+                            text: '',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        Swal.fire({
+                            position: 'center',
+                            title: 'Address not deleted',
+                            text: 'Please Try Again',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                }
+            });
+            $.ajax({
+                url: URL + "?controller=Customer&function=AddressList",
+                data: {
+
+                },
+                success: function(response) {
+                    $('#allAddress').html(response);
+                }
+            });
+        });
+    });
+
+    $('#address').on('click', '#addressClear', function() {
+        cleanValueForNewAddress();
+    });
+
+
+    // customer service dashboard
+
+    if (window.location.href.indexOf('CustomerServiceDashboard.php') != -1) {
+        $.ajax({
+            url: URL + "?controller=Customer&function=ListCustomerServiceDashboard",
+            data: {
+
+            },
+            success: function(response) {
+                $('#DashboardData').html(response);
+            }
+        });
+    }
+
+    $('#DashboardData').on('click', 'td:not(:last-child)', function() {
+        ServiceRequestId = $(this).attr('id');
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Customer&function=ServiceDetailForModel",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#ServiceStartDate').html(response[0]);
+                $('#ServiceTime').html(response[1]);
+                $('#TotalHour').html(response[2] + ' hr');
+                $('#ServiceRequestId').html(response[3]);
+                $('#service').html(response[4]);
+                $('#TotalCost').html(response[5] + ' €');
+                $('#Address').html(response[6]);
+                $('#Mobile').html(response[7]);
+                $('#Email').html(response[8]);
+                $('#Comments').html(response[9]);
+
+                $('#HasPets').html(response[10]);
+
+                $('#fullDetail .Reschedule').attr('id', response[3]);
+                $('#fullDetail .Cancel').attr('id', response[3]);
+            }
+        });
+        $('#fullDetail').modal('show');
+    });
+
+    $('#DashboardData').on('click', '.Reschedule', function() {
+        ServiceRequestId = $(this).attr('id');
+        $('#rescheduleTimeDate .update').attr('id', ServiceRequestId);
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Customer&function=ServiceDetailForModel",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#rescheduleTimeDate #date').val(response[0]);
+                $('#totaltime').html(response[2]);
+                $("#rescheduleTimeDate #time").val(response[11]).change();
+
+
+            }
+        });
+
+    });
+
+    $('#DashboardData').on('click', '.Cancel', function() {
+        ServiceRequestId = $(this).attr('id');
+
+        var cancelComment = $('#cancelComment').val();
+        if (cancelComment.trim().length == 0) {
+            $('#cancelService .cancel').addClass('disabled');
+
+        }
+        $('#cancelService .cancel').attr('id', ServiceRequestId);
+    });
+
+    $('#cancelComment').on('input', function() {
+        var cancelComment = $('#cancelComment').val();
+        if (cancelComment.length == 0) {
+            $('#cancelService .cancel').addClass('disabled');
+
+        } else if (cancelComment.trim().length == 0) {
+            $('#cancelService .cancel').addClass('disabled');
+
+        } else {
+            $('#cancelService .cancel').removeClass('disabled');
+        }
+    });
+
+    $('.Reschedule').click(function() {
+        ServiceRequestId = $(this).attr('id');
+        $('#fullDetail').modal('hide');
+        $('#rescheduleTimeDate .update').attr('id', ServiceRequestId);
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Customer&function=ServiceDetailForModel",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#rescheduleTimeDate #date').val(response[0]);
+                $('#totaltime').html(response[2]);
+                $("#rescheduleTimeDate #time").val(response[11]).change();
+
+            }
+        });
+    });
+
+    $('.Cancel').click(function() {
+        ServiceRequestId = $(this).attr('id');
+        $('#fullDetail').modal('hide');
+
+        var cancelComment = $('#cancelComment').val();
+        if (cancelComment.trim().length == 0) {
+            $('#cancelService .cancel').addClass('disabled');
+
+        }
+        $('#cancelService .cancel').attr('id', ServiceRequestId);
+    });
+
+    $("#rescheduleTimeDate").on("click change", function() {
+
+        timeValue = $('#rescheduleTimeDate #time').val();
+
+        var hoursMinutes = timeValue.split(/[.:]/);
+        var Hours = parseInt(hoursMinutes[0]);
+        var Minutes = parseInt(hoursMinutes[1]);
+        var totalTime = Hours + Minutes / 60;
+
+        Hrsvalue = $("#rescheduleTimeDate #totaltime").text();
+        hour = parseFloat(Hrsvalue);
+
+        if (totalTime + hour > 21) {
+            time = 21 - hour;
+            $('.error21Hour').text("Booking change not saved! The helper must be able to finish cleaning by 9:00 p.m.")
+            time = parseInt(time)
+            $('#update').addClass('disabled');
+        } else {
+            $('.error21Hour').empty();
+            $('#update').removeClass('disabled');
+        }
+
+    });
+
+    $('#rescheduleTimeDate .close').click(function() {
+        $('#rescheduleTimeDate #date').empty();
+        $('#totaltime').empty();
+        $("#rescheduleTimeDate #time").val().change();
+    });
+
+    $('#cancelService .close').click(function() {
+        $('#cancelComment').val('');
+        $('#cancelComment').empty();
+        $('#cancelService .cancel').attr('id', ServiceRequestId);
+    });
+
+    $('.update').on('click', function() {
+        newTime = $('#rescheduleTimeDate #time option:selected').val();
+
+        ServiceRequestId = $(this).attr('id');
+
+        $(".modal-backdrop").remove();
+        $("#rescheduleTimeDate").hide();
+
+        $("#iframeloading").show();
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Customer&function=UpdateServiceRequestTime",
+            data: {
+                'serviceid': ServiceRequestId,
+                'newtime': newTime,
+            },
+            success: function(response) {
+
+                $("#iframeloading").hide();
+
+                if ($.trim(response) == "Update successfully") {
+
+                    Swal.fire({
+                        title: 'Your Booking Has Been Reschedule Successfully',
+                        text: 'Reschedule Request Id : ' + ServiceRequestId,
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+
+                } else {
+                    Swal.fire({
+                        title: 'Your Booking Has Been Not Reschedule ',
+                        text: 'Please Try Again',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=ListCustomerServiceDashboard",
+            data: {
+
+            },
+            success: function(response) {
+                $('#DashboardData').html(response);
+            }
+        });
+
+    });
+
+    $('#cancelService .cancel').on('click', function() {
+        cancelReason = $('textarea#cancelComment').val();
+
+        ServiceRequestId = $(this).attr('id');
+
+        $(".modal-backdrop").remove();
+        $("#cancelService").hide();
+
+        $("#iframeloading").show();
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Customer&function=CancelServiceRequest",
+            data: {
+                'serviceid': ServiceRequestId,
+                'cancelReason': cancelReason,
+            },
+            success: function(response) {
+
+                if ($.trim(response) == "Cancelled successfully") {
+
+                    $("#iframeloading").hide();
+
+                    Swal.fire({
+                        title: 'Your Booking Has Been Cancel Successfully',
+                        text: 'Reschedule Request Id : ' + ServiceRequestId,
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+
+                } else {
+                    Swal.fire({
+                        title: 'Your Booking Has Been Not Cancelled ',
+                        text: 'Please Try Again',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=ListCustomerServiceDashboard",
+            data: {
+
+            },
+            success: function(response) {
+                $('#DashboardData').html(response);
+            }
+        });
+
+    });
+
+
+    // customer service history
+
+    if (window.location.href.indexOf('ServiceHistory.php') != -1) {
+        $.ajax({
+            url: URL + "?controller=Customer&function=ListCustomerServiceHistory",
+            data: {
+
+            },
+            success: function(response) {
+                $('#HistoryData').html(response);
+            }
+        });
+    }
+
+
+
+
+    // star rating for sp
+
+    {
+        let ratings1 = $('.ratings1 .bi');
+        let timemsg = document.getElementsByClassName("timemsg");
+
+        var currentRating1 = 0;
+
+        ratings1 = Array.prototype.slice.call(ratings1);
+
+        ratings1.forEach((star, index) => {
+            star.addEventListener("click", (e) => {
+                    for (let i = 0; i < ratings1.length; i++) {
+                        ratings1[i].style.color = "";
+                    }
+                    colorStar1(index);
+                    currentRating1 = index + 1
+                    timemsg = " : " + currentRating1
+                    $('.timemsg').text(timemsg)
+
+                },
+                false
+            );
+
+            star.addEventListener("mouseenter", (e) => {
+                    for (let i = 0; i < ratings1.length; i++) {
+                        ratings1[i].style.color = "";
+                    }
+                    // colorStar1(index);
+                    currentRating1 = index + 1
+                    timemsg = " : " + currentRating1
+                    $('.timemsg').text(timemsg)
+
+                },
+                false
+            );
+        });
+
+        const colorStar1 = (n) => {
+            if (n < 0) return;
+            ratings1[n].style.color = "#fc0";
+            colorStar1(n - 1);
+        };
+    }
+
+    {
+        let ratings2 = $('.ratings2 .bi');
+        let friendlymsg = document.getElementsByClassName("friendlymsg");
+
+        var currentRating2 = 0;
+
+        ratings2 = Array.prototype.slice.call(ratings2);
+
+        ratings2.forEach((star, index) => {
+            star.addEventListener("click", (e) => {
+                    for (let i = 0; i < ratings2.length; i++) {
+                        ratings2[i].style.color = "";
+                    }
+                    colorStar2(index);
+                    currentRating2 = index + 1
+                    friendlymsg = " : " + currentRating2
+                    $('.friendlymsg').text(friendlymsg);
+
+                },
+                false
+            );
+
+            star.addEventListener("mouseenter", (e) => {
+                    for (let i = 0; i < ratings2.length; i++) {
+                        ratings2[i].style.color = "";
+                    }
+                    // colorStar2(index);
+                    currentRating2 = index + 1
+                    friendlymsg = " : " + currentRating2
+                    $('.friendlymsg').text(friendlymsg);
+
+                },
+                false
+            );
+        });
+
+        const colorStar2 = (n) => {
+            if (n < 0) return;
+            ratings2[n].style.color = "#fc0";
+            colorStar2(n - 1);
+        };
+    }
+
+    {
+        let ratings3 = $('.ratings3 .bi');
+        let qualitymsg = document.getElementsByClassName("qualitymsg");
+
+        var currentRating3 = 0;
+
+        ratings3 = Array.prototype.slice.call(ratings3);
+
+        ratings3.forEach((star, index) => {
+            star.addEventListener("click", (e) => {
+                    for (let i = 0; i < ratings3.length; i++) {
+                        ratings3[i].style.color = "";
+                    }
+                    colorStar3(index);
+                    currentRating3 = index + 1
+                    qualitymsg = " : " + currentRating3
+                    $('.qualitymsg').text(qualitymsg);
+
+                },
+                false
+            );
+
+            star.addEventListener("mouseenter", (e) => {
+                    for (let i = 0; i < ratings3.length; i++) {
+                        ratings3[i].style.color = "";
+                    }
+                    // colorStar3(index);
+                    currentRating3 = index + 1
+                    qualitymsg = " : " + currentRating3
+                    $('.qualitymsg').text(qualitymsg);
+
+                },
+                false
+            );
+
+        });
+
+        const colorStar3 = (n) => {
+            if (n < 0) return;
+            ratings3[n].style.color = "#fc0";
+            colorStar3(n - 1);
+        };
+    }
+
+    {
+        $('#RateSP').on('click', function() {
+            OnTimeArrival = currentRating1;
+            Friendly = currentRating2;
+            QualityOfService = currentRating3;
+
+
+            if (OnTimeArrival == 0) {
+                Ratings = (Friendly + QualityOfService) / 2;
+            }
+            if (Friendly == 0) {
+                Ratings = (OnTimeArrival + QualityOfService) / 2;
+            }
+            if (QualityOfService == 0) {
+                Ratings = (Friendly + OnTimeArrival) / 2;
+            }
+
+
+            if (Friendly == 0 && QualityOfService == 0) {
+                Ratings = OnTimeArrival;
+            }
+            if (OnTimeArrival == 0 && QualityOfService == 0) {
+                Ratings = Friendly;
+            }
+            if (OnTimeArrival == 0 && Friendly == 0) {
+                Ratings = QualityOfService;
+            }
+
+
+            if (Friendly != 0 && QualityOfService != 0 && OnTimeArrival != 0) {
+                Ratings = (OnTimeArrival + Friendly + QualityOfService) / 3;
+            }
+            if (Friendly == 0 && QualityOfService == 0 && OnTimeArrival == 0) {
+                Ratings = 0.00;
+            }
+
+            // Ratings = (OnTimeArrival + Friendly + QualityOfService) / 3;
+
+            Ratings = parseFloat(Ratings).toFixed(2);
+
+            $('#RateSP .info').text(" " + Ratings);
+
+            if (Ratings != 0) {
+                var sahtml = '';
+                for (var i = 0; i < parseInt(Ratings); i++) {
+                    sahtml += `<i class="bi bi-star-fill golden-star"></i>`;
+                }
+                var or = 0;
+                for (var i = 0; i < 1; i++) {
+                    if (Ratings != null) {
+                        if (Ratings.substr(2, 1) != 0) {
+                            sahtml += `<i class="bi bi-star-half golden-star"></i>`;
+                            or = 1;
+                        }
+                    } else {
+                        Ratings = 0;
+                    }
+                }
+                for (var i = 5; i > (parseInt(Ratings) + or); i--) {
+                    sahtml += `<i class="bi bi-star-fill"></i>`;
+                }
+            }
+
+            $('.STAR-AVG').html(sahtml);
+        });
+    }
+
+    $('#RateSP .close').on('click', function() {
+        let ratings1 = $('.ratings1 .bi');
+        let ratings2 = $('.ratings2 .bi');
+        let ratings3 = $('.ratings3 .bi');
+        var value = '';
+        for (i = 0; i < 5; i++) {
+            ratings1[i].style.removeProperty("color");
+            ratings2[i].style.removeProperty("color");
+            ratings3[i].style.removeProperty("color");
+            value += `<i class="bi bi-star-fill"></i>`;
+        }
+
+        $('#RateSP .STAR-AVG').html(value);
+
+        $('.timemsg').empty();
+        $('.friendlymsg').empty();
+        $('.qualitymsg').empty();
+        $('#feedbackcomment').val('');
+        $('#RateSP .info').text('');
+    });
+
+    $('#HistoryData').on('click', '.ratesp', function() {
+        ServiceRequestId = $(this).attr('id');
+        $('#RateSP .giveratting').attr('id', ServiceRequestId);
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Customer&function=CheckCountrating",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+
+            },
+            success: function(response) {
+                if ($.trim(response) == 1) {
+
+                    Swal.fire({
+                        title: 'You Are Already Provided Ratings For This Service',
+                        text: 'Service Request Id : ' + ServiceRequestId,
+                        icon: 'info',
+                        confirmButtonText: 'Done'
+                    });
+
+                    $('#RateSP .giveratting').addClass('disabled');
+
+                } else {
+                    $('#RateSP .giveratting').removeClass('disabled');
+                    $.ajax({
+                        type: "POST",
+                        url: URL + "?controller=Customer&function=GetServiceProvideName",
+                        data: {
+                            'ServiceRequestId': ServiceRequestId,
+
+                        },
+                        success: function(response) {
+                            $('#SPName').text(response);
+                        }
+                    });
+                }
+            }
+        });
+
+    });
+
+    $('#RateSP .giveratting').on('click', function() {
+
+        ServiceRequestId = $('.giveratting').attr('id');
+        OnTimeArrival = currentRating1;
+        Friendly = currentRating2;
+        QualityOfService = currentRating3;
+        Ratings = (OnTimeArrival + Friendly + QualityOfService) / 3;
+
+        rateComment = $('#feedbackcomment').val();
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Customer&function=InsertRatingtoSP",
+            data: {
+                'timearrival': OnTimeArrival,
+                'friendly': Friendly,
+                'quality': QualityOfService,
+                'ServiceRequestId': ServiceRequestId,
+                'Ratings': Ratings,
+                'rateComment': rateComment,
+
+            },
+            success: function(response) {
+                if ($.trim(response) == "Already Done") {
+                    Swal.fire({
+                        title: 'You Are Already Provided Ratings For This Service',
+                        text: 'Service Request Id : ' + ServiceRequestId,
+                        icon: 'info',
+                        confirmButtonText: 'Done'
+                    });
+                }
+                if ($.trim(response) == "rating done") {
+                    Swal.fire({
+                        title: 'Rating Provided Successfully',
+                        text: 'Service Request Id : ' + ServiceRequestId,
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                }
+                if ($.trim(response) == "rating not inserted") {
+
+                    Swal.fire({
+                        title: 'Rating Is Not Submitted',
+                        text: 'Service Request Id : ' + ServiceRequestId,
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+                if ($.trim(response) == "You cancelled before service accept") {
+
+                    Swal.fire({
+                        title: 'You cancelled Service before service accepted',
+                        text: 'Service Request Id : ' + ServiceRequestId,
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+                // alert(response);
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=ListCustomerServiceHistory",
+            data: {
+
+            },
+            success: function(response) {
+                $('#HistoryData').html(response);
+            }
+        });
+    });
+
+
+    // favourite prons
+
+    if (window.location.href.indexOf('FavouriteProns.php') != -1) {
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=FavouritePronsList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#favouritePron').html(response);
+            }
+        });
+
+    }
+
+    $('#favouritePron').on('click', '.Favourite', function() {
+
+        id = $(this).attr('id');
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Customer&function=UpdateFavouriteSP",
+            data: {
+                'FavouriteBlockId': id,
+                'IsFavourite': 1,
+            },
+            success: function(response) {
+                if ($.trim(response) == "Favourite or un-favourite successfully") {
+                    Swal.fire({
+                        title: 'Favourite Succeffully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Favourite not Done',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=FavouritePronsList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#favouritePron').html(response);
+            }
+        });
+
+    });
+
+    $('#favouritePron').on('click', '.Un-Favourite', function() {
+
+        id = $(this).attr('id');
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Customer&function=UpdateFavouriteSP",
+            data: {
+                'FavouriteBlockId': id,
+                'IsFavourite': 0,
+            },
+            success: function(response) {
+                if ($.trim(response) == "Favourite or un-favourite successfully") {
+                    Swal.fire({
+                        title: 'Un-Favourite Succeffully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Un-Favourite not Done',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=FavouritePronsList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#favouritePron').html(response);
+            }
+        });
+
+    });
+
+    $('#favouritePron').on('click', '.Block', function() {
+
+        id = $(this).attr('id');
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Customer&function=UpdateBlockSP",
+            data: {
+                'FavouriteBlockId': id,
+                'IsBlocked': 1,
+            },
+            success: function(response) {
+                if ($.trim(response) == "Block or un-block successfully") {
+                    Swal.fire({
+                        title: 'Blocked Succeffully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Blocked not Done',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=FavouritePronsList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#favouritePron').html(response);
+            }
+        });
+
+    });
+
+    $('#favouritePron').on('click', '.Un-Block', function() {
+
+        id = $(this).attr('id');
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Customer&function=UpdateBlockSP",
+            data: {
+                'FavouriteBlockId': id,
+                'IsBlocked': 0,
+            },
+            success: function(response) {
+                if ($.trim(response) == "Block or un-block successfully") {
+                    Swal.fire({
+                        title: 'Un-Blocked Succeffully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Un-Blocked not Done',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=Customer&function=FavouritePronsList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#favouritePron').html(response);
+            }
+        });
+
+    });
 
 });
 
@@ -625,7 +1886,6 @@ function gotoscheduleplan() {
                 if ($.trim(response) == "Sevice Available") {
                     $('.Zipcode-error').removeClass('text-red').addClass('text-blue').text(response);
                     $('#zipcode').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
-                    // $('#checkAvaibility-btn').removeAttr('disabled');
 
                     var header = document.getElementById("bookservice");
                     var btns = header.getElementsByClassName("btn");
@@ -642,9 +1902,8 @@ function gotoscheduleplan() {
                     btns[1].disabled = false;
 
                 } else {
-                    $('.Zipcode-error').removeClass('text-blue').addClass('text-red').text(response);
+                    $('.Zipcode-error').removeClass('text-blue').addClass('text-red').text('We are not providing service in this area. We will notify you if any helper would start working near your area.');
                     $('#zipcode').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
-                    // $('#checkAvaibility-btn').attr('disabled', 'disabled');
                 }
             }
         });
@@ -657,7 +1916,7 @@ function gotoyourDetails() {
 
     $.ajax({
 
-        url: URL + "?controller=User&function=BookService",
+        url: URL + "?controller=Helperland&function=BookServiceCheckLogin",
         data: {
 
         },
@@ -938,7 +2197,6 @@ function showNewAddress() {
 
 function saveAddress() {
 
-    var UserId = $("#UserId").val();
     var AddressLine1 = $('#AddressLine1').val();
     var AddressLine2 = $('#AddressLine2').val();
     var CityId = $('#CityId').val();
@@ -951,7 +2209,6 @@ function saveAddress() {
         type: 'POST',
         url: URL + "?controller=Bookservice&function=InsertAddress",
         data: {
-            'UserId': UserId,
             'AddressLine1': AddressLine1,
             'AddressLine2': AddressLine2,
             'CityId': CityId,
@@ -1022,17 +2279,25 @@ function changeBed() {
 }
 
 function changeBasicHours() {
-
     Hrstext = $("#Hrs option:selected").text();
     hh = parseFloat(Hrstext);
     basicHour = hh + ' Hours';
     document.querySelector('#basicHour').innerHTML = basicHour;
+    hr = 3;
 
     for (i = 0; i <= 4; i++) {
         if (document.getElementById(i).style.display == "block") {
             hh = hh - 0.5;
-            hours = hh + ' Hours';
-            document.querySelector('#basicHour').innerHTML = hours;
+            hr = hr + 0.5;
+
+            if (hh >= 3) {
+                hours = hh + ' Hours';
+                document.querySelector('#basicHour').innerHTML = hours;
+            } else {
+                checkLessTime();
+                $("#Hrs").val(hr).change();
+            }
+
         }
     }
 }
@@ -1056,9 +2321,9 @@ function checkTotalTime() {
     Hrsvalue = $('#Hrs option:selected').val()
     hour = parseFloat(Hrsvalue);
 
-    if (totalTime + hour > 22) {
+    if (totalTime + hour > 21) {
         time = 21 - hour;
-        alert('select time is greater than 21');
+        $('#Warning21Hour').modal('show');
         time = parseInt(time)
         $("#time").val(time + ':00').change();
     }
@@ -1075,27 +2340,32 @@ function checkPrice() {
 
 function checkLessTime() {
 
-    // TotalHourtext = $(".TotalHour").text();
-    // totalHour = parseFloat(TotalHourtext);
-    // Hrsvalue = $("#Hrs option:selected").val();
-    // Hour = parseFloat(Hrsvalue);
-    // basicHourtext = $("#basicHour").text();
-    // basicHour = parseFloat(basicHourtext);
+    TotalHourtext = $(".TotalHour").text();
+    totalHour = parseFloat(TotalHourtext);
+    Hrsvalue = $("#Hrs option:selected").val();
+    Hour = parseFloat(Hrsvalue);
+    basicHourtext = $("#basicHour").text();
+    basicHour = parseFloat(basicHourtext);
 
-    // if (parseFloat(Hour) < parseFloat(totalHour)) {
+    // console.log(totalHour);
+    // if (totalHour < parseFloat(window.time)) {
     //     if (basicHour < 3.5) {
-    //         alert('select time is LESS of complete all service');
-    //         $("#Hrs").val(totalHour).change();
+    //         $('#WarningLess3Hour').modal('show');
+    //         $("#Hrs").val(TOTALHOUR).change();
     //     }
     // }
+
+
+
+    if (totalHour < parseFloat(window.time)) {
+        $('#WarningLess3Hour').modal('show');
+    }
 }
 
 function SubmitData() {
 
     var favouriteServiceProvider = ['0'];
     var ExtraService = ['0'];
-
-    var UserId = $("#UserId").val();
 
     ServiceHourlyRate = "€19"
 
@@ -1120,9 +2390,9 @@ function SubmitData() {
     comment = $('#comment').val();
 
     if ($('#haspetsornot').is(":checked")) {
-        pets = "yes";
+        pets = "1";
     } else {
-        pets = "no";
+        pets = "0";
     }
 
     Address = $('input[name="address"]:checked').val();
@@ -1152,7 +2422,6 @@ function SubmitData() {
     });
 
     AllData = ({
-        "UserId": UserId,
         "ServiceStartDate": date,
         "ZipCode": Zipcode,
         "ServiceHourlyRate": ServiceHourlyRate,
@@ -1191,7 +2460,9 @@ function SubmitData() {
                     text: 'Please Try Again Later',
                     icon: 'error',
                     confirmButtonText: 'Done'
-                })
+                }).then(function() {
+                    location.href = URL + "?controller=Helperland&function=CustomerServiceDashboard";
+                });
             } else {
                 Swal.fire({
                     title: 'Booking has been successfully submitted',
@@ -1206,4 +2477,104 @@ function SubmitData() {
         }
     });
 
+}
+
+
+// customer setting
+
+function addValidDetail() {
+    if (FirstName.length != 0) {
+        $('#FirstName').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#FirstName').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if (LastName.length != 0) {
+        $('#LastName').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#LastName').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if (PhoneNumber.length != 0) {
+        $('#PhoneNumber').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#PhoneNumber').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if ($('#day').val() != "Day") {
+        $('#day').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#day').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if ($('#month').val() != "Month") {
+        $('#month').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#month').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if ($('#year').val() != "Year") {
+        $('#year').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#year').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if ($('#Language').val() != "") {
+        $('#Language').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#Language').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+}
+
+function cleanValueForNewAddress() {
+    $("#AddressLine1").val(null);
+    $("#AddressLine2").val(null);
+    $('#Zipcode').val(null);
+    $('#phonenumber').val(null);
+    $('#CityId').html(null);
+    $('#StateId').html(null);
+
+    $('#AddressLine1').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    $('#AddressLine2').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    $('#Zipcode').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    $('#phonenumber').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    $('#CityId').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+
+    $("#AddressLine1").removeClass('invalid-inputBorder');
+    $("#AddressLine2").removeClass('invalid-inputBorder');
+    $("#Zipcode").removeClass('invalid-inputBorder');
+    $("#phonenumber").removeClass('invalid-inputBorder');
+    $("#CityId").removeClass('invalid-inputBorder');
+
+    $(".AddressLine1-error").empty();
+    $(".AddressLine2-error").empty();
+    $('.Zipcode-error').empty();
+    $('.phonenumber-error').empty();
+    $('.CityId-error').empty();
+}
+
+function addValidAddress() {
+    if (AddressLine1.length != 0) {
+        $('#AddressLine1').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#AddressLine1').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if (AddressLine2.length != 0) {
+        $('#AddressLine2').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#AddressLine2').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if (Zipcode.length != 0) {
+        $('#Zipcode').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#Zipcode').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if (phonenumber.length != 0) {
+        $('#phonenumber').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#phonenumber').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
 }

@@ -52,7 +52,7 @@
                     </form>
                     <div class="form-group mb-2 text-center pt-2">
                         <span class="text-center">
-                            <a href="#ForgotModal" data-toggle="modal" data-target="#ForgotModal" data-dismiss="modal" onclick="ForgotModal()" class="style-none">Forgot your password</a>
+                            <a href="#ForgotModal" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#ForgotModal" data-dismiss="modal" onclick="ForgotModal()" class="style-none">Forgot your password</a>
                         </span>
                     </div>
                     <div class="form-group mb-2 text-center">

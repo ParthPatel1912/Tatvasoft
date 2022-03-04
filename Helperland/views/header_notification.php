@@ -39,7 +39,8 @@
 
     <?php $base_url = 'http://localhost:8088/'; ?>
 
-    <?php include 'Login.php';?>
+    <?php include 'Login.php'?>
+    <?php include 'WarningBookservice.php'?>
     <?php include 'ForgotPassword.php' ?>
     <?php include 'ResetPassword.php' ?>
 
@@ -90,7 +91,7 @@
                             </li>
 
                             <li class="nav-item display-sm">
-                                <a class="nav-link" href="#"> Dashboard</a>
+                                <a class="nav-link" href="<?= $base_url."?controller=Helperland&function=CustomerServiceDashboard"?>"> Dashboard</a>
                             </li>
                             <li class="nav-item display-sm">
                                 <a class="nav-link" href="<?= $base_url."?controller=Helperland&function=ServiceHistory"?>"> Service History</a>
@@ -99,7 +100,8 @@
                                 <a class="nav-link" href="#"> Service Schedule</a>
                             </li>
                             <li class="nav-item display-sm">
-                                <a class="nav-link" href="#">  Favourite Pros </a>
+                                <a class="nav-link" href="<?= $base_url."?controller=Helperland&function=FavouriteProns"?>">  Favourite Pros </a>
+                                </a>
                             </li>
                             <li class="nav-item display-sm">
                                 <a class="nav-link" href="#"> Invoice </a>
@@ -109,7 +111,15 @@
                             </li>
 
                             <li class="nav-item display-sm">
-                                <a class="nav-link" href="#"> My Setting </a>
+                                <a class="nav-link" 
+                                href="<?php 
+                                        if($_SESSION['UserTypeId'] == 3){
+                                            echo $base_url."?controller=Helperland&function=CustomerSetting";
+                                        }
+                                        elseif ($_SESSION['UserTypeId'] == 2) {
+                                            echo $base_url."?controller=Helperland&function=ppp";
+                                        }
+                                    ?>"> My Setting </a>
                             </li>
                             <li class="nav-item display-sm">
                                 <!-- <a class="nav-link" href="#"> Logout</a> -->
@@ -153,21 +163,37 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="<?php 
+                                                if($_SESSION['UserTypeId'] == 3){
+                                                    echo $base_url."?controller=Helperland&function=CustomerServiceDashboard";
+                                                }
+                                                elseif ($_SESSION['UserTypeId'] == 2) {
+                                                    echo $base_url."?controller=Helperland&function=ppp";
+                                                }
+                                            ?>">
                                             My Dashboard
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" 
+                                        href="<?php 
+                                                if($_SESSION['UserTypeId'] == 3){
+                                                    echo $base_url."?controller=Helperland&function=CustomerSetting";
+                                                }
+                                                elseif ($_SESSION['UserTypeId'] == 2) {
+                                                    echo $base_url."?controller=Helperland&function=ppp";
+                                                }
+                                            ?>">
                                             My Settings
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="<?= $base_url."?controller=User&function=Logout"?>">
                                             <!-- Logout -->
-                                            <form method="POST" action="<?= $base_url."?controller=User&function=Logout"?>" >
+                                            Logout
+                                            <!-- <form method="POST" action="<?= $base_url."?controller=User&function=Logout"?>" >
                                                 <button class="btn border-0" name="logout" type="submit">Logout</button>
-                                            </form>
+                                            </form> -->
                                         </a>
                                     </li>
                                 </ul>

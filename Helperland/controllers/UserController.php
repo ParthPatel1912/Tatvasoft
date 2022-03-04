@@ -46,8 +46,14 @@ class UserController{
             if($FirstName == "") {
                 $error .= "<li>Please enter first name.</li>";
             }
+            elseif(!preg_match("/^[a-zA-Z]*$/",$FirstName)){
+                $error .= "<li>Please enter first name without space.</li>";
+            }
             if($LastName == "") {
                 $error .= "<li>Please enter last name.</li>";
+            }
+            elseif(!preg_match("/^[a-zA-Z]*$/",$LastName)){
+                $error .= "<li>Please enter last name without space.</li>";
             }
             if($EmailAddress == ""){
                 $error .= "<li>Please enter email address.</li>";
@@ -187,8 +193,14 @@ class UserController{
             if($FirstName == "") {
                 $error .= "<li>Please enter first name.</li>";
             }
+            elseif(!preg_match("/^[a-zA-Z]*$/",$FirstName)){
+                $error .= "<li>Please enter first name without space.</li>";
+            }
             if($LastName == "") {
                 $error .= "<li>Please enter last name.</li>";
+            }
+            elseif(!preg_match("/^[a-zA-Z]*$/",$LastName)){
+                $error .= "<li>Please enter last name without space.</li>";
             }
             if($EmailAddress == ""){
                 $error .= "<li>Please enter email address.</li>";
@@ -422,7 +434,29 @@ class UserController{
 
         if (isset($_POST)) {
             $EmailAddress = trim($_POST['EmailAddress']);
+
+            ?>
+
+                <script>
+                    $(document).ready(function() {
+                        $('#ForgotModal').modal('hide');
+                        $("#iframeloading").show();   
+                    });
+                </script>
+
+            <?php
+
             $result = $this->model->forgot('user',$EmailAddress);
+
+            ?>
+
+                <script>
+                    $(document).ready(function() {
+                        $("#iframeloading").hide();   
+                    });
+                </script>
+
+            <?php
 
             $count = $result[0];
             $Name = $result[1]; 
@@ -504,7 +538,29 @@ class UserController{
                         'Password' => $PasswordCrypt,
                         'Resetkey' => $Resetkey,
                     ];
+
+                    ?>
+
+                        <script>
+                            $(document).ready(function() {
+                                $("#iframeloading").show();   
+                            });
+                        </script>
+
+                    <?php
+
                     $result = $this->model->ResetPassword('user',$array,$Resetkey);
+
+
+                    ?>
+
+                        <script>
+                            $(document).ready(function() {
+                                $("#iframeloading").hide();   
+                            });
+                        </script>
+
+                    <?php
 
                     if ($result) {
                         $_SESSION['message_title'] = "Password Updated Successfully";
@@ -569,6 +625,7 @@ class UserController{
         if(isset($_POST)){
             unset($_SESSION['UserName']);
             unset($_SESSION['UserId']);
+            unset($_SESSION['UserTypeId']);
             $_SESSION['message_title'] = "You are Logged Out";
             $_SESSION['message_text'] = "";
             $_SESSION['message_icon'] = "success";
@@ -580,24 +637,6 @@ class UserController{
             $_SESSION['message_text'] = "Please Try Again";
             $_SESSION['message_icon'] = "error";
             header('Location: ' . $base_urlLoginModal);
-        }
-    }
-
-    public function BookService()
-    {
-        $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';
-        $base_url = '?controller=Helperland&function=BookService';
-        if(!isset($_SESSION['UserName'])){
-            echo "Login not-success";
-            // $_SESSION['message_title'] = "Please Login now";
-            // $_SESSION['message_text'] = "";
-            // $_SESSION['message_icon'] = "error";
-            // header('Location: ' . $base_urlLoginModal);
-        }
-
-        if(isset($_SESSION['UserName'])){
-            echo "Login successfull";
-            // header('Location: ' . $base_url);
         }
     }
 

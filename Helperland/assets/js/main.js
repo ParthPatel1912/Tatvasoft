@@ -33,7 +33,20 @@ $(document).ready(function() {
 
     // service history
 
-    $('#service-history').dataTable({
+    $('#service-history').DataTable({
+        "bPaginate": true,
+        "bFilter": false,
+        "bInfo": false,
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': [-1] /* 1st one, start by the right */
+        }]
+    });
+
+
+    // customer-service-dashboard
+
+    $('#customer-service-dashboard').DataTable({
         "bPaginate": true,
         "bFilter": false,
         "bInfo": false,
@@ -67,6 +80,14 @@ $(document).ready(function() {
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
         }]
+    });
+
+    /* coustomer setting */
+    $('#nav-tab button').on('click', function(e) {
+        $(this).tab('show');
+        $(".nav-tabs button").removeClass("border-bottom-blue text-blue");
+        $(this).addClass(" border-bottom-blue text-blue");
+        $(".tab-content .tab-pane").addClass("active-nav");
     });
 
 });
@@ -257,6 +278,45 @@ $(document).ready(function() {
     $('#close-alert-reset').click(function() {
         $('#ResetError').hide('fade');
     });
+
+    // Disable click outside of modal area
+
+    $('#Warning21Hour').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
+    $('#LoginModal').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
+    $('#ForgotModal').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
+    $('#ResetModal').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
+    $('#WarningLess3Hour').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
+    $('#fullDetail').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
 });
 
 function LoginModal() {

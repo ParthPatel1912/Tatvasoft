@@ -26,7 +26,7 @@
                     </form>
                     <div class="form-group mb-2 text-center pt-2">
                             <span class="text-center">
-                                <a href="#LoginModal" data-toggle="modal" data-target="#LoginModal" data-dismiss="modal" onclick="LoginModal()" class="style-none">Login in Now</a>
+                                <a href="#LoginModal" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#LoginModal" data-dismiss="modal" onclick="LoginModal()" class="style-none">Login in Now</a>
                             </span>
                         </div>
                 </div>

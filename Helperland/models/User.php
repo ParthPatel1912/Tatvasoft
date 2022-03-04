@@ -62,6 +62,7 @@ class UserModel{
 
                 $_SESSION['UserName'] = $Name;
                 $_SESSION['UserId'] = $UserId;
+                $_SESSION['UserTypeId'] = $UserTypeId;
                 return array($count,$UserTypeId,$Name,$IsActive);
             }
         }
