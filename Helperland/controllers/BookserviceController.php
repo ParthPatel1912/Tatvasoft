@@ -113,6 +113,15 @@ class BookserviceController{
             else if(strlen($Mobile)<10){
                 $error .= "<li>Phone number shoud be 10 digit.</li>";
             }
+            if($PostalCode == "") {
+                $error .= "<li>Please enter postal code.</li>";
+            }
+            else if(strlen($PostalCode)<6){
+                $error .= "<li>Postal should be 6 digit.</li>";
+            }
+            else if(strlen($PostalCode)>6){
+                $error .= "<li>Postal should be 6 digit.</li>";
+            }
 
             if($error != ""){
                 echo $error;

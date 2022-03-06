@@ -50,6 +50,9 @@ class ContactController{
             else if(strlen($PhoneNumber)<10){
                 $error .= "<li>Phone number shoud be 10 digit.</li>";
             }
+            else if(strlen($PhoneNumber)>10){
+                $error .= "<li>Phone number shoud be 10 digit.</li>";
+            }
             if($Message == ""){
                 $error .= "<li>Please enter message.</li>";
             }

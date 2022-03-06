@@ -86,9 +86,14 @@
                                 ?>
                                 </a>
                             </li>
-                            <li class="nav-item display-sm">
-                                <a class="nav-link rounded-link active" href="<?= $base_url."?controller=Helperland&function=BookService"?>">Book now </a>
-                            </li>
+                            <?php 
+                                if($_SESSION['UserTypeId'] == 3){ ?>
+                                    <li class="nav-item display-sm">
+                                        <a class="nav-link rounded-link active" href="<?= $base_url."?controller=Helperland&function=BookService"?>">Book now </a>
+                                    </li>
+                                    <?php
+                                }
+                            ?>
 
                             <li class="nav-item display-sm">
                                 <a class="nav-link" href="<?= $base_url."?controller=Helperland&function=CustomerServiceDashboard"?>"> Dashboard</a>
@@ -117,7 +122,7 @@
                                             echo $base_url."?controller=Helperland&function=CustomerSetting";
                                         }
                                         elseif ($_SESSION['UserTypeId'] == 2) {
-                                            echo $base_url."?controller=Helperland&function=ppp";
+                                            echo $base_url."?controller=Helperland&function=ServiceProviderSetting";
                                         }
                                     ?>"> My Setting </a>
                             </li>
@@ -127,9 +132,20 @@
                                     <button class="nav-link btn btn-link" name="logout" type="submit">Logout</button>
                                 </form>
                             </li>
-                            <li class="nav-item display-non-sm btnBlue rounded-pill">
-                                <a class="nav-link text-decoration-none text-light p-0" href="<?= $base_url."?controller=Helperland&function=BookService"?>">Book Now</a>
-                            </li>
+                           
+
+                            <?php 
+                                if($_SESSION['UserTypeId'] == 3){ ?>
+
+                                    <li class="nav-item display-non-sm btnBlue rounded-pill">
+                                        <a class="nav-link text-decoration-none text-light p-0" href="<?= $base_url."?controller=Helperland&function=BookService"?>">Book Now</a>
+                                        <!-- <a class="nav-link text-decoration-none text-light p-0" href="<?= $base_url."?controller=Helperland&function=BookService"?>">Book Now</a> -->
+                                    </li>
+                                    <?php
+                                }
+                            ?>
+
+                                
                             <li class="nav-item">
                                 <a class="nav-link " href="<?= $base_url."?controller=Helperland&function=Prices"?>">Prices & services</a>
                             </li>
@@ -168,7 +184,7 @@
                                                     echo $base_url."?controller=Helperland&function=CustomerServiceDashboard";
                                                 }
                                                 elseif ($_SESSION['UserTypeId'] == 2) {
-                                                    echo $base_url."?controller=Helperland&function=ppp";
+                                                    echo $base_url."?controller=Helperland&function=PPP";
                                                 }
                                             ?>">
                                             My Dashboard
@@ -181,7 +197,7 @@
                                                     echo $base_url."?controller=Helperland&function=CustomerSetting";
                                                 }
                                                 elseif ($_SESSION['UserTypeId'] == 2) {
-                                                    echo $base_url."?controller=Helperland&function=ppp";
+                                                    echo $base_url."?controller=Helperland&function=ServiceProviderSetting";
                                                 }
                                             ?>">
                                             My Settings

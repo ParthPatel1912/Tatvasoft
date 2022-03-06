@@ -24,7 +24,10 @@
             <div class="row justify-content-center">
                 <div class="col-md-2 service-menu">
                     <div class="side-menu-item">
+                    <a href="<?= $base_url."?controller=Helperland&function=ServiceProviderSetting"?>"
+                        class="style-none text-white">                    
                         Dashboard
+                    </a>
                     </div>
                     <div class="side-menu-item">
                         New Service
@@ -36,7 +39,7 @@
                         Service Schedule
                     </div>
                     <div class="side-menu-item">
-                       <a href="<?= $base_url."?controller=Helperland&function=ServiceHistory"?>">Service History</a> 
+                       <a href="<?= $base_url."?controller=Helperland&function=iii"?>" class="style-none text-white border-0">Service History</a> 
                     </div>
                     <div class="side-menu-item">
                         My Ratings

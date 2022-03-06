@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     $('#FirstName').on('input', function() {
         var FirstName = $(this).val();
-        var validName = /^[a-zA-Z]*$/;
+        var validName = /^[a-zA-Z ]*$/;
         if (FirstName.length == 0) {
             $('.FirstName-error').addClass('text-red').text("First Name is required");
             $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
@@ -622,7 +622,7 @@ $(document).ready(function() {
                 $('#CheckAdress').removeAttr('disabled');
                 $('.address-error').empty();
 
-            })
+            });
 
         });
     }
@@ -1314,18 +1314,18 @@ $(document).ready(function() {
                 false
             );
 
-            star.addEventListener("mouseenter", (e) => {
-                    for (let i = 0; i < ratings1.length; i++) {
-                        ratings1[i].style.color = "";
-                    }
-                    // colorStar1(index);
-                    currentRating1 = index + 1
-                    timemsg = " : " + currentRating1
-                    $('.timemsg').text(timemsg)
+            // star.addEventListener("mouseenter", (e) => {
+            //         for (let i = 0; i < ratings1.length; i++) {
+            //             ratings1[i].style.color = "";
+            //         }
+            //         // colorStar1(index);
+            //         currentRating1 = index + 1
+            //         timemsg = " : " + currentRating1
+            //         $('.timemsg').text(timemsg)
 
-                },
-                false
-            );
+            //     },
+            //     false
+            // );
         });
 
         const colorStar1 = (n) => {
@@ -1357,18 +1357,18 @@ $(document).ready(function() {
                 false
             );
 
-            star.addEventListener("mouseenter", (e) => {
-                    for (let i = 0; i < ratings2.length; i++) {
-                        ratings2[i].style.color = "";
-                    }
-                    // colorStar2(index);
-                    currentRating2 = index + 1
-                    friendlymsg = " : " + currentRating2
-                    $('.friendlymsg').text(friendlymsg);
+            // star.addEventListener("mouseenter", (e) => {
+            //         for (let i = 0; i < ratings2.length; i++) {
+            //             ratings2[i].style.color = "";
+            //         }
+            //         // colorStar2(index);
+            //         currentRating2 = index + 1
+            //         friendlymsg = " : " + currentRating2
+            //         $('.friendlymsg').text(friendlymsg);
 
-                },
-                false
-            );
+            //     },
+            //     false
+            // );
         });
 
         const colorStar2 = (n) => {
@@ -1400,18 +1400,18 @@ $(document).ready(function() {
                 false
             );
 
-            star.addEventListener("mouseenter", (e) => {
-                    for (let i = 0; i < ratings3.length; i++) {
-                        ratings3[i].style.color = "";
-                    }
-                    // colorStar3(index);
-                    currentRating3 = index + 1
-                    qualitymsg = " : " + currentRating3
-                    $('.qualitymsg').text(qualitymsg);
+            // star.addEventListener("mouseenter", (e) => {
+            //         for (let i = 0; i < ratings3.length; i++) {
+            //             ratings3[i].style.color = "";
+            //         }
+            //         // colorStar3(index);
+            //         currentRating3 = index + 1
+            //         qualitymsg = " : " + currentRating3
+            //         $('.qualitymsg').text(qualitymsg);
 
-                },
-                false
-            );
+            //     },
+            //     false
+            // );
 
         });
 
@@ -1809,6 +1809,136 @@ $(document).ready(function() {
 
     });
 
+
+    // service provider setting
+
+    if (window.location.href.indexOf('ServiceProviderSetting.php') != -1) {
+        var hidden = document.getElementsByClassName("hidden-input-avtar");
+        var avtar = document.getElementsByClassName("img-avtar");
+
+        for (i = 0; i <= 6; i++) {
+            if (hidden[i].value == "notselected") {
+                $('.Selectavtar').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+                $('.avtar-error').addClass('text-red').text('Please profile picture');
+            }
+        }
+
+        $(avtar).on('click', function() {
+            $('.Selectavtar').removeClass('invalid-inputBorder');
+            $('.avtar-error').empty();
+
+        });
+
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=getServiceProviderDetail",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('#FirstName').val(response[0]);
+                $('#LastName').val(response[1]);
+                $('#EmailAddress').val(response[2]);
+                $('#PhoneNumber').val(response[3]);
+                $('#day').val(response[4]);
+                $('#month').val(response[5]);
+                $('#year').val(response[6]);
+                $('#Language').val(response[7]);
+                addValidDetail();
+
+                if (response[8] != null && response[9] != null && response[10] != null) {
+                    ValidAddressMatchServiceProvider();
+                    // alert(0)
+                } else {
+                    ValidAddressServiceProvider();
+                    // alert(1)
+                }
+
+                $("#AddressLine1").val(response[8]);
+                $("#AddressLine2").val(response[9]);
+                $('#Zipcode').val(response[10]);
+                $('#CityId').html(response[11]);
+                $('#StateId').html(response[12]);
+
+                $("input[name=gender][value='" + response[13] + "']").prop('checked', true);
+
+                photo = response[14];
+
+                if (response[15] == 'Yes') {
+                    $('.status').addClass('text-green').text('Active');
+                }
+
+                var hidden = document.getElementsByClassName("hidden-input-avtar");
+                var imgs = document.getElementById("img-avtar-main");
+
+                for (i = 1; i <= 6; i++) {
+                    if (hidden[i].id == photo) {
+                        hidden[i].value = "selected";
+                        avtar[i].style.border = "3px solid #146371";
+                        var path = "../assets/img/" + photo + ".jpeg";
+                        imgs.src = path;
+                        $('.Selectavtar').removeClass('invalid-inputBorder');
+                        $('.avtar-error').empty();
+                    }
+                }
+
+                if (response[13] == null || response[13] == "") {
+
+                    if ($("input[name='gender']:checked").length == 0) {
+                        $('#save-detail').attr('disabled', 'disabled');
+                        // $('.gender').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+                        $('.gender-error').addClass('text-red').text('Please select Gender');
+
+                    } else {
+                        $('#save-detail').removeAttr('disabled');
+                        $('.gender-error').empty();
+
+                    }
+                }
+            }
+        });
+
+        $('body').on('click', '.gender', function() {
+            $('#save-detail').removeAttr('disabled');
+            $('.gender-error').empty();
+            // $('.gender').removeClass('invalid-inputBorder');
+
+        });
+
+        $('#change-password').css('pointerEvents', 'none');
+
+        if ($('#Service-Details').find('.valid-inputBorder').length > 0) {
+            $('#save-detail').addClass('disabled');
+
+        } else {
+            $('#save-detail').removeClass('disabled');
+
+        }
+
+    }
+
+    $('#Service-Details').on('input', function() {
+        if ($('#Service-Details').find('.invalid-inputBorder').length > 0) {
+            $('#save-detail').addClass('disabled');
+
+        } else {
+            $('#save-detail').removeClass('disabled');
+
+        }
+
+    });
+
+    $('#Service-Details').on('click', function() {
+        if ($('#Service-Details').find('.invalid-inputBorder').length > 0) {
+            $('#save-detail').addClass('disabled');
+
+        } else {
+            $('#save-detail').removeClass('disabled');
+
+        }
+
+    });
+
 });
 
 
@@ -1872,7 +2002,7 @@ function gotoscheduleplan() {
         $('.Zipcode-error').addClass('text-red').text('Postal code is required');
         $("#zipcode").addClass('invalid-inputBorder').removeClass('valid-inputBorder');
     } else if (Zipcode.length < 6) {
-        $('.Zipcode-error').addClass('text-red').text('Postal code` has 6 digit');
+        $('.Zipcode-error').addClass('text-red').text('Postal code has 6 digit');
         $("#zipcode").addClass('invalid-inputBorder').removeClass('valid-inputBorder');
     } else {
         $.ajax({
@@ -2577,4 +2707,242 @@ function addValidAddress() {
     } else {
         $('#phonenumber').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
     }
+}
+
+
+// service provider setting 
+
+function checkavtar(para) {
+    var hidden = document.getElementsByClassName("hidden-input-avtar");
+    var avtar = document.getElementsByClassName("img-avtar");
+    var imgs = document.getElementById("img-avtar-main");
+
+    para = para + 1;
+
+    if (hidden[para].value == "notselected") {
+
+        for (i = 1; i <= 6; i++) {
+            if (hidden[i].value == "selected") {
+                hidden[i].value = "notselected";
+                avtar[i].style.border = "2px solid gray";
+            }
+        }
+
+        hidden[para].value = "selected";
+        avtar[para].style.border = "3px solid #146371";
+        var path = "../assets/img/" + (para) + "-avtar.jpeg";
+        imgs.src = path;
+
+    }
+    // else {
+    //     hidden[para].value = "notselected";
+    //     avtar[para].style.border = "2px solid gray";
+    // }
+
+
+}
+
+function ValidAddressServiceProvider() {
+    if (AddressLine1.length != null) {
+        $('#AddressLine1').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#AddressLine1').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if (AddressLine2.length != null) {
+        $('#AddressLine2').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#AddressLine2').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if (Zipcode.length != null) {
+        $('#Zipcode').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#Zipcode').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+}
+
+function ValidAddressMatchServiceProvider() {
+    if (AddressLine1.length != 0) {
+        $('#AddressLine1').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#AddressLine1').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if (AddressLine2.length != 0) {
+        $('#AddressLine2').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#AddressLine2').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+    if (Zipcode.length != 0) {
+        $('#Zipcode').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+    } else {
+        $('#Zipcode').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+    }
+
+}
+
+function updateServiceProviderData() {
+    var hidden = document.getElementsByClassName("hidden-input-avtar");
+
+    for (i = 1; i <= 6; i++) {
+        if (hidden[i].value == "selected") {
+            photoid = hidden[i].id;
+        }
+    }
+
+    firstname = $('#FirstName').val();
+    lastname = $('#LastName').val();
+    mobile = $('#PhoneNumber').val();
+    day = $('#day').val();
+    month = $('#month').val();
+    year = $('#year').val();
+    profilephoto = photoid;
+    gender = $("input[name='gender']:checked").val();
+    language = $('#Language').val();
+
+    AddressLine1 = $("#AddressLine1").val();
+    AddressLine2 = $("#AddressLine2").val();
+    Zipcode = $('#Zipcode').val();
+    CityId = $('#CityId').val();
+    StateId = $('#StateId').val();
+
+
+    AllUpdateData = ({
+        "FirstName": firstname,
+        "LastName": lastname,
+        "PhoneNumber": mobile,
+        "day": day,
+        "month": month,
+        "year": year,
+        "profilephoto": profilephoto,
+        "gender": gender,
+        "Language": language,
+        "AddressLine1": AddressLine1,
+        "AddressLine2": AddressLine2,
+        "PostalCode": Zipcode,
+        "CityId": CityId,
+        "StateId": StateId,
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: URL + "?controller=ServiceProvider&function=UpdateServiceProvideDetails",
+        data: AllUpdateData,
+        success: function(response) {
+            if ($.trim(response) == "Data Update successfully") {
+
+                Swal.fire({
+                    position: 'center',
+                    title: 'Address added Succesfully',
+                    text: '',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    title: 'Address not added',
+                    text: 'Please Try Again',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }
+    });
+
+    var hidden = document.getElementsByClassName("hidden-input-avtar");
+    var avtar = document.getElementsByClassName("img-avtar");
+
+    for (i = 0; i <= 6; i++) {
+        if (hidden[i].value == "notselected") {
+            $('.Selectavtar').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+            $('.avtar-error').addClass('text-red').text('Please profile picture');
+        }
+    }
+
+    $(avtar).on('click', function() {
+        $('.Selectavtar').removeClass('invalid-inputBorder');
+        $('.avtar-error').empty();
+
+    });
+
+    $.ajax({
+        url: URL + "?controller=ServiceProvider&function=getServiceProviderDetail",
+        data: {
+
+        },
+        dataType: 'json',
+        success: function(response) {
+            $('#FirstName').val(response[0]);
+            $('#LastName').val(response[1]);
+            $('#EmailAddress').val(response[2]);
+            $('#PhoneNumber').val(response[3]);
+            $('#day').val(response[4]);
+            $('#month').val(response[5]);
+            $('#year').val(response[6]);
+            $('#Language').val(response[7]);
+            addValidDetail();
+
+            if (response[8] != null && response[9] != null && response[10] != null) {
+                ValidAddressMatchServiceProvider();
+                // alert(0)
+            } else {
+                ValidAddressServiceProvider();
+                // alert(1)
+            }
+
+            $("#AddressLine1").val(response[8]);
+            $("#AddressLine2").val(response[9]);
+            $('#Zipcode').val(response[10]);
+            $('#CityId').html(response[11]);
+            $('#StateId').html(response[12]);
+
+            $("input[name=gender][value='" + response[13] + "']").prop('checked', true);
+
+            photo = response[14];
+
+            $('.status').text(response[15]);
+
+            var hidden = document.getElementsByClassName("hidden-input-avtar");
+            var imgs = document.getElementById("img-avtar-main");
+
+            for (i = 1; i <= 6; i++) {
+                if (hidden[i].id == photo) {
+                    hidden[i].value = "selected";
+                    avtar[i].style.border = "3px solid #146371";
+                    var path = "../assets/img/" + photo + ".jpeg";
+                    imgs.src = path;
+                    $('.Selectavtar').removeClass('invalid-inputBorder');
+                    $('.avtar-error').empty();
+                }
+            }
+
+            if (response[13] == null || response[13] == "") {
+
+                if ($("input[name='gender']:checked").length == 0) {
+                    $('#save-detail').attr('disabled', 'disabled');
+                    // $('.gender').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+                    $('.gender-error').addClass('text-red').text('Please select Gender');
+
+                } else {
+                    $('#save-detail').removeAttr('disabled');
+                    $('.gender-error').empty();
+
+                }
+            }
+        }
+    });
+
+    $('body').on('click', '.gender', function() {
+        $('#save-detail').removeAttr('disabled');
+        $('.gender-error').empty();
+        // $('.gender').removeClass('invalid-inputBorder');
+
+    });
+
 }

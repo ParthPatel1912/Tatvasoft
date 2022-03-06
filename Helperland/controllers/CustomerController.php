@@ -173,6 +173,18 @@ class CustomerController{
             else if(strlen($PhoneNumber)<10){
                 $error .= "<li>Phone number shoud be 10 digit.</li>";
             }
+            else if(strlen($PhoneNumber)>10){
+                $error .= "<li>Phone number shoud be 10 digit.</li>";
+            }
+            if($day == 'Day'){
+                $error .= "<li>Select Date.</li>";
+            }
+            if($month == 'Month'){
+                $error .= "<li>Select Month.</li>";
+            }
+            if($year == 'Year'){
+                $error .= "<li>Select Year.</li>";
+            }
             if($Language == "") {
                 $error .= "<li>Please select Language.</li>";
             }
@@ -242,6 +254,27 @@ class CustomerController{
             else if(strlen($Mobile)<10){
                 $error .= "<li>Phone number shoud be 10 digit.</li>";
             }
+            if($PostalCode == "") {
+                $error .= "<li>Please enter postal code.</li>";
+            }
+            else if(strlen($PostalCode)<6){
+                $error .= "<li>Postal should be 6 digit.</li>";
+            }
+            else if(strlen($PostalCode)>6){
+                $error .= "<li>Postal should be 6 digit.</li>";
+            }
+            if($AddressLine1 == "") {
+                $error .= "<li>Please enter street name.</li>";
+            }
+            if($CityId == "") {
+                $error .= "<li>Please enter City Id.</li>";
+            }
+            if($StateId == "") {
+                $error .= "<li>Please enter state Id.</li>";
+            }
+            if($AddressId == "") {
+                $error .= "<li>Please select adress Id.</li>";
+            }
 
             if($error != ""){
                 echo $error;
@@ -303,6 +336,15 @@ class CustomerController{
             }
             else if(strlen($Mobile)<10){
                 $error .= "<li>Phone number shoud be 10 digit.</li>";
+            }
+            if($PostalCode == "") {
+                $error .= "<li>Please enter postal code.</li>";
+            }
+            else if(strlen($PostalCode)<6){
+                $error .= "<li>Postal should be 6 digit.</li>";
+            }
+            else if(strlen($PostalCode)>6){
+                $error .= "<li>Postal should be 6 digit.</li>";
             }
 
             if($error != ""){

@@ -92,6 +92,11 @@ class HelperlandController{
         header('Location: views/FavouriteProns.php');
     }
 
+    public function ServiceProviderSetting()
+    {
+        header('Location: views/ServiceProviderSetting.php');
+    }
+
     public function BookServiceCheckLogin()
     {
         $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';

@@ -67,6 +67,9 @@ class UserController{
             else if(strlen($PhoneNumber)<10){
                 $error .= "<li>Phone number shoud be 10 digit.</li>";
             }
+            else if(strlen($PhoneNumber)>10){
+                $error .= "<li>Phone number shoud be 10 digit.</li>";
+            }
             if($Password == ""){
                 $error .= '<li>Please enter Password.</li>';
             }
@@ -212,6 +215,9 @@ class UserController{
                 $error .= "<li>Please enter phone number.</li>";
             }
             else if(strlen($PhoneNumber)<10){
+                $error .= "<li>Phone number shoud be 10 digit.</li>";
+            }
+            else if(strlen($PhoneNumber)>10){
                 $error .= "<li>Phone number shoud be 10 digit.</li>";
             }
             if($Password == ""){
