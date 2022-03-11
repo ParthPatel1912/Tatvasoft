@@ -34,31 +34,34 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-2 service-menu">
-                <div class="side-menu-item">
-                    <!-- <a href="<?= $base_url."?controller=Helperland&function=ServiceProviderSetting"?>"
-                        class="style-none text-white"> -->
-                        Dashboard
-                    <!-- </a> -->
-                </div>
-                <div class="side-menu-item">
-                    <a href="<?= $base_url."?controller=Helperland&function=ppp"?>" class="style-none text-white">
-                        Service History
-                    </a>
-                </div>
-                <div class="side-menu-item">
-                    Service Schedule
-                </div>
-                <div class="side-menu-item">
-                    <a href="<?= $base_url."?controller=Helperland&function=ppp"?>" class="style-none text-white">
-                        Favourite Pros
-                    </a>
-                </div>
-                <div class="side-menu-item">
-                    Invoices Notifications
-                </div>
-                <div class="side-menu-item">
-                    Notifications
-                </div>
+            <div class="side-menu-item">
+                        
+                            Dashboard
+                    </div>
+                    <div class="side-menu-item">
+                        <a href="<?= $base_url."?controller=Helperland&function=NewServiceRequests"?>"
+                            class="style-none text-white">
+                            New Service
+                        </a>
+                    </div>
+                    <div class="side-menu-item">
+                        <a href="<?= $base_url."?controller=Helperland&function=UpcomingServices"?>"
+                                class="style-none text-white">
+                            Upcoming Services
+                        </a>
+                    </div>
+                    <div class="side-menu-item">
+                        Service Schedule
+                    </div>
+                    <div class="side-menu-item">
+                    <a href="<?= $base_url."?controller=Helperland&function=ServiceHistoryforSP"?>" class="style-none text-white border-0">Service History</a> 
+                    </div>
+                    <div class="side-menu-item">
+                    <a href="<?= $base_url."?controller=Helperland&function=ServiceProviderRating"?>" class="style-none text-white border-0">My Ratings</a>
+                    </div>
+                    <div class="side-menu-item">
+                    <a href="<?= $base_url."?controller=Helperland&function=BlockCustomer"?>" class="style-none text-white border-0">Block Customer</a>
+                    </div>
             </div>
             <div class="col-md-8">
 

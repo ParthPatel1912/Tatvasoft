@@ -97,6 +97,26 @@ class HelperlandController{
         header('Location: views/ServiceProviderSetting.php');
     }
 
+    public function NewServiceRequests()
+    {
+        header('Location: views/NewServiceRequests.php');
+    }
+
+    public function ServiceProviderRating()
+    {
+        header('Location: views/ServiceProviderRating.php');
+    }
+
+    public function ServiceHistoryforSP()
+    {
+        header('Location: views/ServiceHistoryforSP.php');
+    }
+
+    public function BlockCustomer()
+    {
+        header('Location: views/BlockCustomer.php');
+    }
+
     public function BookServiceCheckLogin()
     {
         $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';

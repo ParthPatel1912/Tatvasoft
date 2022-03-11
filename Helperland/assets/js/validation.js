@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     $('#FirstName').on('input', function() {
         var FirstName = $(this).val();
-        var validName = /^[a-zA-Z ]*$/;
+        var validName = /^[a-zA-Z]*$/;
         if (FirstName.length == 0) {
             $('.FirstName-error').addClass('text-red').text("First Name is required");
             $(this).addClass('invalid-inputBorder').removeClass('valid-inputBorder');
@@ -1013,8 +1013,10 @@ $(document).ready(function() {
             data: {
 
             },
+            dataType: 'json',
             success: function(response) {
-                $('#DashboardData').html(response);
+                // $('#DashboardData').html(response);
+                showCustomerServiceDashboard(response);
             }
         });
     }
@@ -1061,13 +1063,28 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(response) {
-                $('#rescheduleTimeDate #date').val(response[0]);
+                date = response[0]
+                datenew = date.split("-").reverse().join("-");
+                $('#rescheduleTimeDate #date').val(datenew);
                 $('#totaltime').html(response[2]);
                 $("#rescheduleTimeDate #time").val(response[11]).change();
 
-
             }
         });
+
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate() + 1;
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var minDate = year + '-' + month + '-' + day;
+
+        $('#date').attr('min', minDate);
 
     });
 
@@ -1108,7 +1125,9 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(response) {
-                $('#rescheduleTimeDate #date').val(response[0]);
+                date = response[0]
+                datenew = date.split("-").reverse().join("-");
+                $('#rescheduleTimeDate #date').val(datenew);
                 $('#totaltime').html(response[2]);
                 $("#rescheduleTimeDate #time").val(response[11]).change();
 
@@ -1166,6 +1185,9 @@ $(document).ready(function() {
 
     $('.update').on('click', function() {
         newTime = $('#rescheduleTimeDate #time option:selected').val();
+        newDate = $('#rescheduleTimeDate #date').val();
+
+        datenew = newDate.split("-").reverse().join("-");
 
         ServiceRequestId = $(this).attr('id');
 
@@ -1180,6 +1202,7 @@ $(document).ready(function() {
             data: {
                 'serviceid': ServiceRequestId,
                 'newtime': newTime,
+                'newdate': datenew,
             },
             success: function(response) {
 
@@ -1211,8 +1234,10 @@ $(document).ready(function() {
             data: {
 
             },
+            dataType: 'json',
             success: function(response) {
-                $('#DashboardData').html(response);
+                // $('#DashboardData').html(response);
+                showCustomerServiceDashboard(response);
             }
         });
 
@@ -1265,8 +1290,10 @@ $(document).ready(function() {
             data: {
 
             },
+            dataType: 'json',
             success: function(response) {
-                $('#DashboardData').html(response);
+                // $('#DashboardData').html(response);
+                showCustomerServiceDashboard(response);
             }
         });
 
@@ -1281,8 +1308,10 @@ $(document).ready(function() {
             data: {
 
             },
+            dataType: 'json',
             success: function(response) {
-                $('#HistoryData').html(response);
+                // $('#HistoryData').html(response);
+                showCustomerServiceHistory(response);
             }
         });
     }
@@ -1618,8 +1647,10 @@ $(document).ready(function() {
             data: {
 
             },
+            dataType: 'json',
             success: function(response) {
-                $('#HistoryData').html(response);
+                // $('#HistoryData').html(response);
+                showCustomerServiceHistory(response);
             }
         });
     });
@@ -1936,6 +1967,569 @@ $(document).ready(function() {
             $('#save-detail').removeClass('disabled');
 
         }
+
+    });
+
+
+    // service provider 
+
+    if (window.location.href.indexOf('NewServiceRequests.php') != -1) {
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // $('.new-service-request').html(response);
+                showNewServiceRequests(response);
+            }
+        });
+    }
+
+    $('.new-service-request').on('click', 'td:not(:last-child)', function() {
+        ServiceRequestId = $(this).attr('id');
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=ServiceProvider&function=ServiceDetailForModel",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#ServiceStartDate').html(response[0]);
+                $('#ServiceTime').html(response[1]);
+                $('#TotalHour').html(response[2] + ' hr');
+                $('#ServiceRequestId').html(response[3]);
+                $('#service').html(response[4]);
+                $('#TotalCost').html(response[5] + ' €');
+                $('#coustomerName').html(response[6]);
+                $('#Address').html(response[7]);
+                $('#Comments').html(response[8]);
+                $('#HasPets').html(response[9]);
+
+                $('#NewServiceDetail .Accept').attr('id', response[3]);
+            }
+        });
+        $('#NewServiceDetail').modal('show');
+    });
+
+    $('.new-service-request').on('click', '.Accept', function() {
+        ServiceRequestId = $(this).attr('id');
+
+        $("#iframeloading").show();
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=ServiceProvider&function=ApproveService",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            success: function(response) {
+
+                $("#iframeloading").hide();
+
+                if ($.trim(response) == 'You cannot accept service') {
+                    Swal.fire({
+                        title: 'You cannot accept service',
+                        text: 'Because you block this customer',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+
+                if ($.trim(response) == 'approved succefully') {
+                    Swal.fire({
+                        title: 'Service Accepted Succefully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                }
+                if ($.trim(response) == 'You are busy in this time') {
+                    Swal.fire({
+                        title: 'Service is not Acceptable',
+                        text: 'You are busy on this time',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+                // alert(response)
+            }
+        });
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // $('.new-service-request').html(response);
+                showNewServiceRequests(response);
+            }
+        });
+    });
+
+    $('.Accept').click(function() {
+        ServiceRequestId = $(this).attr('id');
+
+        $("#iframeloading").show();
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=ServiceProvider&function=ApproveService",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            success: function(response) {
+
+                $("#iframeloading").hide();
+
+                if ($.trim(response) == 'You cannot accept service') {
+                    Swal.fire({
+                        title: 'You cannot accept service',
+                        text: 'Because you block this customer',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+
+                if ($.trim(response) == 'approved succefully') {
+                    Swal.fire({
+                        title: 'Service Accepted Succefully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                }
+                if ($.trim(response) == 'You are busy in this time') {
+                    Swal.fire({
+                        title: 'Service is not Acceptable',
+                        text: 'You are busy on this time',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // $('.new-service-request').html(response);
+                showNewServiceRequests(response);
+            }
+        });
+    });
+
+
+    // upcoming services
+
+    if (window.location.href.indexOf('UpcomingServices.php') != -1) {
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=UpcominngServiceList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // $('#upcomingService').html(response);
+                showUpcomingService(response);
+            }
+        });
+
+
+
+        // table = $("#upcoming-service").DataTable({
+        //     "bPaginate": true,
+        //     "bFilter": false,
+        //     "bInfo": true,
+        //     // 'aoColumnDefs': [{
+        //     //     'bSortable': false,
+        //     //     'aTargets': [-1] /* 1st one, start by the right */
+        //     // }],
+        //     "ajax": {
+        //         'type': 'POST',
+        //         'url': URL + "?controller=ServiceProvider&function=UpcominngServiceList",
+        //         'data': {
+
+        //         },
+        //     },
+        //     'columns': [{
+        //         "data": 'ServiceId'
+        //     }, {
+
+        //         "data": 'time'
+        //     }, {
+
+        //         "data": 'address'
+        //     }, {
+
+        //         "data": 'distance'
+        //     }, {
+
+        //         "data": 'action'
+        //     }, ],
+
+        //     responsive: true,
+        //     columnDefs: [{
+        //             orderable: false,
+        //             targets: -1,
+        //         },
+        //         {
+        //             targets: 0,
+        //             className: 'control',
+        //         },
+        //         {
+        //             responsivePriority: 3,
+        //             targets: 1
+        //         },
+
+        //     ],
+        // }).ajax.reload();
+
+    }
+
+    $('#upcomingService').on('click', 'td:not(:last-child)', function() {
+        ServiceRequestId = $(this).attr('id');
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=ServiceProvider&function=ServiceDetailForModel",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#ServiceStartDate').html(response[0]);
+                $('#ServiceTime').html(response[1]);
+                $('#TotalHour').html(response[2] + ' hr');
+                $('#ServiceRequestId').html(response[3]);
+                $('#service').html(response[4]);
+                $('#TotalCost').html(response[5] + ' €');
+                $('#coustomerName').html(response[6]);
+                $('#Address').html(response[7]);
+                $('#Comments').html(response[8]);
+                $('#HasPets').html(response[9]);
+
+                $('#UpcomingServiceDetail .CancelUpcoming').attr('id', response[3]);
+                $('#UpcomingServiceDetail .CompleteUpcoming').attr('id', response[3]);
+
+                $('#UpcomingServiceDetail .CompleteUpcoming').hide();
+
+                fulldate = response[0];
+                dateNEW = fulldate.split("-").reverse().join("-");
+
+                // alert(dateNEW)
+
+                var ED = dateNEW + ' ' + response[10];
+                var endDate = new Date(ED);
+                var today = new Date();
+
+                if (today > endDate) {
+                    $('#UpcomingServiceDetail .CompleteUpcoming').show();
+                }
+            }
+        });
+        $('#UpcomingServiceDetail').modal('show');
+    });
+
+    $('#upcomingService').on('click', '.CancelUpcoming', function() {
+        ServiceRequestId = $(this).attr('id');
+
+        $("#iframeloading").show();
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=ServiceProvider&function=CancelUpcomingService",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            success: function(response) {
+                $("#iframeloading").hide();
+
+                if ($.trim(response) == 'Cancellation successfully') {
+                    Swal.fire({
+                        title: 'Service Cancellation Succefully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Service is not Cancellation',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=UpcominngServiceList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // $('#upcomingService').html(response);
+                showUpcomingService(response);
+            }
+        });
+    });
+
+    $('.CancelUpcoming').on('click', function() {
+        ServiceRequestId = $(this).attr('id');
+
+        $("#iframeloading").show();
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=ServiceProvider&function=CancelUpcomingService",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            success: function(response) {
+                $("#iframeloading").hide();
+
+                if ($.trim(response) == 'Cancellation successfully') {
+                    Swal.fire({
+                        title: 'Service Cancellation Succefully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Service is not Cancellation',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=UpcominngServiceList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // $('#upcomingService').html(response);
+                showUpcomingService(response);
+            }
+        });
+    });
+
+    $('.CompleteUpcoming').on('click', function() {
+        ServiceRequestId = $(this).attr('id');
+
+        $("#iframeloading").show();
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=ServiceProvider&function=CompleteUpcomingService",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            success: function(response) {
+
+                $("#iframeloading").hide();
+
+                if ($.trim(response) == 'Completion successfully') {
+                    Swal.fire({
+                        title: 'Service Completion Succefully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Service is not Completion',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=UpcominngServiceList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // $('#upcomingService').html(response);
+                showUpcomingService(response);
+            }
+        });
+    });
+
+
+    // service Provide requests rating
+
+    if (window.location.href.indexOf('ServiceProviderRating.php') != -1) {
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=ServiceRequestRating",
+            data: {
+
+            },
+            success: function(response) {
+                $('#SPrating').html(response);
+            }
+        });
+    }
+
+
+    // service history for service provider SP
+
+    if (window.location.href.indexOf('ServiceHistoryforSP.php') != -1) {
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=ServiceHistory",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // $('#ServiceHistoryforSP').html(response);
+                showServiceHistoryforSP(response);
+            }
+        });
+    }
+
+    $('#ServiceHistoryforSP').on('click', 'td', function() {
+        ServiceRequestId = $(this).attr('id');
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=ServiceProvider&function=ServiceDetailForModel",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#ServiceStartDate').html(response[0]);
+                $('#ServiceTime').html(response[1]);
+                $('#TotalHour').html(response[2] + ' hr');
+                $('#ServiceRequestId').html(response[3]);
+                $('#service').html(response[4]);
+                $('#TotalCost').html(response[5] + ' €');
+                $('#coustomerName').html(response[6]);
+                $('#Address').html(response[7]);
+                $('#Comments').html(response[8]);
+                $('#HasPets').html(response[9]);
+            }
+        });
+        $('#ServiceHistoryDetails').modal('show');
+    });
+
+
+    // block coustomer
+
+    if (window.location.href.indexOf('BlockCustomer.php') != -1) {
+
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=BlockCoustomerList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#blockCoustomer').html(response);
+            }
+        });
+
+    }
+
+    $('#blockCoustomer').on('click', '.Block', function() {
+
+        id = $(this).attr('id');
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=ServiceProvider&function=UpdateBlockCoust",
+            data: {
+                'FavouriteBlockId': id,
+                'IsBlocked': 1,
+            },
+            success: function(response) {
+                if ($.trim(response) == "Block or un-block successfully") {
+                    Swal.fire({
+                        title: 'Blocked Succeffully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Blocked not Done',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=BlockCoustomerList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#blockCoustomer').html(response);
+            }
+        });
+
+    });
+
+    $('#blockCoustomer').on('click', '.Un-Block', function() {
+
+        id = $(this).attr('id');
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=ServiceProvider&function=UpdateBlockCoust",
+            data: {
+                'FavouriteBlockId': id,
+                'IsBlocked': 0,
+            },
+            success: function(response) {
+                if ($.trim(response) == "Block or un-block successfully") {
+                    Swal.fire({
+                        title: 'Un-Blocked Succeffully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Un-Blocked not Done',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            url: URL + "?controller=ServiceProvider&function=BlockCoustomerList",
+            data: {
+
+            },
+            success: function(response) {
+                $('#blockCoustomer').html(response);
+            }
+        });
 
     });
 
@@ -2945,4 +3539,108 @@ function updateServiceProviderData() {
 
     });
 
+}
+
+
+// PRINT ALL DATA TABLE DATA
+
+// service provider
+
+function showUpcomingService(data) {
+    var myTable = $('#upcoming-service').DataTable();
+    myTable.clear().draw();
+    data.forEach(function(dt) {
+        myTable.row.add($(
+            `<tr>
+                <td id="` + dt.ServiceId + `">` + dt.ServiceId + `</td>
+                <td id="` + dt.ServiceId + `" class="flex">
+                    <div class="bold"><img src="../assets/img/calendar2.png">
+                        <span class="padding">` + dt.startDate + `</span>
+                    </div>
+                    <div><img src="../assets/img/layer-14.png">
+                        <span class="padding">
+                            ` + dt.time + `
+                        </span>
+                    </div>
+                </td>
+                <td id="` + dt.ServiceId + `">
+                    ` + dt.name + `
+                    <div><img src="../assets/img/layer-719.png">
+                        <span class="padding">
+                        ` + dt.address + `
+                        </span>
+                    </div>
+                </td>
+                <td id="` + dt.ServiceId + `">0 km</td>
+                <td id="` + dt.ServiceId + `">
+                    <input type="button" id="` + dt.ServiceId + `" class="btn lite-red btn-sm rounded-pill CancelUpcoming" value="Cancel"></td>
+            </tr>`
+        )).draw();
+    });
+}
+
+function showServiceHistoryforSP(data) {
+    var myTable = $('#service-history-SP').DataTable();
+    myTable.clear().draw();
+    data.forEach(function(dt) {
+        myTable.row.add($(
+            `<tr>
+                ` + dt.serviId + `
+                ` + dt.datetime + `
+                ` + dt.nameaddress + `
+            </tr>`
+        )).draw();
+    });
+}
+
+function showNewServiceRequests(data) {
+    var myTable = $('#new-service').DataTable();
+    myTable.clear().draw();
+    data.forEach(function(dt) {
+        myTable.row.add($(
+            `<tr>
+                ` + dt.serviceid + `
+                ` + dt.datetime + `
+                ` + dt.nameaddress + `
+                ` + dt.totalcost + `
+                ` + dt.conflicttime + `
+                ` + dt.action + `
+            </tr>`
+        )).draw();
+    });
+}
+
+// customer
+
+function showCustomerServiceDashboard(data) {
+    var myTable = $('#customer-service-dashboard').DataTable();
+    myTable.clear().draw();
+    data.forEach(function(dt) {
+        myTable.row.add($(
+            `<tr>
+                    ` + dt.serviceid + `
+                    ` + dt.datetime + `
+                    ` + dt.SPnamewithstar + `
+                    ` + dt.address + `
+                    ` + dt.action + `
+            </tr>`
+        )).draw();
+    });
+}
+
+function showCustomerServiceHistory(data) {
+    var myTable = $('#service-history').DataTable();
+    myTable.clear().draw();
+    data.forEach(function(dt) {
+        myTable.row.add($(
+            `<tr>
+                    ` + dt.serviceid + `
+                    ` + dt.datetime + `
+                    ` + dt.spDetails + `
+                    ` + dt.totalcost + `
+                    ` + dt.serviceStatus + `
+                    ` + dt.action + `
+            </tr>`
+        )).draw();
+    });
 }

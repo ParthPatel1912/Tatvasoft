@@ -29,7 +29,6 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
@@ -96,10 +95,24 @@
                             ?>
 
                             <li class="nav-item display-sm">
-                                <a class="nav-link" href="<?= $base_url."?controller=Helperland&function=CustomerServiceDashboard"?>"> Dashboard</a>
+                                <a class="nav-link" href="
+                                <?php 
+                                    if($_SESSION['UserTypeId'] == 3){
+                                        echo $base_url."?controller=Helperland&function=CustomerServiceDashboard";
+                                    }
+                                ?>
+                                "> Dashboard</a>
                             </li>
                             <li class="nav-item display-sm">
-                                <a class="nav-link" href="<?= $base_url."?controller=Helperland&function=ServiceHistory"?>"> Service History</a>
+                                <a class="nav-link" href="
+                                    <?php 
+                                    if($_SESSION['UserTypeId'] == 3){
+                                        echo $base_url."?controller=Helperland&function=ServiceHistory";
+                                    }
+                                    elseif ($_SESSION['UserTypeId'] == 2) { 
+                                        echo $base_url."?controller=Helperland&function=ServiceHistoryforSP";
+                                    }
+                                    ?>"> Service History</a>
                             </li>
                             <li class="nav-item display-sm">
                                 <a class="nav-link" href="#"> Service Schedule</a>
@@ -184,7 +197,7 @@
                                                     echo $base_url."?controller=Helperland&function=CustomerServiceDashboard";
                                                 }
                                                 elseif ($_SESSION['UserTypeId'] == 2) {
-                                                    echo $base_url."?controller=Helperland&function=PPP";
+                                                    echo $base_url."?controller=Helperland&function=ServiceProviderSetting";
                                                 }
                                             ?>">
                                             My Dashboard

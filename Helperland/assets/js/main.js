@@ -21,9 +21,22 @@ $(document).ready(function() {
     // upcoming-service
 
     $('#upcoming-service').dataTable({
-        "bPaginate": false,
+        "bPaginate": true,
         "bFilter": false,
-        "bInfo": false,
+        "bInfo": true,
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': [-1] /* 1st one, start by the right */
+        }]
+    });
+
+
+    // new-service-request
+
+    $('#new-service').dataTable({
+        "bPaginate": true,
+        "bFilter": false,
+        "bInfo": true,
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
@@ -33,10 +46,10 @@ $(document).ready(function() {
 
     // service history
 
-    $('#service-history').DataTable({
+    $('#service-history').dataTable({
         "bPaginate": true,
         "bFilter": false,
-        "bInfo": false,
+        "bInfo": true,
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
@@ -46,10 +59,10 @@ $(document).ready(function() {
 
     // customer-service-dashboard
 
-    $('#customer-service-dashboard').DataTable({
+    $('#customer-service-dashboard').dataTable({
         "bPaginate": true,
         "bFilter": false,
-        "bInfo": false,
+        "bInfo": true,
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
@@ -70,6 +83,19 @@ $(document).ready(function() {
     });
 
 
+    // sp rating
+
+    $('#sp-rating').dataTable({
+        "bPaginate": true,
+        "bFilter": false,
+        "bInfo": true,
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': [] /* 1st one, start by the right */
+        }]
+    });
+
+
     // service request
 
     $('#service-requets').dataTable({
@@ -79,6 +105,19 @@ $(document).ready(function() {
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
+        }]
+    });
+
+
+    // service history for service provider
+
+    $('#service-history-SP').dataTable({
+        "bPaginate": true,
+        "bFilter": false,
+        "bInfo": true,
+        'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': [] /* 1st one, start by the right */
         }]
     });
 
@@ -312,6 +351,24 @@ $(document).ready(function() {
     });
 
     $('#fullDetail').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
+    $('#NewServiceDetail').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
+    $('#UpcomingServiceDetail').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
+    $('#ServiceHistoryDetails').modal({
         backdrop: 'static',
         keyboard: false,
         show: false

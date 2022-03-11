@@ -612,8 +612,8 @@ ul.padding-left {
 .round {
     height: 108px;
     width: 108px;
-    margin-top: 40px;
-    padding-top: 30px;
+    margin-top: 45px;
+    padding-top: 35px;
     /* background-color: #bbb; */
     border-radius: 50%;
     border: 2px solid gray;
@@ -623,6 +623,24 @@ ul.padding-left {
 
 .round img {
     margin-bottom: 10px;
+}
+
+.round-2 {
+    height: 108px;
+    width: 108px;
+    margin-top: 40px;
+    padding-top: 30px;
+    /* background-color: #bbb; */
+    border-radius: 50%;
+    border: 2px solid gray;
+    display: inline-block;
+    margin-bottom: 50px;
+}
+
+.round-2 img {
+    margin-top: -30px;
+    border-radius: 50%;
+    width: 98%;
 }
 
 .circle_contain {
@@ -922,6 +940,12 @@ ul.padding-left {
     justify-content: center;
 }
 
+.service-history-icon-fav {
+    /* padding: 5px; */
+    align-items: center;
+    justify-content: center;
+}
+
 .service-history-star-icon {
     height: 15px;
     margin: 0px;
@@ -933,6 +957,13 @@ ul.padding-left {
     height: 35px;
     width: 35px;
     padding: 5px;
+}
+
+.service-history-icon-fav img {
+    border: 1px solid black;
+    border-radius: 100px;
+    height: 35px;
+    width: 35px;
 }
 
 .padding-star {
@@ -963,6 +994,11 @@ ul.padding-left {
 
 .lite-red {
     background-color: #eb467d;
+    color: #fff;
+}
+
+.lite-green {
+    background-color: #40cc40;
     color: #fff;
 }
 

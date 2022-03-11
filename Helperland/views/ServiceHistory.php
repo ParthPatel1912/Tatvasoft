@@ -14,7 +14,16 @@
     <section id="service-history-welcome">
         <div class="container">
             <div class="row text-center">
-                <h1> Welcome, <b>Gaurang!</b></h1>
+                <h1> Welcome, <b>
+                    <?php 
+                        if (isset($_SESSION['UserName'])) { 
+                            echo $_SESSION['UserName'];   
+                        }
+                        else{
+                            echo 'Coustomer';
+                        }
+                    ?>
+                </b></h1>
             </div>
         </div>
     </section>
@@ -24,20 +33,21 @@
             <div class="row justify-content-center">
                 <div class="col-md-2 service-menu">
                     <div class="side-menu-item">
-                        <a href="<?= $base_url."?controller=Helperland&function=CustomerServiceDashboard"?>" class="style-none text-white border-0">
+                        <a href="<?= $base_url."?controller=Helperland&function=CustomerServiceDashboard"?>"
+                            class="style-none text-white border-0">
                             Dashboard
                         </a>
                     </div>
                     <div class="side-menu-item  side-menu-item-active">
-                        <a href="<?= $base_url."?controller=Helperland&function=ServiceHistory"?>" class="style-none text-white border-0">
+                        
                             Service History
-                        </a>
                     </div>
                     <div class="side-menu-item">
                         Service Schedule
                     </div>
                     <div class="side-menu-item">
-                        <a href="<?= $base_url."?controller=Helperland&function=FavouriteProns"?>" class="style-none text-white">
+                        <a href="<?= $base_url."?controller=Helperland&function=FavouriteProns"?>"
+                            class="style-none text-white">
                             Favourite Pros
                         </a>
                     </div>
@@ -55,7 +65,9 @@
                             <input type="button" class="btn dark-blue btn-sm rounded-pill" value="Export"></td>
                         </span>
                     </div>
-                    <table id="service-history" class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive" style="width:100%">
+                    <table id="service-history"
+                        class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive"
+                        style="width:100%">
                         <thead class="text-center">
                             <tr>
                                 <th>Service Id</th>
@@ -66,9 +78,9 @@
                                 <th>Rate SP</th>
                             </tr>
                         </thead>
-                        
+
                         <tbody class="text-center" id="HistoryData">
-                            <tr>
+                            <!-- <tr>
                                 <td class="flex text-left">
                                     <div><img src="../assets/img/calendar2.png"><b> 09/04/2018</b> </div>
                                     <span>12:00 - 18:00</span>
@@ -93,7 +105,8 @@
                                 </td>
                                 <td><span class="completed"> Completed </span></td>
                                 <td>
-                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP">
+                                </td>
                             </tr>
                             <tr>
                                 <td class="flex text-left">
@@ -120,8 +133,9 @@
                                 </td>
                                 <td><span class="cancelled"> Cancelled </span></td>
                                 <td>
-                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP"></td>
-                            </tr>
+                                    <input type="button" class="btn lite-blue btn-sm rounded-pill" value="Rate SP">
+                                </td>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -138,7 +152,8 @@
                     <div class="modal-title" id="models">
                         <div class="spalldetails">
                             <div class="row ml-1">
-                                <div class="col mt-3"><img src="../assets/img/forma-1-copy-19.png" class="service-provider-img"></div>
+                                <div class="col mt-3"><img src="../assets/img/forma-1-copy-19.png"
+                                        class="service-provider-img"></div>
                                 <div class="col">
                                     <div class="row m-3 font-18" style="width: 200px;" id="SPName"></div>
                                     <span class="STAR-AVG">
@@ -155,7 +170,8 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn-close btn-danger close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-danger close" data-dismiss="modal"
+                        aria-label="Close"></button>
 
                 </div>
                 <div class="modal-body">
@@ -192,7 +208,7 @@
                         </div>
 
                         <div class=" row mt-2 col-md-5">
-                            <label for=""class="ratingtxt">Quality Of Service</label>
+                            <label for="" class="ratingtxt">Quality Of Service</label>
 
                             <span class="ratings3">
                                 <i class="bi bi-star-fill" id="quality1"></i>
@@ -211,7 +227,9 @@
                         </div>
 
                         <div class="col-md-4">
-                            <button type="button" id="" data-dismiss="modal" class="btn rounded-pill active font-white mt-3 col-md-12 giveratting" value="">Submit</button>
+                            <button type="button" id="" data-dismiss="modal"
+                                class="btn rounded-pill active font-white mt-3 col-md-12 giveratting"
+                                value="">Submit</button>
                         </div>
 
                     </form>

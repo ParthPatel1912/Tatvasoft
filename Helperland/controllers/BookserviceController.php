@@ -254,6 +254,7 @@ class BookserviceController{
             $UserName = $firstname." ".$lastname;
             $Address = " ".$UserAddress['AddressLine1']."  ".$UserAddress['AddressLine2'].", ".$UserAddress['CityName']."  ".$UserAddress['StateName']." - ".$UserAddress['PostalCode']." ";
             $MobileNo = " ".$UserAddress['Mobile']." ";
+            $allExtraServices = implode(", ",$ExtraServices);
 
             if($result){
                 $this->model->InsertAddressIdByServiceRequestId('servicerequestaddress',$result,$AddressId);

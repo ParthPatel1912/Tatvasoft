@@ -48,10 +48,9 @@
                     Service Schedule
                 </div>
                 <div class="side-menu-item side-menu-item-active">
-                    <a href="<?= $base_url."?controller=Helperland&function=FavouriteProns"?>"
-                        class="style-none text-white">
+                    
                         Favourite Pros
-                    </a>
+                    
                 </div>
                 <div class="side-menu-item">
                     Invoices Notifications
@@ -60,7 +59,7 @@
                     Notifications
                 </div>
             </div>
-            <div class="row col-md-8" id="favouritePron">
+            <div class="row col-md-8 table-responsive-lg table-responsive-md table-responsive-sm table-responsive" id="favouritePron">
 
                 <!-- <div class="col-md-3">
                     <div class="favourite-border text-center">

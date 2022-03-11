@@ -188,7 +188,7 @@ class CustomerModel{
     {
         $sql_query = "SELECT user.FirstName,user.LastName FROM $table
         LEFT OUTER JOIN user
-        on $table.UserId = user.UserId
+        on $table.ServiceProviderId = user.UserId
         WHERE $table.ServiceRequestId  = $serviceid" ;
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
@@ -205,7 +205,7 @@ class CustomerModel{
     }
 
     function UpdateServiceTime($table,$array,$ServiceRequestId){
-        $sql_query = "UPDATE $table SET SelectTime = :newtime, ModifiedDate = now() ,ModifiedBy= :modifiedby , RecordVersion= :recordversion, Status= :status WHERE ServiceRequestId = $ServiceRequestId";
+        $sql_query = "UPDATE $table SET SelectTime = :newtime, ServiceStartDate = :newdate, ModifiedDate = now() ,ModifiedBy= :modifiedby , RecordVersion= :recordversion, Status= :status WHERE ServiceRequestId = $ServiceRequestId";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute($array);
         $count = $statement->rowCount();

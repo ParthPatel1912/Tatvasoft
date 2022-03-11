@@ -1,4 +1,4 @@
-    <?php 
+<?php 
         include 'header_notification.php';
 
         if(isset($_SESSION['base_url'])){
@@ -9,7 +9,7 @@
             $_SESSION['base_url'] = "?controller=Helperland&function=UpcomingServices";
         }
     ?>
-    <title>Upcoming Service</title>
+    <title>Service History</title>
 
     <section id="Upcoming-service-welcome">
         <div class="container">
@@ -42,15 +42,17 @@
                             New Service
                         </a>
                     </div>
-                    <div class="side-menu-item side-menu-item-active">
-                        
+                    <div class="side-menu-item">
+                        <a href="<?= $base_url."?controller=Helperland&function=UpcomingServices"?>"
+                                class="style-none text-white">
                             Upcoming Services
+                        </a>
                     </div>
                     <div class="side-menu-item">
                         Service Schedule
                     </div>
-                    <div class="side-menu-item">
-                    <a href="<?= $base_url."?controller=Helperland&function=ServiceHistoryforSP"?>" class="style-none text-white border-0">Service History</a> 
+                    <div class="side-menu-item side-menu-item-active">
+                       Service History 
                     </div>
                     <div class="side-menu-item">
                     <a href="<?= $base_url."?controller=Helperland&function=ServiceProviderRating"?>" class="style-none text-white border-0">My Ratings</a>
@@ -60,17 +62,20 @@
                     </div>
                 </div>
                 <div class="col-md-8 table-responsive-lg table-responsive-md table-responsive-sm table-responsive">
-                    <table id="upcoming-service" class="display table-responsive-lg table-responsive-md table-responsive-sm table-responsive" style="width:100%">
+                    <div>
+                        <span class="float-right">
+                            <input type="button" class="btn dark-blue btn-sm rounded-pill" value="Export"></td>
+                        </span>
+                    </div>
+                    <table id="service-history-SP" class="display table-responsive-lg table-responsive-md table-responsive-sm table-responsive" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Service ID</th>
                                 <th>Service Data</th>
                                 <th>Coustomre details</th>
-                                <th>Distance</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="upcomingService">
+                        <tbody id="ServiceHistoryforSP">
                             <!-- <tr>
                                 <td>323436 </td>
                                 <td class="flex">
@@ -87,9 +92,6 @@
                                         <span class="padding">Musterstrabe 5,12345 Bonn</span>
                                     </div>
                                 </td>
-                                <td>15 km</td>
-                                <td>
-                                    <input type="button" class="btn btn-danger btn-sm rounded-pill" value="Cancel"></td>
                             </tr> -->
                             
                         </tbody>
@@ -101,7 +103,7 @@
 
     <!-- Full details model -->
 
-    <div class="modal fade" id="UpcomingServiceDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="ServiceHistoryDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -147,10 +149,6 @@
                         <span id="HasPets"></span>
                     </div>
 
-                    <hr>
-
-                    <button type="submit" id="" data-bs-dismiss="modal" class="btn lite-red btn-sm rounded-pill CancelUpcoming"><i class="bi bi-x">&nbsp;&nbsp;</i>Cancel&nbsp;&nbsp;</button>
-                    <button type="submit" id="" data-bs-dismiss="modal" class="btn lite-blue btn-sm rounded-pill CompleteUpcoming"><i class="bi bi-check-lg">&nbsp;&nbsp;</i>Complete&nbsp;&nbsp;</button>
                 </div>
 
             </div>

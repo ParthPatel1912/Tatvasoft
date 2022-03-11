@@ -21,7 +21,7 @@ class ServiceProviderModel{
        }
     }
 
-    function CheckUser($table,$UserID)
+    function CheckUser($table,$UserId)
     {
         $sql_query = "SELECT
                             USER.UserId,
@@ -45,7 +45,7 @@ class ServiceProviderModel{
                         FROM
                             $table
                         LEFT OUTER JOIN useraddress ON useraddress.UserId = $table.UserId
-                        WHERE $table.UserId = 3";
+                        WHERE $table.UserId = $UserId";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
         $row = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -132,6 +132,298 @@ class ServiceProviderModel{
         else{
             return 0;
         }
+    }
+
+    function findFavouriteSPservicerequest($table)
+    {
+        $sql_query = "SELECT 
+                    *
+                FROM $table
+                WHERE $table.Status NOT IN ('Completed','Cancelled')";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $row;
+    }
+
+    function NewServiceList($table)
+    {
+        $sql_query = "SELECT 
+                    $table.ServiceRequestId,
+                    ServiceStartDate,
+                    SelectTime,
+                    TotalHour,
+                    ServiceProviderId,
+                    TotalCost,
+                    servicerequest.Status,
+                    user.FirstName,
+                    user.LastName,
+                    AddressLine1, 
+                    AddressLine2, 
+                    City, 
+                    State,
+                    PostalCode
+                FROM $table
+                left outer join user
+                    on user.UserId = $table.UserId
+                LEFT OUTER JOIN servicerequestaddress
+                    ON servicerequestaddress.ServiceRequestId = $table.ServiceRequestId
+                WHERE $table.Status NOT IN ('Completed','Cancelled','Approved')";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $row;
+    }
+
+    function NewServiceListByFavouriteSP($table,$UserId)
+    {
+        $sql_query = "SELECT 
+                    $table.ServiceRequestId,
+                    ServiceStartDate,
+                    SelectTime,
+                    TotalHour,
+                    ServiceProviderId,
+                    TotalCost,
+                    servicerequest.Status,
+                    user.FirstName,
+                    user.LastName,
+                    AddressLine1, 
+                    AddressLine2, 
+                    City, 
+                    State,
+                    PostalCode
+                FROM $table
+                left outer join user
+                    on user.UserId = $table.Userid
+                LEFT OUTER JOIN servicerequestaddress
+                    ON servicerequestaddress.ServiceRequestId = $table.ServiceRequestId
+                WHERE $table.Status NOT IN ('Completed','Cancelled','Approved')
+                AND ($table.FavouriteServiceProviderId LIKE '%$UserId%'
+                    OR $table.FavouriteServiceProviderId is NULL
+                    OR $table.FavouriteServiceProviderId = '')";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $row;
+    }
+
+    function DetailofServiceRequest($table,$ServiceRequestId)
+    {
+        $sql_query = "SELECT * FROM $table
+        LEFT OUTER JOIN servicerequestextra
+        ON servicerequestextra.ServiceRequestId = $table.ServiceRequestId
+        LEFT OUTER JOIN servicerequestaddress
+        ON servicerequestaddress.ServiceRequestId = $table.ServiceRequestId
+        LEFT OUTER JOIN user
+        ON user.UserId = $table.UserId
+        WHERE $table.ServiceRequestId = $ServiceRequestId";
+        $statement= $this->conn->prepare($sql_query);
+        $statement->execute();
+
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $row;
+    }
+
+    function findAppovedRequestByDateSP($table,$StartDate,$UserId)
+    {
+        $sql_query = "SELECT
+                    *
+                FROM
+                    $table
+                WHERE
+                    $table.ServiceStartDate = '$StartDate'
+                    AND $table.Status = 'Approved'
+                    AND $table.ServiceProviderId = $UserId";
+        $statement= $this->conn->prepare($sql_query);
+        $statement->execute();
+
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $row;
+    }
+
+    function checkForAppovalByTime($table,$ServiceRequestId,$StartDate,$StartTime,$EndTime)
+    {
+        $sql_query = "SELECT
+                            *
+                        FROM
+                            $table
+                        WHERE
+                            $table.ServiceStartDate = '$StartDate'
+                        AND $table.SelectTime NOT BETWEEN $StartTime AND $EndTime
+                        AND $table.Status in ('Pending','Reschedule')
+                        AND $table.ServiceRequestId = $ServiceRequestId";
+        $statement= $this->conn->prepare($sql_query);
+        $statement->execute();
+
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $row;
+    }
+
+    function approveNewRequest($table,$ServiceRequestId,$UserId,$recordVersion)
+    {
+        $sql_query = "UPDATE $table SET ServiceProviderId = $UserId, Status = 'Approved', ModifiedDate = now(), ModifiedBy = $UserId, RecordVersion = $recordVersion
+        WHERE ServiceRequestId = $ServiceRequestId";
+        $statement= $this->conn->prepare($sql_query);
+        $count = $statement->execute();
+
+        return $count;
+    }
+
+    function GetUserDetails($table,$UserId){
+        $sql_query = "SELECT * FROM $table WHERE UserId = $UserId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+        $row  = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
+    // public function CancelPastRequests()
+    // {
+    //     $sql_query = "WHERE DATE(ModifiedDate) = DATE(NOW() - INTERVAL 1 DAY);";
+    // }
+
+    function listUpcomming($table,$UserId)
+    {
+        $sql_query = "SELECT 
+                    $table.ServiceRequestId,
+                    ServiceStartDate,
+                    SelectTime,
+                    TotalHour,
+                    ServiceProviderId,
+                    TotalCost,
+                    servicerequest.Status,
+                    user.FirstName,
+                    user.LastName,
+                    AddressLine1, 
+                    AddressLine2, 
+                    City, 
+                    State,
+                    PostalCode
+                FROM $table
+                left outer join user
+                    on user.UserId = $table.UserId
+                LEFT OUTER JOIN servicerequestaddress
+                    ON servicerequestaddress.ServiceRequestId = $table.ServiceRequestId
+                WHERE $table.Status = 'Approved'
+                AND $table.ServiceProviderId = $UserId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $row;
+    }
+
+    function CancelServicePending($table,$ServiceRequestId,$UserId,$recordVersion,$status)
+    {
+        $sql_query = "UPDATE $table SET Status = '$status', ServiceProviderId = null, ModifiedDate = now() ,ModifiedBy = $UserId , RecordVersion= $recordVersion WHERE ServiceRequestId = $ServiceRequestId";
+        $statement = $this->conn->prepare($sql_query);
+        $row = $statement->execute();
+        return $row;
+
+    }
+
+    function CancelService($table,$ServiceRequestId,$serproviderId,$UserId,$recordVersion,$status)
+    {
+        $sql_query = "UPDATE $table SET Status = '$status', ServiceProviderId = $serproviderId, ModifiedDate = now() ,ModifiedBy = $UserId , RecordVersion= $recordVersion WHERE ServiceRequestId = $ServiceRequestId";
+        $statement = $this->conn->prepare($sql_query);
+        $row = $statement->execute();
+        return $row;
+
+    }
+
+    function CompleteService($table,$ServiceRequestId,$UserId,$recordVersion,$status)
+    {
+        $sql_query = "UPDATE $table SET Status = '$status', ModifiedDate = now() ,ModifiedBy= $UserId , RecordVersion= $recordVersion WHERE ServiceRequestId = $ServiceRequestId";
+        $statement = $this->conn->prepare($sql_query);
+        $row = $statement->execute();
+        return $row;
+
+    }
+
+    function GetSPRattings($table,$UserId){
+        $sql_query = "SELECT *,$table.Comments as comment FROM $table 
+                        left outer join user
+                            on user.UserId = $table.RatingFrom
+                        left outer join servicerequest
+                            on servicerequest.ServiceRequestId = $table.ServiceRequestId
+                        WHERE RatingTo = $UserId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+        $result  = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function ListFavourite($table,$UserId,$coustomerId)
+    {
+        $sql_query = "SELECT * FROM $table WHERE TargetUserId = $UserId AND UserId = $coustomerId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+
+        $result  = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function insertfavouriteblock($table,$coustomerId,$UserId)
+    {
+        $sql_query = "INSERT INTO $table (UserId, TargetUserId, IsFavorite, IsBlocked) VALUES ($coustomerId,$UserId,0,0)";
+        $statement = $this->conn->prepare($sql_query);
+        $statement->execute();
+    }
+
+    function listServiceHistory($table,$UserId)
+    {
+        $sql_query = "SELECT 
+                    $table.ServiceRequestId,
+                    ServiceStartDate,
+                    SelectTime,
+                    TotalHour,
+                    ServiceProviderId,
+                    TotalCost,
+                    servicerequest.Status,
+                    user.FirstName,
+                    user.LastName,
+                    AddressLine1, 
+                    AddressLine2, 
+                    City, 
+                    State,
+                    PostalCode
+                FROM $table
+                left outer join user
+                    on user.UserId = $table.UserId
+                LEFT OUTER JOIN servicerequestaddress
+                    ON servicerequestaddress.ServiceRequestId = $table.ServiceRequestId
+                WHERE $table.Status = 'Completed'
+                AND $table.ServiceProviderId = $UserId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $row;
+    }
+
+    function ListBlock($table,$UserId)
+    {
+        $sql_query = "SELECT * FROM $table WHERE UserId = $UserId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+
+        $result  = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function updateIsblock($table,$IsBlocked,$FavouriteBlockId)
+    {
+        $sql_query = "UPDATE $table SET IsBlocked = $IsBlocked WHERE FavouriteBlockId = $FavouriteBlockId";
+        $statement =  $this->conn->prepare($sql_query);
+        $result = $statement->execute();
+
+        return $result;
     }
 
 }

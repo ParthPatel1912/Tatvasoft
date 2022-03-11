@@ -16,13 +16,13 @@
         <div class="row text-center">
             <h1> Welcome, <b>
                     <?php 
-                    if (isset($_SESSION['UserName'])) { 
-                        echo $_SESSION['UserName'];   
-                    }
-                    else{
-                        echo 'Coustomer';
-                    }
-                ?>
+                        if (isset($_SESSION['UserName'])) { 
+                            echo $_SESSION['UserName'];   
+                        }
+                        else{
+                            echo 'Coustomer';
+                        }
+                    ?>
                 </b></h1>
         </div>
     </div>
@@ -33,10 +33,8 @@
         <div class="row justify-content-center">
             <div class="col-md-2 service-menu">
                 <div class="side-menu-item  side-menu-item-active">
-                    <a href="<?= $base_url."?controller=Helperland&function=CustomerServiceDashboard"?>"
-                        class="style-none text-white">
+                    
                         Dashboard
-                    </a>
                 </div>
                 <div class="side-menu-item">
                     <a href="<?= $base_url."?controller=Helperland&function=ServiceHistory"?>"
@@ -83,7 +81,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-center" id="DashboardData">
-                        <tr>
+                        <!-- <tr>
                             <td>1</td>
                             <td class="flex text-left">
                                 <div><img src="../assets/img/calendar2.png"><b> 09/04/2018</b> </div>
@@ -111,7 +109,7 @@
                                     value="Reschedule">
                                 <input type="button" class="btn lite-red btn-sm rounded-pill Cancel" value="Cancel">
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -126,7 +124,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="DeleteAddress">
+                <h4 class="modal-title" id="">
                     Service Details
                 </h4>
                 <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -190,7 +188,7 @@
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="DeleteAddress">
+                <h4 class="modal-title" id="">
                     Reschedule Service Request
                 </h4>
                 <button type="button" class="btn-close btn-danger close" data-dismiss="modal" aria-label="Close"></button>
@@ -200,9 +198,9 @@
                 <div class="error21Hour text-red"></div>
                 <label for="" class="mb-2">Select New Time & Date</label>
                 <div class="row">
-                    <div class="col-md-6 me-3 selectdiv-calendar">
-                        <input type="text" id="date" name="date" class="form-control"
-                            value="" readonly>
+                    <div class="col-md-7">
+                        <input type="date" id="date" name="date" class="form-control"
+                            value="">
                     </div>
                     <div class="col-md-5 selectdiv">
                         <select class="form-control" id="time">
@@ -243,7 +241,7 @@
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="DeleteAddress">
+                <h4 class="modal-title" id="">
                     Cancel Service Request
                 </h4>
                 <button type="button" class="btn-close btn-danger close" data-dismiss="modal" aria-label="Close"></button>

@@ -498,140 +498,148 @@ class CustomerController{
         $UserId = $_SESSION['UserId'];
         $result = $this->model->ListCustomerServiceDashboard('servicerequest',$UserId);
 
+        $json = array();
+
         foreach($result as $address) { 
             if ($address['Status'] != "Cancelled" && $address['Status'] != "Completed") {
-            ?>
-        
 
-            <tr>
-                <td id='<?= $address['ServiceRequestId'] ?>'><?= $address['ServiceRequestId']  ?></td>
-                <td id='<?= $address['ServiceRequestId'] ?>' class="flex text-left">
-                    <div><img src="../assets/img/calendar2.png"><b> <?= $address['ServiceStartDate']  ?></b> </div>
-                    <span>
-                        <?php 
-                            $startTime = $address['SelectTime'];
-                            $totalhour = $address['TotalHour'];
-                            $starttime = explode(":",$startTime);
-                            $totaltime = number_format($totalhour,1);
-                            $endtime = explode(".",$totaltime);
 
-                            $hour = $starttime[0] + $endtime[0];
-                            $minute = $starttime[1] + $endtime[1]*6;
+                $startTime = $address['SelectTime'];
+                $totalhour = $address['TotalHour'];
+                $starttime = explode(":",$startTime);
+                $totaltime = number_format($totalhour,1);
+                $endtime = explode(".",$totaltime);
 
-                            if($minute == 60){
-                                $hour = $hour + 1;
-                                $minute = '00';
+                $hour = $starttime[0] + $endtime[0];
+                $minute = $starttime[1] + $endtime[1]*6;
+
+                if($minute == 60){
+                    $hour = $hour + 1;
+                    $minute = '00';
+                }
+                else if($minute == 0){
+                    $minute = '00';
+                }
+
+                $EndTime = $hour.':'.$minute;
+                $fulltime = $address['SelectTime'] . " - " . $EndTime;
+
+                $reschelestatus = '';
+                $values = '';
+                $Name = '';
+
+
+                if ($address['Status'] == 'Pending') {
+                    $reschelestatus = '';
+                }
+            
+                if ($address['Status'] == 'Reschedule') {
+                    $reschelestatus = '<p class="text-success serviceproviderblocks">You have rescheduled service request. Your SP will accept it soon.</p>';
+                }
+
+                if ($address['Status'] == 'Approved') {
+                    $ServiceProviderId = $address['ServiceProviderId'];
+                    $serviceProvider = $this->model->GetUserDetails('user',$ServiceProviderId);
+                    if(count($serviceProvider)){
+                        foreach($serviceProvider as $spdata){
+                            $SPfirstname = $spdata['FirstName'];
+                            $SPlastname = $spdata['LastName'];
+                            $Name = $SPfirstname." ".$SPlastname;
+                            $photo = $spdata['UserProfilePicture'];
+
+                            $SPRating = $this->model->GetSPRattings('rating',$ServiceProviderId);
+                            if (count($SPRating[0])) {
+                                $sprate = 0;
+                                $count = $SPRating[1];
+
+                                foreach ($SPRating[0] as $sprating) {
+                                    $sprate = ($sprate + $sprating['Ratings']);
+                                }
+                                $sprate = round(($sprate / $count), 2);
+                                $spratings = ceil($sprate);
+                                $halfstar = $spratings-$sprate;
+                                $blankstar = 5-$spratings;
                             }
-                            else if($minute == 0){
-                                $minute = '00';
+                            else{
+                                $sprate = 0;
+                                $halfstar = 0;
+                                $blankstar = 5;
                             }
 
-                            $EndTime = $hour.':'.$minute;
-                            echo $address['SelectTime'] . " - " . $EndTime;
-                        ?>
-                    </span>
-                </td>
-                <td id='<?= $address['ServiceRequestId'] ?>'>
-                    <?php
-                        if ($address['Status'] == 'Pending') {
-                            echo '';
+                            if($photo == null){
+
+                                $reschelestatus = $reschelestatus.'<div class="service-history-icon d-flex"><img src="../assets/img/cap.png"></div>';
+                            } 
+                            
+                            else{
+                                $reschelestatus = $reschelestatus.'<div class="service-history-icon-fav d-flex"><img src="../assets/img/'.$photo.'.jpeg"></div>';
+                            }
+                            
+                            for($i=1; $i<=$sprate; $i++){
+                                $values = $values.'<i class="bi bi-star-fill golden-star" id=""></i>';
+                            }
+
+                            if($halfstar > 0){ 
+                                for($i=0; $i<$halfstar; $i++){
+                            
+                                    $values = $values.'<i class="bi bi-star-half golden-star" id=""></i>';
+                                }
+                            }
+
+                            if($blankstar > 0){ 
+                                for($i=0; $i<$blankstar; $i++){
+                            
+                                    $values = $values.'<i class="bi bi-star-fill" id=""></i>';
+                                }
+                            }
                         }
-                    
-                        if ($address['Status'] == 'Reschedule') {
-                            echo '<p class="text-success serviceproviderblocks">You Have Requested to Change SP. New SP Will be Provided Soon.</p>';
-                        }
+                    }
+                }
 
-                        if ($address['Status'] == 'Approved') {
-                            $ServiceProviderId = $address['ServiceProviderId'];
-                            $serviceProvider = $this->model->GetUserDetails('user',$ServiceProviderId);
-                            if(count($serviceProvider)){
-                                foreach($serviceProvider as $spdata){
-                                    $SPfirstname = $spdata['FirstName'];
-                                    $SPlastname = $spdata['LastName'];
-                                    $Name = $SPfirstname." ".$SPlastname;
 
-                                    $SPRating = $this->model->GetSPRattings('rating',$ServiceProviderId);
-                                    if (count($SPRating[0])) {
-                                        $sprate = 0;
-                                        $count = $SPRating[1];
-
-                                        foreach ($SPRating[0] as $sprating) {
-                                            $sprate = ($sprate + $sprating['Ratings']);
-                                        }
-                                        $sprate = round(($sprate / $count), 2);
-                                        $spratings = ceil($sprate);
-                                        $halfstar = $spratings-$sprate;
-                                        $blankstar = 5-$spratings;
-                                    }
-                                    ?>
-                                        
+                            $serviceid = '<td id="'.$address['ServiceRequestId'].'">'.$address['ServiceRequestId'].'</td>';
+                            $datetime = '<td id="'.$address['ServiceRequestId'].'" class="flex text-left">
+                                <div><img src="../assets/img/calendar2.png"><b>'.$address['ServiceStartDate'].'</b> </div>
+                                <span>
+                                    '.$fulltime.'
+                                </span>
+                            </td>';
+                            $SPdeatil = '<td id="'.$address['ServiceRequestId'].'">
+                                                    
                                         <div class="d-flex">
-                                        <div class="service-history-icon d-flex"><img src="../assets/img/cap.png"></div>
-                                        <div><span class="d-block"> <?= $Name ?> </span>
-                                        <div class="padding-star">
-                                    
-                                    <?php
-                                        for($i=1; $i<=$sprate; $i++){ ?>
-                                            <i class="bi bi-star-fill golden-star" id=""></i>
-
-                                            <?php
-                                        }
-
-                                        if($halfstar > 0){ 
-                                            for($i=0; $i<$halfstar; $i++){ ?>
-                                        
-                                                <i class="bi bi-star-half golden-star" id=""></i>
-                                            <?php
-                                            }
-                                        }
-
-                                        if($blankstar > 0){ 
-                                            for($i=0; $i<$blankstar; $i++){ ?>
-                                        
-                                                <i class="bi bi-star-fill" id=""></i>
-                                            <?php
-                                            }
-                                        }
-
-                                        ?>
+                                            '.$reschelestatus.'
+                                            <div><span class="d-block">'.$Name.'</span>
+                                                <div class="padding-star">
+                                                
+                                                    '.$values.'
 
                                                 </div>
                                             </div>
                                         </div>
+                                
+                            </td>';
+                            $serviceaddress = '<td id="'.$address['ServiceRequestId'].'" class="font-blue font-18">
+                                <div class="bold-blue"> <b>€'. $address['TotalCost'].'</b> </div>
+                            </td>';
+                            $action = '<td>
+                                <div class="d-flex">
+                                    <button type="submit" id="'.$address['ServiceRequestId'].'" data-backdrop="static" data-keyboard="false" data-target="#rescheduleTimeDate" data-toggle="modal" class="btn dark-blue btn-sm rounded-pill Reschedule">Reschedule</button>
+                                    <button type="submit" id="'.$address['ServiceRequestId'].'" data-backdrop="static" data-keyboard="false" data-target="#cancelService" data-toggle="modal" class="btn lite-red btn-sm rounded-pill Cancel">Cancel</button>
+                                </div>
+                            </td>';
 
-                                        <?php
+                    $results = array();
+                    $results['serviceid'] = $serviceid;
+                    $results['datetime'] = $datetime;
+                    $results['SPnamewithstar'] = $SPdeatil;
+                    $results['address'] = $serviceaddress;
+                    $results['action'] = $action;
 
-                                    // echo $sprate." ".$spratings." ".$halfstar." ".$blankstar;
-                                }
-                            }
-                        }
-                    ?>
-                    <!-- <div class="d-flex">
-                        <div class="service-history-icon d-flex"><img src="../assets/img/cap.png"></div>
-                        <div><span class="d-block"> lyun Waston </span>
-                            <div class="padding-star">
-                                <img src="../assets/img/star1.png" class="service-history-star-icon">
-                                <img src="../assets/img/star1.png" class="service-history-star-icon">
-                                <img src="../assets/img/star1.png" class="service-history-star-icon">
-                                <img src="../assets/img/star1.png" class="service-history-star-icon">
-                                <img src="../assets/img/star2.png" class="service-history-star-icon"> 4
-                            </div>
-                        </div>
-                    </div> -->
-                </td>
-                <td id='<?= $address['ServiceRequestId'] ?>' class="font-blue font-18">
-                    <div class="bold-blue"> <b>€ <?= $address['TotalCost']  ?></b> </div>
-                </td>
-                <td>
-                    <button type="submit" id='<?= $address['ServiceRequestId'] ?>' data-backdrop="static" data-keyboard="false" data-target="#rescheduleTimeDate" data-toggle="modal" class="btn dark-blue btn-sm rounded-pill Reschedule">Reschedule</button>
-                    <button type="submit" id='<?= $address['ServiceRequestId'] ?>' data-backdrop="static" data-keyboard="false" data-target="#cancelService" data-toggle="modal" class="btn lite-red btn-sm rounded-pill Cancel">Cancel</button>
-                </td>
-            </tr>
-
-            <?php
-        }
+                    array_push($json, $results);
+            }
         }
 
+        echo json_encode($json);
     }
 
     public function ServiceDetailForModel()
@@ -649,6 +657,8 @@ class CustomerController{
 
             }
             $service = join(", ",$array);
+
+            // $service = $result[0]['ServiceExtra'];
 
             $startTime = $result[0]['SelectTime'];
             $totalhour = $result[0]['TotalHour'];
@@ -690,7 +700,8 @@ class CustomerController{
         if(isset($_POST)){
 
             $ServiceRequestId = $_POST['serviceid'];
-            $newTime = $_POST['newtime'];
+            $newTime = trim($_POST['newtime']);
+            $newDate = trim($_POST['newdate']);
 
             $result = $this->model->GetServiceHistoryUser('servicerequest',$ServiceRequestId);
 
@@ -722,7 +733,7 @@ class CustomerController{
                     'modifiedby' => $UserId,
                     'recordversion' => $recordversion,
                     'status' => $status,
-    
+                    'newdate' => $newDate,
                 ];
                 $updatedresult = $this->model->UpdateServiceTime('servicerequest',$array,$ServiceRequestId);
 
@@ -732,7 +743,7 @@ class CustomerController{
                         foreach ($spDetails as $spemail) {
                             $ServiceRequestsId = $ServiceRequestId;
                             $SPEmail  = $spemail['Email'];
-                            include('ServiceProviderReschedul.php');
+                            include('ServiceProviderReschedulMail.php');
                         }
                     }
                 }
@@ -748,7 +759,7 @@ class CustomerController{
                             foreach($userServiceprovider as $usp){
                                 $ServiceRequestsId = $ServiceRequestId;
                                 $SPEmail = $usp['Email'];
-                                include('ServiceProviderReschedul.php');
+                                include('ServiceProviderReschedulMail.php');
                             }
                         }
                     }
@@ -760,7 +771,7 @@ class CustomerController{
                             foreach($Activeserviceprovider as $asp){
                                 $ServiceRequestsId = $ServiceRequestId;
                                 $SPEmail = $asp['Email'];
-                                include('ServiceProviderReschedul.php');
+                                include('ServiceProviderReschedulMail.php');
                             }
                         }
                     }
@@ -820,7 +831,7 @@ class CustomerController{
                         foreach ($Spemail as $spemail) {
                             $ServiceRequestsId = $ServiceRequestId;
                             $SPEmail  = $spemail['Email'];
-                            include('ServiceProviderCancel.php');
+                            include('ServiceProviderCancelMail.php');
                         }
                     }
                 }
@@ -836,7 +847,7 @@ class CustomerController{
                             foreach($userServiceprovider as $usp){
                                 $ServiceRequestsId = $ServiceRequestId;
                                 $SPEmail = $usp['Email'];
-                                include('ServiceProviderCancel.php');
+                                include('ServiceProviderCancelMail.php');
                             }
                         }
                     }
@@ -848,14 +859,14 @@ class CustomerController{
                             foreach($Activeserviceprovider as $asp){
                                 $ServiceRequestsId = $ServiceRequestId;
                                 $SPEmail = $asp['Email'];
-                                include('ServiceProviderCancel.php');
+                                include('ServiceProviderCancelMail.php');
                             }
                         }
                     }
                 }
 
                 if($updatedresult){
-                    include("ClientCancelledBooking.php");   
+                    include("ClientCancelledBookingMail.php");   
                 }
                 echo "Cancelled successfully";
             }
@@ -871,149 +882,153 @@ class CustomerController{
         $UserId = $_SESSION['UserId'];
         $result = $this->model->ListCustomerServiceDashboard('servicerequest',$UserId);
 
+        $json = array();
+
         foreach($result as $address) { 
             if ($address['Status'] != "Pending" && $address['Status'] != "Approved" && $address['Status'] != "Reschedule") {
-            ?>
 
-                <tr>
-                    <td><?= $address['ServiceRequestId']  ?></td>
-                    <td  class="flex text-left">
-                        <div><img src="../assets/img/calendar2.png"><b> <?= $address['ServiceStartDate']  ?> </b> </div>
-                        <span>
-                        <?php 
-                            $startTime = $address['SelectTime'];
-                            $totalhour = $address['TotalHour'];
-                            $starttime = explode(":",$startTime);
-                            $totaltime = number_format($totalhour,1);
-                            $endtime = explode(".",$totaltime);
+                $startTime = $address['SelectTime'];
+                $totalhour = $address['TotalHour'];
+                $starttime = explode(":",$startTime);
+                $totaltime = number_format($totalhour,1);
+                $endtime = explode(".",$totaltime);
 
-                            $hour = $starttime[0] + $endtime[0];
-                            $minute = $starttime[1] + $endtime[1]*6;
+                $hour = $starttime[0] + $endtime[0];
+                $minute = $starttime[1] + $endtime[1]*6;
 
-                            if($minute == 60){
-                                $hour = $hour + 1;
-                                $minute = '00';
-                            }
-                            else if($minute == 0){
-                                $minute = '00';
-                            }
+                if($minute == 60){
+                    $hour = $hour + 1;
+                    $minute = '00';
+                }
+                else if($minute == 0){
+                    $minute = '00';
+                }
 
-                            $EndTime = $hour.':'.$minute;
-                            echo $address['SelectTime'] . " - " . $EndTime;
-                        ?>
-                    </span>
-                    </td>
-                    <td>
+                $EndTime = $hour.':'.$minute;
+                $fulltime = $address['SelectTime'] . " - " . $EndTime;
 
-                            <?php 
-                                $ServiceRequestId = $address['ServiceRequestId'];
-                                $countrating =  $this->model->CountRating('rating',$ServiceRequestId);
+                $reschelestatus = '';
+                $values = '';
+                $Name = '';
 
-                                $RatingCount = $countrating[1];
 
-                                if($RatingCount == 1){
-                                        $ServiceProviderId = $address['ServiceProviderId'];
-                                        $serviceProvider = $this->model->GetUserDetails('user',$ServiceProviderId);
-                                        if(count($serviceProvider)){
-                                            foreach($serviceProvider as $spdata){
-                                                $SPfirstname = $spdata['FirstName'];
-                                                $SPlastname = $spdata['LastName'];
-                                                $Name = $SPfirstname." ".$SPlastname;
-            
-                                                $SPRating = $this->model->GetSPRattings('rating',$ServiceProviderId);
-                                                if (count($SPRating[0])) {
-                                                    $sprate = 0;
-                                                    $count = $SPRating[1];
-            
-                                                    foreach ($SPRating[0] as $sprating) {
-                                                        $sprate = ($sprate + $sprating['Ratings']);
-                                                    }
-                                                    $sprate = round(($sprate / $count), 2);
-                                                    $spratings = ceil($sprate);
-                                                    $halfstar = $spratings-$sprate;
-                                                    $blankstar = 5-$spratings;
-                                                }
-                                                ?>
-                                                    
-                                                    <div class="d-flex">
-                                                    <div class="service-history-icon d-flex"><img src="../assets/img/cap.png"></div>
-                                                    <div><span class="d-block"> <?= $Name ?> </span>
-                                                    <div class="padding-star">
-                                                
-                                                <?php
-                                                    for($i=1; $i<=$sprate; $i++){ ?>
-                                                        <i class="bi bi-star-fill golden-star" id=""></i>
-            
-                                                        <?php
-                                                    }
-            
-                                                    if($halfstar > 0){ 
-                                                        for($i=0; $i<$halfstar; $i++){ ?>
-                                                    
-                                                            <i class="bi bi-star-half golden-star" id=""></i>
-                                                        <?php
-                                                        }
-                                                    }
-            
-                                                    if($blankstar > 0){ 
-                                                        for($i=0; $i<$blankstar; $i++){ ?>
-                                                    
-                                                            <i class="bi bi-star-fill" id=""></i>
-                                                        <?php
-                                                        }
-                                                    }
-            
-                                                    ?>
-            
-                                                            </div>
-                                                        </div>
-                                                    </div>
-            
-                                                    <?php
-            
-                                                // echo $sprate." ".$spratings." ".$halfstar." ".$blankstar;
-                                            }
-                                        }
+                $ServiceRequestId = $address['ServiceRequestId'];
+                $countrating =  $this->model->CountRating('rating',$ServiceRequestId);
+
+                $RatingCount = $countrating[1];
+
+                if($RatingCount == 1){
+                    $ServiceProviderId = $address['ServiceProviderId'];
+                    $serviceProvider = $this->model->GetUserDetails('user',$ServiceProviderId);
+                    if(count($serviceProvider)){
+                        foreach($serviceProvider as $spdata){
+                            $SPfirstname = $spdata['FirstName'];
+                            $SPlastname = $spdata['LastName'];
+                            $Name = $SPfirstname." ".$SPlastname;
+                            $photo = $spdata['UserProfilePicture'];
+
+                            $SPRating = $this->model->GetSPRattings('rating',$ServiceProviderId);
+                            if (count($SPRating[0])) {
+                                $sprate = 0;
+                                $count = $SPRating[1];
+
+                                foreach ($SPRating[0] as $sprating) {
+                                    $sprate = ($sprate + $sprating['Ratings']);
                                 }
-                            ?>
+                                $sprate = round(($sprate / $count), 2);
+                                $spratings = ceil($sprate);
+                                $halfstar = $spratings-$sprate;
+                                $blankstar = 5-$spratings;
+                            }
+                            else{
+                                $sprate = 0;
+                                $halfstar = 0;
+                                $blankstar = 5;
+                            }
 
-                        <!-- <div class="d-flex">
-                            <div class="service-history-icon d-flex"><img src="../assets/img/cap.png"></div>
-                            <div><span class="d-block"> lyun Waston </span>
-                                <div class="">
-                                    <img src="../assets/img/star1.png" class="service-history-star-icon">
-                                    <img src="../assets/img/star1.png" class="service-history-star-icon">
-                                    <img src="../assets/img/star1.png" class="service-history-star-icon">
-                                    <img src="../assets/img/star1.png" class="service-history-star-icon">
-                                    <img src="../assets/img/star2.png" class="service-history-star-icon">
-                                    <label for="">4</label>
-                                </div>
-                            </div>
-                        </div> -->
-                    </td>
-                    <td class="active-font">
-                        <div class="bold-blue"> <b>€ <?= $address['TotalCost']  ?></b> </div>
-                    </td>
-                    
-                    <?php 
-                        if ($address['Status'] == "Completed") { ?>
-                            <td id='<?= $address['ServiceRequestId'] ?>' ><span class="completed"> Completed </span></td>
-                        <?php
+                            if($photo == null){
+
+                                $reschelestatus = '<div class="service-history-icon d-flex"><img src="../assets/img/cap.png"></div>';
+                            } 
+                            
+                            else{
+                                $reschelestatus = '<div class="service-history-icon-fav d-flex"><img src="../assets/img/'.$photo.'.jpeg"></div>';
+                            }
+                            
+                            for($i=1; $i<=$sprate; $i++){
+                                $values = $values.'<i class="bi bi-star-fill golden-star" id=""></i>';
+                            }
+
+                            if($halfstar > 0){ 
+                                for($i=0; $i<$halfstar; $i++){
+                            
+                                    $values = $values.'<i class="bi bi-star-half golden-star" id=""></i>';
+                                }
+                            }
+
+                            if($blankstar > 0){ 
+                                for($i=0; $i<$blankstar; $i++){
+                            
+                                    $values = $values.'<i class="bi bi-star-fill" id=""></i>';
+                                }
+                            }
                         }
-                        if ($address['Status'] == "Cancelled") { ?>
-                            <td id='<?= $address['ServiceRequestId'] ?>' ><span class="cancelled"> Cancelled </span></td>
-                        <?php
-                        }    
-                    ?>
+                    }
+                }
+
+                if ($address['Status'] == "Completed") {
+                    $servicestatus = '<td id="'.$address['ServiceRequestId'].'" ><span class="completed"> Completed </span></td>';
+
+                }
+                if ($address['Status'] == "Cancelled") {
+                    $servicestatus = '<td id="'.$address['ServiceRequestId'].'" ><span class="cancelled"> Cancelled </span></td>';
+
+                }
+
+
+                    $serviceid = '<td>'.$address['ServiceRequestId'].'</td>';
+                    $datetime = '<td  class="flex text-left">
+                        <div><img src="../assets/img/calendar2.png"><b> '.$address['ServiceStartDate'].' </b> </div>
+                        <span>
+                        '.$fulltime.'
+                        </span>
+                        </td>';
+                    $spDetails = '<td id="'.$address['ServiceRequestId'].'">
+                                                    
+                                    <div class="d-flex">
+                                        '.$reschelestatus.'
+                                        <div><span class="d-block">'.$Name.'</span>
+                                            <div class="padding-star">
+                                            
+                                                '.$values.'
+
+                                            </div>
+                                        </div>
+                                    </div>
+                    </td>';
+                    $totalcost = '<td class="active-font">
+                        <div class="bold-blue"> <b>€ '.$address['TotalCost'].'</b> </div>
+                    </td>';
                     
-                    <td>
-                        <button type="button" id='<?= $address['ServiceRequestId'] ?>' data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#RateSP" class="btn lite-blue btn-sm rounded-pill ratesp" value="">Rate SP</button>
-                    </td>
-                </tr>
-                
-            <?php
+                    $action = '<td>
+                        <button type="button" id="'.$address['ServiceRequestId'].'" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#RateSP" class="btn lite-blue btn-sm rounded-pill ratesp" value="">Rate SP</button>
+                    </td>';
+
+
+                $results = array();
+                $results['serviceid'] = $serviceid;
+                $results['datetime'] = $datetime;
+                $results['spDetails'] = $spDetails;
+                $results['totalcost'] = $totalcost;
+                $results['serviceStatus'] = $servicestatus;
+                $results['action'] = $action;
+
+                array_push($json, $results);
+
             }
         }
+
+        echo json_encode($json);
     }
 
     public function GetServiceProvideName()
@@ -1110,13 +1125,25 @@ class CustomerController{
                 $firstname = $spname['FirstName'];
                 $lastname = $spname['LastName'];
                 $name = $firstname." ".$lastname;
+                $photo = $spname['UserProfilePicture'];
             }
             
             ?>
                     <div class="col-md-4">
                         <div class="favourite-border text-center">
-                            <div class="round">
-                                <img src="../assets/img/cap.png" width="75%" alt="" class="">
+                           
+                                <?php 
+                                    if($photo == null){ ?>
+                                     <div class="round">
+                                        <img src="../assets/img/cap.png" width="75%" alt="" class="">
+                                        <?php
+                                    }
+                                    else{ ?>
+                                     <div class="round-2">
+                                        <img src="../assets/img/<?= $photo ?>.jpeg" alt="" class="">
+                                        <?php
+                                    }
+                                ?>
                                 <label class="mt-5"><b><?= $name  ?></b></label>
                             </div>
                             <div class="mt-1">
@@ -1132,7 +1159,7 @@ class CustomerController{
                                         $sprate = ($sprate + $sprating['Ratings']);
                                     }
                                     $sprate = round(($sprate / $count), 2);
-                                    $spratings = round($sprate);
+                                    $spratings = ceil($sprate);
                                     $halfstar = $spratings-$sprate;
                                     $blankstar = 5-$spratings;
 
@@ -1175,7 +1202,7 @@ class CustomerController{
                                 <img src="../assets/img/star1.png" class="service-history-star-icon">
                                 <img src="../assets/img/star2.png" class="service-history-star-icon"> 4 -->
                             </div>
-                            <div class="mt-3 mb-3">
+                            <div class="mt-4 mb-3">
 
                                 <?php
 

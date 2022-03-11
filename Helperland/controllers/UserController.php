@@ -302,7 +302,7 @@ class UserController{
                         $_SESSION['message_title'] = "Your Account has been Created";
                         $_SESSION['message_text'] = "Please Verify Your Email";
                         $_SESSION['message_icon'] = "success";
-                        include('VerifyAccount.php');
+                        include('VerifyAccountMail.php');
                         header('Location: ' . $base_url);
                     } else {
                         $_SESSION['message_title'] = "Your Account is not Created";
@@ -469,7 +469,7 @@ class UserController{
             $Resetkey = $result[2];
 
             if($count == 1){
-                include('ForgotPassword.php');
+                include('ForgotPasswordMail.php');
                 $_SESSION['message_title'] = "Reset Password Link has been sent successfully on!";
                 $_SESSION['message_text'] = $EmailAddress;
                 $_SESSION['message_icon'] = "success";
