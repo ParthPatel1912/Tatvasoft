@@ -62,7 +62,7 @@
                     <div>
                         <span class="font-24"> <b> Service History </b> </span>
                         <span class="float-right">
-                            <input type="button" class="btn dark-blue btn-sm rounded-pill" value="Export"></td>
+                            <button type="button" class="btn dark-blue btn-sm rounded-pill" id="btnExport-customer" value="Export">Export</button>
                         </span>
                     </div>
                     <table id="service-history"

@@ -808,105 +808,116 @@ class ServiceProviderController{
         $UserId = $_SESSION['UserId'];
         $SPRating = $this->model->GetSPRattings('rating',$UserId);
 
-        foreach($SPRating as $row){ ?>
+        $json = array();
 
+        foreach($SPRating as $row){ 
+            
+            $firstname = $row['FirstName'];
+            $lastname = $row['LastName'];
+            $name = $firstname." ".$lastname;
+
+            $startTime = $row['SelectTime'];
+            $totalhour = $row['TotalHour'];
+            $starttime = explode(":",$startTime);
+            $totaltime = number_format($totalhour,1);
+            $endtime = explode(".",$totaltime);
+
+            $hour = $starttime[0] + $endtime[0];
+            $minute = $starttime[1] + $endtime[1]*6;
+
+            if($minute == 60){
+                $hour = $hour + 1;
+                $minute = '00';
+            }
+            else if($minute == 0){
+                $minute = '00';
+            }
+
+            $EndTime = $hour.':'.$minute;
+            $fulltime = $row['SelectTime'] . " - " . $EndTime;
+
+            $values = '';
+            $ratestatus = '';
+
+            $sprate =  $row['Ratings'];
+            $spratings = ceil($sprate);
+            $halfstar = $spratings-$sprate;
+            $blankstar = 5-$spratings;
+
+            for($i=1; $i<=$sprate; $i++){
+                $values = $values.'<i class="bi bi-star-fill golden-star" id=""></i> ';
+
+            }
+
+            if($halfstar > 0){ 
+                for($i=0; $i<$halfstar; $i++){
+            
+                    $values = $values.'<i class="bi bi-star-half golden-star" id=""></i> ';
+                }
+            }
+
+            if($blankstar > 0){ 
+                for($i=0; $i<$blankstar; $i++){
+            
+                    $values = $values.'<i class="bi bi-star-fill" id=""></i> ';
+                }
+            }
+
+            if ($sprate > 0.0 && $sprate <= 1.0 ) {
+                $ratestatus = 'Very Bad';
+            }
+            else if ($sprate > 1.0 && $sprate <= 2.0 ) {
+                $ratestatus =  'Bad';
+            }
+            else if ($sprate > 2.0 && $sprate <= 3.0 ) {
+                $ratestatus =  'Good';
+            }
+            else if ($sprate > 3.0 && $sprate <= 4.0 ) {
+                $ratestatus =  'Very Good';
+            }
+            else if ($sprate > 4.0 && $sprate <= 5.0 ) {
+                $ratestatus =  'Excellent';
+            }
+
+
+                $ratingrow = '<td>
                     <div class="row p-2 mb-3" style="border:1px solid grey">
                         <div class="col-md-3 mb-2">
-                            <span class="bold"><?= $row['ServiceRequestId'] ?> </span> <br />
+                            <span class="bold">'.$row['ServiceRequestId'].'</span> <br />
                             <span class="bold"> 
-                            <?php 
-                                $firstname = $row['FirstName'];
-                                $lastname = $row['LastName'];
-                                $name = $firstname." ".$lastname;
-                                echo $name;
-                            ?>    
+                            '. $name.'   
                             </span>
                         </div>
                         <div class="col-md-5 mb-2">
-                            <div><img src="../assets/img/calendar2.png"><b><span class="padding"><?= $row['ServiceStartDate'] ?></span></b> </div>
+                            <div><img src="../assets/img/calendar2.png"><b><span class="padding">'.$row['ServiceStartDate'].'</span></b> </div>
                             <div><img src="../assets/img/layer-14.png"> 
                                 <span class="padding">
-                                <?php 
-                                        $startTime = $row['SelectTime'];
-                                        $totalhour = $row['TotalHour'];
-                                        $starttime = explode(":",$startTime);
-                                        $totaltime = number_format($totalhour,1);
-                                        $endtime = explode(".",$totaltime);
-
-                                        $hour = $starttime[0] + $endtime[0];
-                                        $minute = $starttime[1] + $endtime[1]*6;
-
-                                        if($minute == 60){
-                                            $hour = $hour + 1;
-                                            $minute = '00';
-                                        }
-                                        else if($minute == 0){
-                                            $minute = '00';
-                                        }
-
-                                        $EndTime = $hour.':'.$minute;
-                                        echo $row['SelectTime'] . " - " . $EndTime;
-                                    ?>
+                                '.$fulltime.'
                                 </span> 
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
                             <span class="bold">Ratings </span><br />
                             <div>
-                                <?php 
-                                    $sprate =  $row['Ratings'];
-                                    $spratings = ceil($sprate);
-                                    $halfstar = $spratings-$sprate;
-                                    $blankstar = 5-$spratings;
-
-                                    for($i=1; $i<=$sprate; $i++){ ?>
-                                        <i class="bi bi-star-fill golden-star" id=""></i>
-
-                                        <?php
-                                    }
-
-                                    if($halfstar > 0){ 
-                                        for($i=0; $i<$halfstar; $i++){ ?>
-                                    
-                                            <i class="bi bi-star-half golden-star" id=""></i>
-                                        <?php
-                                        }
-                                    }
-
-                                    if($blankstar > 0){ 
-                                        for($i=0; $i<$blankstar; $i++){ ?>
-                                    
-                                            <i class="bi bi-star-fill" id=""></i>
-                                        <?php
-                                        }
-                                    }
-
-                                    if ($sprate > 0.0 && $sprate <= 1.0 ) {
-                                        echo 'Very Bad';
-                                    }
-                                    else if ($sprate > 1.0 && $sprate <= 2.0 ) {
-                                        echo 'Bad';
-                                    }
-                                    else if ($sprate > 2.0 && $sprate <= 3.0 ) {
-                                        echo 'Good';
-                                    }
-                                    else if ($sprate > 3.0 && $sprate <= 4.0 ) {
-                                        echo 'Very Good';
-                                    }
-                                    else if ($sprate > 4.0 && $sprate <= 5.0 ) {
-                                        echo 'Excellent';
-                                    }
-                                ?>
+                                '.$values . $ratestatus.'
                             </div>
                         </div>
                         <hr class="mt-2" />
                         <div class="col-md-12">
-                            <span class="bold"> Customer Comments: </span> <?= $row['comment'] ?>
+                            <span class="bold"> Customer Comments: </span> '.$row['comment'].'
                         </div>
                     </div>
+                </td>';
 
-            <?php
+
+                $results = array();
+                $results['raterow'] = $ratingrow;
+
+                array_push($json, $results);
+
         }
+
+        echo json_encode($json);
     }
     
     public function ServiceHistory()

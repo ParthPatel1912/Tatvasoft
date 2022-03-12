@@ -576,20 +576,20 @@ class CustomerController{
                             }
                             
                             for($i=1; $i<=$sprate; $i++){
-                                $values = $values.'<i class="bi bi-star-fill golden-star" id=""></i>';
+                                $values = $values.'<i class="bi bi-star-fill golden-star" id=""></i> ';
                             }
 
                             if($halfstar > 0){ 
                                 for($i=0; $i<$halfstar; $i++){
                             
-                                    $values = $values.'<i class="bi bi-star-half golden-star" id=""></i>';
+                                    $values = $values.'<i class="bi bi-star-half golden-star" id=""></i> ';
                                 }
                             }
 
                             if($blankstar > 0){ 
                                 for($i=0; $i<$blankstar; $i++){
                             
-                                    $values = $values.'<i class="bi bi-star-fill" id=""></i>';
+                                    $values = $values.'<i class="bi bi-star-fill" id=""></i> ';
                                 }
                             }
                         }
@@ -599,7 +599,7 @@ class CustomerController{
 
                             $serviceid = '<td id="'.$address['ServiceRequestId'].'">'.$address['ServiceRequestId'].'</td>';
                             $datetime = '<td id="'.$address['ServiceRequestId'].'" class="flex text-left">
-                                <div><img src="../assets/img/calendar2.png"><b>'.$address['ServiceStartDate'].'</b> </div>
+                                <div><img src="../assets/img/calendar2.png"><b> '.$address['ServiceStartDate'].'</b> </div>
                                 <span>
                                     '.$fulltime.'
                                 </span>
@@ -956,20 +956,20 @@ class CustomerController{
                             }
                             
                             for($i=1; $i<=$sprate; $i++){
-                                $values = $values.'<i class="bi bi-star-fill golden-star" id=""></i>';
+                                $values = $values.'<i class="bi bi-star-fill golden-star" id=""></i> ';
                             }
 
                             if($halfstar > 0){ 
                                 for($i=0; $i<$halfstar; $i++){
                             
-                                    $values = $values.'<i class="bi bi-star-half golden-star" id=""></i>';
+                                    $values = $values.'<i class="bi bi-star-half golden-star" id=""></i> ';
                                 }
                             }
 
                             if($blankstar > 0){ 
                                 for($i=0; $i<$blankstar; $i++){
                             
-                                    $values = $values.'<i class="bi bi-star-fill" id=""></i>';
+                                    $values = $values.'<i class="bi bi-star-fill" id=""></i> ';
                                 }
                             }
                         }

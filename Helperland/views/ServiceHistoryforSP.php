@@ -64,7 +64,7 @@
                 <div class="col-md-8 table-responsive-lg table-responsive-md table-responsive-sm table-responsive">
                     <div>
                         <span class="float-right">
-                            <input type="button" class="btn dark-blue btn-sm rounded-pill" value="Export"></td>
+                            <button type="button" class="btn dark-blue btn-sm rounded-pill" id="btnExport" value="Export">Export</button>
                         </span>
                     </div>
                     <table id="service-history-SP" class="display table-responsive-lg table-responsive-md table-responsive-sm table-responsive" style="width:100%">

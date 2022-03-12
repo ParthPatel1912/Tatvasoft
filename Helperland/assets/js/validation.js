@@ -593,6 +593,9 @@ $(document).ready(function() {
     });
 
     if (window.location.href.indexOf('BookService.php') != -1) {
+
+        disablesetupservice();
+
         $('input').on('input', function(e) {
 
             if ($('input[type=checkbox][name="chkPrivacy"]:checked').length == 1) {
@@ -2383,8 +2386,10 @@ $(document).ready(function() {
             data: {
 
             },
+            dataType: 'json',
             success: function(response) {
-                $('#SPrating').html(response);
+                // $('#SPrating').html(response);
+                showSPRting(response);
             }
         });
     }
@@ -3605,6 +3610,18 @@ function showNewServiceRequests(data) {
                 ` + dt.totalcost + `
                 ` + dt.conflicttime + `
                 ` + dt.action + `
+            </tr>`
+        )).draw();
+    });
+}
+
+function showSPRting(data) {
+    var myTable = $('#sp-rating').DataTable();
+    myTable.clear().draw();
+    data.forEach(function(dt) {
+        myTable.row.add($(
+            `<tr>
+                    ` + dt.raterow + `
             </tr>`
         )).draw();
     });

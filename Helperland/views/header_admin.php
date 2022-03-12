@@ -57,7 +57,7 @@
         <div class=" main position-relative">
             <nav class="navbar navbar-expand-xl home-navbar navbar-usermanagement" id="navbar">
                 <div class="container-fluid">
-                    <h1>Halperland</h1>
+                    <h1>Helperland</h1>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

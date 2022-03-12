@@ -33,8 +33,8 @@
         <div class="row justify-content-center">
             <div class="col-md-2 service-menu">
                 <div class="side-menu-item">
-                    
-                        Dashboard
+
+                    Dashboard
                 </div>
                 <div class="side-menu-item">
                     <a href="<?= $base_url."?controller=Helperland&function=NewServiceRequests"?>"
@@ -52,18 +52,21 @@
                     Service Schedule
                 </div>
                 <div class="side-menu-item">
-                <a href="<?= $base_url."?controller=Helperland&function=ServiceHistoryforSP"?>" class="style-none text-white border-0">Service History</a> 
+                    <a href="<?= $base_url."?controller=Helperland&function=ServiceHistoryforSP"?>"
+                        class="style-none text-white border-0">Service History</a>
                 </div>
                 <div class="side-menu-item side-menu-item-active">
-                <a href="<?= $base_url."?controller=Helperland&function=ServiceProviderRating"?>" class="style-none text-white border-0">My Ratings</a>
+                    <a href="<?= $base_url."?controller=Helperland&function=ServiceProviderRating"?>"
+                        class="style-none text-white border-0">My Ratings</a>
                 </div>
                 <div class="side-menu-item">
-                <a href="<?= $base_url."?controller=Helperland&function=BlockCustomer"?>" class="style-none text-white border-0">Block Customer</a>
+                    <a href="<?= $base_url."?controller=Helperland&function=BlockCustomer"?>"
+                        class="style-none text-white border-0">Block Customer</a>
                 </div>
             </div>
             <div class="col-md-8 table-responsive-lg table-responsive-md table-responsive-sm table-responsive">
-                <div id="SPrating" class="container">
-                    <!-- <div class="row p-2 mb-3" style="border:1px solid grey">
+                <!-- <div id="SPrating" class="container"> -->
+                <!-- <div class="row p-2 mb-3" style="border:1px solid grey">
                         <div class="col-md-3 mb-2">
                             <span class="font-bold">@item.ServiceRequestID </span> <br />
                             <span class="font-bold"> @item.CustomerName </span>
@@ -107,7 +110,17 @@
                             <span class="font-bold"> Customer Comments: </span> @item.Comments
                         </div>
                     </div> -->
-                </div>
+                <!-- </div> -->
+                <table id="sp-rating" class="container table-responsive-lg table-responsive-md table-responsive-sm table-responsive" style="width:100%; border:0; border-collapse: separate;">
+
+                    <thead>
+                    </thead>
+
+                    <tbody id="SPrating" class="container">
+                        
+                    </tbody>
+
+                </table>
             </div>
         </div>
     </div>

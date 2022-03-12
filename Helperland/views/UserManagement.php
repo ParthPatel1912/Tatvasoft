@@ -34,7 +34,7 @@
                         Escalation Management
                     </div>
                     <div class="border-bottom-admin">
-                        <a class="side-menu-link" href="../10 Service Request/ServiceRequets.html">Service Requests</a>
+                        <a class="side-menu-link" href="<?= $base_url."?controller=Helperland&function=ServiceRequets"?>">Service Requests</a>
                     </div>
                     <div class="border-bottom-admin">
                         Service Providers
@@ -69,7 +69,7 @@
                         <div class="collapse" id="collapseExample3">
                             <div>
                                 <div class="content" href="#">Blog</div>
-                                <a class="content side-menu-link" href="../2 FAQ/FAQ.html">FAQs</a>
+                                <a class="content side-menu-link" href="<?= $base_url."?controller=Helperland&function=FAQ"?>">FAQs</a>
                             </div>
                         </div>
                     </div>

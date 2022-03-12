@@ -32,6 +32,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
+    <!-- to export data -->
+    <script src="https://cdn.jsdelivr.net/npm/table2csv@1.1.6/src/table2csv.min.js"></script>
+
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/e6dbed9bdc.js" crossorigin="anonymous"></script>
 
@@ -45,7 +48,7 @@
 
 </head>
 
-<body id="body"  onload="disablesetupservice()">
+<body id="body">
 
     <!-- Header -->
 

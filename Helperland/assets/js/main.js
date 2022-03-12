@@ -27,7 +27,8 @@ $(document).ready(function() {
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
-        }]
+        }],
+        pagingType: "full_numbers",
     });
 
 
@@ -40,7 +41,8 @@ $(document).ready(function() {
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
-        }]
+        }],
+        pagingType: "full_numbers",
     });
 
 
@@ -53,7 +55,22 @@ $(document).ready(function() {
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
-        }]
+        }],
+        pagingType: "full_numbers",
+    });
+
+    var option = {
+        "separator": ",",
+        "filename": "Customer-ServiceHistory.csv",
+        separator: ',',
+        newline: '\n',
+        quoteFields: true,
+        excludeColumns: '',
+        excludeRows: '',
+        trimContent: true
+    }
+    $("#btnExport-customer").on('click', function() {
+        $('#service-history').table2csv(option);
     });
 
 
@@ -66,7 +83,8 @@ $(document).ready(function() {
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
-        }]
+        }],
+        pagingType: "full_numbers",
     });
 
 
@@ -79,20 +97,23 @@ $(document).ready(function() {
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
-        }]
+        }],
+        pagingType: "full_numbers",
     });
 
 
     // sp rating
 
     $('#sp-rating').dataTable({
+
         "bPaginate": true,
         "bFilter": false,
         "bInfo": true,
         'aoColumnDefs': [{
             'bSortable': false,
-            'aTargets': [] /* 1st one, start by the right */
-        }]
+            'aTargets': [0] /* 1st one, start by the right */
+        }],
+        pagingType: "full_numbers",
     });
 
 
@@ -105,7 +126,8 @@ $(document).ready(function() {
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
-        }]
+        }],
+        pagingType: "full_numbers",
     });
 
 
@@ -118,7 +140,32 @@ $(document).ready(function() {
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [] /* 1st one, start by the right */
-        }]
+        }],
+        pagingType: "full_numbers",
+        "dom": '<"top">Brt<"bottom"flpi><"clear">',
+        "processing": true,
+        // "buttons": [{
+        //     extend: 'csv',
+        //     text: 'Export',
+        // }],
+        lengthMenu: [10, 5, 20, 50, 100, 200, 500],
+        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        responsive: true,
+    });
+
+
+    var options = {
+        "separator": ",",
+        "filename": "Service Provider-ServiceHistory.csv",
+        separator: ',',
+        newline: '\n',
+        quoteFields: true,
+        excludeColumns: '',
+        excludeRows: '',
+        trimContent: true
+    }
+    $("#btnExport").on('click', function() {
+        $('#service-history-SP').table2csv(options);
     });
 
     /* coustomer setting */
