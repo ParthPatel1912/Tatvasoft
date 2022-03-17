@@ -63,10 +63,10 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer justify-content-between">
+            <!-- <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button>
-                <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
-            </div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div> -->
         </div>
     </div>
 </div>

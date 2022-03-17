@@ -52,7 +52,8 @@ class ServiceProviderModel{
         return $row;
     }
 
-    public function findCityUsingZipcode($table,$Zipcode){
+    public function findCityUsingZipcode($table,$Zipcode)
+    {
         $sql_query = "SELECT * FROM $table
             left OUTER JOIN city
             on city.CityId = zipcode.CityId
@@ -81,7 +82,8 @@ class ServiceProviderModel{
         return $row;
     }
 
-    function updateUser($table,$array,$UserId){
+    function updateUser($table,$array,$UserId)
+    {
         $sql_query = "UPDATE $table SET FirstName = :FirstName, LastName = :LastName, Mobile = :PhoneNumber, DateOfBirth = :dob, LanguageId = :Language, Gender = :gender, UserProfilePicture = :profilephoto, ModifiedDate = now()
                     WHERE UserId = $UserId";
         $statement= $this->conn->prepare($sql_query);
@@ -90,7 +92,8 @@ class ServiceProviderModel{
         return $count;
     }
 
-    function AddAddress($table,$array,$UserId){
+    function AddAddress($table,$array,$UserId)
+    {
         $sql_query = "INSERT INTO $table (UserId, AddressLine1, AddressLine2, CityId, StateId, PostalCode, Mobile) 
         VALUES ($UserId, :AddressLine1, :AddressLine2, :CityId, :StateId, :PostalCode, :Mobile)";
         $statement = $this->conn->prepare($sql_query);
@@ -99,13 +102,21 @@ class ServiceProviderModel{
         return $count;
     }
 
-    function UpdateAddressbyUserId($table,$array,$UserId, $AddressId){
+    function UpdateAddressbyUserId($table,$array,$UserId, $AddressId)
+    {
         $sql_query = "UPDATE $table SET AddressLine1 = :AddressLine1 ,AddressLine2 = :AddressLine2 , CityId = :CityId, StateId = :StateId, PostalCode = :PostalCode , Mobile = :Mobile 
         WHERE UserId = $UserId AND AddressId = $AddressId";
         $statement = $this->conn->prepare($sql_query);
         $count = $statement->execute($array);
 
         return $count;
+    }
+
+    function UpdateZipcodebyUserId($table,$PostalCode, $UserId)
+    {
+        $sql_query = "UPDATE $table SET ZipCode = $PostalCode WHERE $table.UserId = $UserId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
     }
 
     function UpdatePassword($table, $OldPassword, $NewPassword, $UserId)
@@ -275,7 +286,8 @@ class ServiceProviderModel{
         return $count;
     }
 
-    function GetUserDetails($table,$UserId){
+    function GetUserDetails($table,$UserId)
+    {
         $sql_query = "SELECT * FROM $table WHERE UserId = $UserId";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
@@ -346,7 +358,8 @@ class ServiceProviderModel{
 
     }
 
-    function GetSPRattings($table,$UserId){
+    function GetSPRattings($table,$UserId)
+    {
         $sql_query = "SELECT *,$table.Comments as comment FROM $table 
                         left outer join user
                             on user.UserId = $table.RatingFrom
@@ -362,6 +375,16 @@ class ServiceProviderModel{
     function ListFavourite($table,$UserId,$coustomerId)
     {
         $sql_query = "SELECT * FROM $table WHERE TargetUserId = $UserId AND UserId = $coustomerId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+
+        $result  = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function ListBlocked($table,$UserId)
+    {
+        $sql_query = "SELECT * FROM $table WHERE UserId = $UserId AND IsBlocked = '1'";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
 

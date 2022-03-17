@@ -70,7 +70,7 @@
                         style="width:100%">
                         <thead class="text-center">
                             <tr>
-                                <th>Service Id</th>
+                                <!-- <th>Service Id</th> -->
                                 <th>Service Details</th>
                                 <th>Service Provider</th>
                                 <th>Payment</th>

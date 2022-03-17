@@ -183,7 +183,7 @@
                                 </a>
                                 <ul class="dropdown-menu padding-left" aria-labelledby="navbarDropdown">
                                     <li>
-                                        <a class="dropdown-item bordered" href="#">
+                                        <a class="dropdown-item-nav bordered" href="#">
                                             Welcome,<br>
                                             <?php if (isset($_SESSION['UserName'])) { 
                                                 echo $_SESSION['UserName'];   
@@ -195,7 +195,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="<?php 
+                                        <a class="dropdown-item-nav" href="<?php 
                                                 if($_SESSION['UserTypeId'] == 3){
                                                     echo $base_url."?controller=Helperland&function=CustomerServiceDashboard";
                                                 }
@@ -207,7 +207,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" 
+                                        <a class="dropdown-item-nav" 
                                         href="<?php 
                                                 if($_SESSION['UserTypeId'] == 3){
                                                     echo $base_url."?controller=Helperland&function=CustomerSetting";
@@ -220,7 +220,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="<?= $base_url."?controller=User&function=Logout"?>">
+                                        <a class="dropdown-item-nav" href="<?= $base_url."?controller=User&function=Logout"?>">
                                             <!-- Logout -->
                                             Logout
                                             <!-- <form method="POST" action="<?= $base_url."?controller=User&function=Logout"?>" >

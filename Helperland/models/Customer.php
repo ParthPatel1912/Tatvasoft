@@ -113,6 +113,13 @@ class CustomerModel{
         return $count;
     }
 
+    function UpdateZipcodebyUserId($table,$PostalCode, $UserId)
+    {
+        $sql_query = "UPDATE $table SET ZipCode = $PostalCode WHERE $table.UserId = $UserId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+    }
+
     function DeleteAddress($table,$AddressId){
         $sql_query = "UPDATE $table SET IsDeleted = 1 WHERE AddressId = $AddressId";
         $statement = $this->conn->prepare($sql_query);

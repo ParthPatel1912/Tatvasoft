@@ -149,8 +149,9 @@ textarea {
     padding: 0px;
 }
 
-.dropdown-item {
+.dropdown-item-nav {
     color: #fff;
+    text-decoration: none;
 }
 
 .active2 {
@@ -184,6 +185,7 @@ textarea {
 .navbar .navbar-nav .dropdown-menu {
     background-color: transparent;
     border: none;
+    text-decoration: none;
     min-width: 0px;
     left: -15px;
     padding: 0px;
@@ -219,7 +221,7 @@ ul.padding-left li a.bordered {
     border-bottom: 2px solid gray;
 }
 
-ul.padding-left li a.dropdown-item {
+ul.padding-left li a.dropdown-item-nav {
     color: #111 !important;
 }
 
@@ -1431,6 +1433,30 @@ ul.padding-left {
     border-top: transparent !important;
     border-left: transparent !important;
     border-right: transparent !important;
+}
+
+
+/* admin panel */
+
+.table .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: 30px;
+    border-width: 14px;
+    border-style: solid;
+    border-color: transparent transparent #ffffff transparent;
+}
+
+.bi-three-dots-vertical {
+    color: #000;
+    font-size: 1.5em;
+}
+
+.tooltiptext {
+    left: -30px !important;
+    top: 10px !important;
 }
 
 

@@ -56,7 +56,7 @@ class BookserviceController{
                 echo "<select class='form-control' name='CityId' id='CityId' readonly>";
                 echo "<option value='" . $CityId . "'>" . $CityName . "</option>";
                 echo "</select>";
-                echo "<select class='form-control' name='StateId' id='StateId' readonly >";
+                echo "<select class='form-control' name='StateId' id='StateId' readonly hidden>";
                 echo "<option value='" . $StateId . "'>" . $StateId . "</option>";
                 echo "</select>";
             }
@@ -84,6 +84,7 @@ class BookserviceController{
 
     public function InsertAddress()
     {
+        $UserId = $_SESSION['UserId'];
         if(isset($_POST)){
             
             $AddressLine1  = trim($_POST['AddressLine1']);
@@ -139,6 +140,7 @@ class BookserviceController{
                 ];
 
                 $result = $this->model->AddAddress('useraddress', $array);
+                $this->model->UpdateZipcodebyUserId('user',$PostalCode , $UserId);
 
                 if($result){
                     echo 'Address added successfully';
@@ -298,8 +300,6 @@ class BookserviceController{
             }
         }
     }
-
-    
 }
 
 ?>

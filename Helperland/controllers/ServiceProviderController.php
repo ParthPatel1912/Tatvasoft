@@ -188,9 +188,11 @@ class ServiceProviderController{
                     
                     if($AddressId == null){
                         $result3 = $this->model->AddAddress('useraddress', $arrayAddress, $UserId);
+                        $this->model->UpdateZipcodebyUserId('user',$PostalCode , $UserId);
                     }
                     else{
                         $result3 = $this->model->UpdateAddressbyUserId('useraddress', $arrayAddress, $UserId, $AddressId);
+                        $this->model->UpdateZipcodebyUserId('user',$PostalCode , $UserId);
                     }
                 }
 
@@ -308,8 +310,26 @@ class ServiceProviderController{
         $result = $this->model->findFavouriteSPservicerequest('servicerequest');
 
         $json = array();
+        $block = array();
+        $uniqueblock = array();
 
         foreach($result as $data){
+
+            $favouriteblock = $this->model->ListBlocked('favoriteandblocked',$UserId);
+
+            foreach ($favouriteblock as $row) {
+                $blockuserid = $row['TargetUserId'];
+                
+                array_push($block, $blockuserid);
+            }
+
+            $uniqueblock = array_unique($block);
+
+            foreach($uniqueblock as $data){
+                if(!empty($uniqueblock)){
+                    // $result3 = $this->model->NewServiceListByFavouriteSPwithBlock('servicerequest',$UserId,$data);
+                }
+            }
 
             // if($data['FavouriteServiceProviderId']!=null or $data['FavouriteServiceProviderId']!=""){
                 
@@ -395,7 +415,6 @@ class ServiceProviderController{
         }
 
         echo json_encode($json);
-
     }
 
     public function ServiceDetailForModel()

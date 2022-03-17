@@ -55,21 +55,28 @@ class UserModel{
         $UserId = $row['UserId'];
         $UserTypeId = $row['UserTypeId'];
         $IsActive = $row['IsActive'];
+        $status = $row['Status'];
 
         if ($count == 1){
 
             if (password_verify($Password, $row['Password'])) {
 
+                if($status == 'New'){
+                    $sql_query = "UPDATE $table SET Status = 'Active', ModifiedDate = now(), ModifiedBy = $UserId WHERE Email = '$EmailAddress'";
+                    $statement =  $this->conn->prepare($sql_query);
+                    $result = $statement->execute();
+                }
+
                 $_SESSION['UserName'] = $Name;
                 $_SESSION['UserId'] = $UserId;
                 $_SESSION['UserTypeId'] = $UserTypeId;
-                return array($count,$UserTypeId,$Name,$IsActive);
+                return array($count,$UserTypeId,$Name,$IsActive,$status);
             }
         }
 
         else {
 
-            return array($count,$UserTypeId,$Name,$IsActive);
+            return array($count,$UserTypeId,$Name,$IsActive,$status);
         }
     }
 
@@ -152,10 +159,12 @@ class UserModel{
         $sql_query = "SELECT * FROM $table WHERE Resetkey = '$Resetkey' AND IsActive = 'No'";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        $UserId = $row['UserId'];
         $count = $statement->rowCount();
 
         if($count == 1){
-            $sql_query = "UPDATE $table SET IsActive = 'Yes' WHERE Resetkey='$Resetkey'";
+            $sql_query = "UPDATE $table SET IsActive = 'No', Status = 'Accept', ModifiedDate = now(), ModifiedBy = $UserId WHERE Resetkey='$Resetkey'";
             $statement =  $this->conn->prepare($sql_query);
             $result = $statement->execute();
             

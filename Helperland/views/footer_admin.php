@@ -12,6 +12,15 @@
         <?php require('../assets/js/validation.js');?>
     </script>
 
+    <div id="iframeloading" 
+        style="top: 35%;
+        display:none;
+        position: fixed;
+        left: 40%;
+        height: 100%;">
+        <img src="../assets/img/Double Ring.gif" alt="loading" />
+    </div>
+
 <?php  if (isset($_SESSION['message_title']) && isset($_SESSION['message_text']) && isset($_SESSION['message_icon'])){ ?>
     <script>
         $(document).ready(function() {

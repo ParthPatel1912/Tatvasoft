@@ -691,6 +691,17 @@ $(document).ready(function() {
 
     });
 
+    $('#Details').on('click', function() {
+        if ($('#Details').find('.invalid-inputBorder').length > 0) {
+            $('#save-detail').addClass('disabled');
+
+        } else {
+            $('#save-detail').removeClass('disabled');
+
+        }
+
+    });
+
     $('#ChangePassword').on('input', function() {
         if ($('#ChangePassword').find('.valid-inputBorder').length == 3) {
             $('#change-password').removeClass('disabled');
@@ -725,17 +736,17 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=AddressList",
-            data: {
-
-            },
-            success: function(response) {
-                $('#allAddress').html(response);
-            }
-        });
+        customerAddressList();
 
         $('#change-password').css('pointerEvents', 'none');
+
+        if ($('#Details').find('.valid-inputBorder').length == 7) {
+            $('#save-detail').removeClass('disabled');
+
+        } else {
+            $('#save-detail').addClass('disabled');
+
+        }
 
     }
 
@@ -832,15 +843,7 @@ $(document).ready(function() {
                 }
             });
 
-            $.ajax({
-                url: URL + "?controller=Customer&function=AddressList",
-                data: {
-
-                },
-                success: function(response) {
-                    $('#allAddress').html(response);
-                }
-            });
+            customerAddressList();
         });
     });
 
@@ -949,15 +952,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=AddressList",
-            data: {
-
-            },
-            success: function(response) {
-                $('#allAddress').html(response);
-            }
-        });
+        customerAddressList();
     });
 
     $('#allAddress').on('click', ".Deleteaddress", function() {
@@ -991,15 +986,8 @@ $(document).ready(function() {
                     }
                 }
             });
-            $.ajax({
-                url: URL + "?controller=Customer&function=AddressList",
-                data: {
 
-                },
-                success: function(response) {
-                    $('#allAddress').html(response);
-                }
-            });
+            customerAddressList();
         });
     });
 
@@ -1011,17 +999,9 @@ $(document).ready(function() {
     // customer service dashboard
 
     if (window.location.href.indexOf('CustomerServiceDashboard.php') != -1) {
-        $.ajax({
-            url: URL + "?controller=Customer&function=ListCustomerServiceDashboard",
-            data: {
 
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('#DashboardData').html(response);
-                showCustomerServiceDashboard(response);
-            }
-        });
+        ListCustomerServiceDashboard();
+
     }
 
     $('#DashboardData').on('click', 'td:not(:last-child)', function() {
@@ -1232,17 +1212,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=ListCustomerServiceDashboard",
-            data: {
-
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('#DashboardData').html(response);
-                showCustomerServiceDashboard(response);
-            }
-        });
+        ListCustomerServiceDashboard();
 
     });
 
@@ -1288,17 +1258,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=ListCustomerServiceDashboard",
-            data: {
-
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('#DashboardData').html(response);
-                showCustomerServiceDashboard(response);
-            }
-        });
+        ListCustomerServiceDashboard();
 
     });
 
@@ -1306,20 +1266,8 @@ $(document).ready(function() {
     // customer service history
 
     if (window.location.href.indexOf('ServiceHistory.php') != -1) {
-        $.ajax({
-            url: URL + "?controller=Customer&function=ListCustomerServiceHistory",
-            data: {
-
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('#HistoryData').html(response);
-                showCustomerServiceHistory(response);
-            }
-        });
+        ListCustomerServiceHistory();
     }
-
-
 
 
     // star rating for sp
@@ -1645,17 +1593,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=ListCustomerServiceHistory",
-            data: {
-
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('#HistoryData').html(response);
-                showCustomerServiceHistory(response);
-            }
-        });
+        ListCustomerServiceHistory();
     });
 
 
@@ -1663,15 +1601,7 @@ $(document).ready(function() {
 
     if (window.location.href.indexOf('FavouriteProns.php') != -1) {
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=FavouritePronsList",
-            data: {
-
-            },
-            success: function(response) {
-                $('#favouritePron').html(response);
-            }
-        });
+        FavouritePronsList();
 
     }
 
@@ -1705,15 +1635,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=FavouritePronsList",
-            data: {
-
-            },
-            success: function(response) {
-                $('#favouritePron').html(response);
-            }
-        });
+        FavouritePronsList();
 
     });
 
@@ -1747,15 +1669,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=FavouritePronsList",
-            data: {
-
-            },
-            success: function(response) {
-                $('#favouritePron').html(response);
-            }
-        });
+        FavouritePronsList();
 
     });
 
@@ -1789,15 +1703,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=FavouritePronsList",
-            data: {
-
-            },
-            success: function(response) {
-                $('#favouritePron').html(response);
-            }
-        });
+        FavouritePronsList();
 
     });
 
@@ -1831,15 +1737,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=Customer&function=FavouritePronsList",
-            data: {
-
-            },
-            success: function(response) {
-                $('#favouritePron').html(response);
-            }
-        });
+        FavouritePronsList();
 
     });
 
@@ -1941,7 +1839,7 @@ $(document).ready(function() {
 
         $('#change-password').css('pointerEvents', 'none');
 
-        if ($('#Service-Details').find('.valid-inputBorder').length > 0) {
+        if ($('#Service-Details').find('.invalid-inputBorder').length > 0) {
             $('#save-detail').addClass('disabled');
 
         } else {
@@ -1974,20 +1872,12 @@ $(document).ready(function() {
     });
 
 
-    // service provider 
+    // service provider new service request
 
     if (window.location.href.indexOf('NewServiceRequests.php') != -1) {
-        $.ajax({
-            url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
-            data: {
 
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('.new-service-request').html(response);
-                showNewServiceRequests(response);
-            }
-        });
+        NewServiceRequest();
+
     }
 
     $('.new-service-request').on('click', 'td:not(:last-child)', function() {
@@ -2061,17 +1951,7 @@ $(document).ready(function() {
                 // alert(response)
             }
         });
-        $.ajax({
-            url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
-            data: {
-
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('.new-service-request').html(response);
-                showNewServiceRequests(response);
-            }
-        });
+        NewServiceRequest();
     });
 
     $('.Accept').click(function() {
@@ -2116,36 +1996,15 @@ $(document).ready(function() {
                 }
             }
         });
-        $.ajax({
-            url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
-            data: {
-
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('.new-service-request').html(response);
-                showNewServiceRequests(response);
-            }
-        });
+        NewServiceRequest();
     });
 
 
     // upcoming services
 
     if (window.location.href.indexOf('UpcomingServices.php') != -1) {
-        $.ajax({
-            url: URL + "?controller=ServiceProvider&function=UpcominngServiceList",
-            data: {
 
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('#upcomingService').html(response);
-                showUpcomingService(response);
-            }
-        });
-
-
+        UpcominngServiceList();
 
         // table = $("#upcoming-service").DataTable({
         //     "bPaginate": true,
@@ -2273,17 +2132,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=ServiceProvider&function=UpcominngServiceList",
-            data: {
-
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('#upcomingService').html(response);
-                showUpcomingService(response);
-            }
-        });
+        UpcominngServiceList();
     });
 
     $('.CancelUpcoming').on('click', function() {
@@ -2318,17 +2167,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=ServiceProvider&function=UpcominngServiceList",
-            data: {
-
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('#upcomingService').html(response);
-                showUpcomingService(response);
-            }
-        });
+        UpcominngServiceList();
     });
 
     $('.CompleteUpcoming').on('click', function() {
@@ -2364,17 +2203,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=ServiceProvider&function=UpcominngServiceList",
-            data: {
-
-            },
-            dataType: 'json',
-            success: function(response) {
-                // $('#upcomingService').html(response);
-                showUpcomingService(response);
-            }
-        });
+        UpcominngServiceList();
     });
 
 
@@ -2442,15 +2271,7 @@ $(document).ready(function() {
 
     if (window.location.href.indexOf('BlockCustomer.php') != -1) {
 
-        $.ajax({
-            url: URL + "?controller=ServiceProvider&function=BlockCoustomerList",
-            data: {
-
-            },
-            success: function(response) {
-                $('#blockCoustomer').html(response);
-            }
-        });
+        BlockCoustomerList();
 
     }
 
@@ -2484,15 +2305,7 @@ $(document).ready(function() {
             }
         });
 
-        $.ajax({
-            url: URL + "?controller=ServiceProvider&function=BlockCoustomerList",
-            data: {
-
-            },
-            success: function(response) {
-                $('#blockCoustomer').html(response);
-            }
-        });
+        BlockCoustomerList();
 
     });
 
@@ -2526,16 +2339,610 @@ $(document).ready(function() {
             }
         });
 
+        BlockCoustomerList();
+
+    });
+
+
+    // service request admin
+
+    if (window.location.href.indexOf('ServiceRequets.php') != -1) {
+
         $.ajax({
-            url: URL + "?controller=ServiceProvider&function=BlockCoustomerList",
+            type: 'POST',
+            url: URL + "?controller=Admin&function=ServiceRequestList",
             data: {
 
             },
+            dataType: 'json',
             success: function(response) {
-                $('#blockCoustomer').html(response);
+                // console.log(response)
+                showServiceRequest(response);
             }
         });
 
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Admin&function=GetCustomerList",
+            success: function(response) {
+                // alert(response)
+                $("#customername").append(response);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Admin&function=GetSPList",
+            success: function(response) {
+                // alert(response)
+                $("#serviceprovider").append(response);
+            }
+        });
+
+    }
+
+    $('#searchSR').on('click', function() {
+        ServiceID = $('#ServiceID').val();
+        userid = $('#customername option:selected').val();
+        serviceproviderid = $('#serviceprovider option:selected').val();
+        statues = $('#status option:selected').val();
+        fromdate = $('#fromDate').val();
+        todate = $('#toDate').val();
+
+        // fromdate = fromdate.split("-").reverse().join("-");
+        // todate = todate.split("-").reverse().join("-");
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=GetSearchedSR",
+            data: {
+                "ServiceID": ServiceID,
+                "userid": userid,
+                "serviceproviderid": serviceproviderid,
+                "statues": statues,
+                "fromdate": fromdate,
+                "todate": todate,
+            },
+            dataType: 'json',
+            success: function(response) {
+                showServiceRequest(response);
+            }
+        });
+
+    });
+
+    $('#cleanSR').on('click', function() {
+        $('#ServiceID').val(null);
+        $('#fromDate').val(null);
+        $('#toDate').val(null);
+        $('#customername').val(null).trigger("change");
+        $('#serviceprovider').val(null).trigger("change");
+        $("#status").val(null).trigger("change");
+    });
+
+    $('#service-requets').on('click', ".editReschedule", function(e) {
+        e.preventDefault();
+        id = $(this).attr('id');
+        $('#editReschedulebyAdmin .UPDATE').attr('id', id);
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=ServiceDetailForModel",
+            data: {
+                'servicerequestid': id,
+            },
+            dataType: 'json',
+            success: function(response) {
+                date = response[0]
+                datenew = date.split("-").reverse().join("-");
+                $('#editReschedulebyAdmin #rescheduleDate').val(datenew);
+                $("#editReschedulebyAdmin #rescheduleTime").val(response[1]).change();
+                $('#totaltime').html(response[2]);
+                $('#AddressLine1').val(response[3]);
+                $('#AddressLine2').val(response[4]);
+                $('#Zipcode').val(response[5]);
+                $('#CityName').html(response[6]);
+                $('#StateName').html(response[7]);
+            }
+        });
+
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate() + 1;
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var minDate = year + '-' + month + '-' + day;
+
+        $('#rescheduleDate').attr('min', minDate);
+    });
+
+    $("#editReschedulebyAdmin").on("click change", function() {
+
+        timeValue = $('#editReschedulebyAdmin #rescheduleTime').val();
+
+        var hoursMinutes = timeValue.split(/[.:]/);
+        var Hours = parseInt(hoursMinutes[0]);
+        var Minutes = parseInt(hoursMinutes[1]);
+        var totalTime = Hours + Minutes / 60;
+
+        Hrsvalue = $("#editReschedulebyAdmin #totaltime").text();
+        hour = parseFloat(Hrsvalue);
+
+        if (totalTime + hour > 21) {
+            time = 21 - hour;
+            $('.error21Hour').text("Booking change not saved! The helper must be able to finish cleaning by 9:00 p.m.")
+            time = parseInt(time)
+            $('#editReschedulebyAdmin .UPDATE').addClass('disabled');
+        } else {
+            $('.error21Hour').empty();
+            $('#editReschedulebyAdmin .UPDATE').removeClass('disabled');
+        }
+
+    });
+
+    $('#Zipcode').on('input', function() {
+        var zipcode = $(this).val();
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Customer&function=CheckAvaibility",
+            data: {
+                'Zipcode': zipcode,
+            },
+            success: function(response) {
+                if ($.trim(response) == "Sevice Available") {
+                    $('#Zipcode').removeClass('invalid-inputBorder').addClass('valid-inputBorder');
+                    $('.Zipcode-error').empty();
+                    if ($('#address').find('.valid-inputBorder').length == 4) {
+                        $('#editReschedulebyAdmin .UPDATE').removeClass('disabled');
+                    }
+
+                } else {
+                    $('#Zipcode').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
+                    $('.Zipcode-error').addClass('text-red').text(response);
+                    $('#editReschedulebyAdmin .UPDATE').addClass('disabled');
+
+                }
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=CheckCity",
+            data: {
+                'Zipcode': zipcode,
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('#CityName').html(response[0]);
+                $('#StateName').html(response[1]);
+            }
+        });
+    });
+
+    $('.UPDATE').on('click', function() {
+        id = $(this).attr('id');
+
+        startdate = $('#rescheduleDate').val();
+        newAdminTime = $('#rescheduleTime').val();
+        dateNew = startdate.split("-").reverse().join("-");
+
+        addressline1 = $('#AddressLine1').val();
+        addressline2 = $('#AddressLine2').val();
+        zipcode = $('#Zipcode').val();
+        cityname = $('#CityName').text();
+        statename = $('#StateName').text();
+        rescheduleComment = $('#rescheduleComment').val();
+
+        $("#iframeloading").show();
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=RescheduleService",
+            data: {
+                'dateNew': dateNew,
+                'newAdminTime': newAdminTime,
+                'addressline1': addressline1,
+                'addressline2': addressline2,
+                'zipcode': zipcode,
+                'cityname': cityname,
+                'statename': statename,
+                'rescheduleComment': rescheduleComment,
+                'serviceRequestId': id,
+            },
+            success: function(response) {
+                $("#iframeloading").hide();
+                if ($.trim(response) == "updated successfully") {
+                    Swal.fire({
+                        title: 'Updated Succefully',
+                        text: '',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Update not done',
+                        text: '',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=ServiceRequestList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // console.log(response)
+                showServiceRequest(response);
+            }
+        });
+    });
+
+    $('#editReschedulebyAdmin .close').click(function() {
+        $('#rescheduleComment').val('');
+        $('#rescheduleComment').empty();
+    });
+
+    $('#service-requets').on('click', 'td:not(:last-child)', function() {
+        ServiceRequestId = $(this).attr('id');
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=ServiceProvider&function=ServiceDetailForModel",
+            data: {
+                'ServiceRequestId': ServiceRequestId,
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#ServiceStartDate').html(response[0]);
+                $('#ServiceTime').html(response[1]);
+                $('#TotalHour').html(response[2] + ' hr');
+                $('#ServiceRequestId').html(response[3]);
+                $('#service').html(response[4]);
+                $('#TotalCost').html(response[5] + ' €');
+                $('#coustomerName').html(response[6]);
+                $('#Address').html(response[7]);
+                $('#Comments').html(response[8]);
+                $('#HasPets').html(response[9]);
+            }
+        });
+        $('#ServiceAllDetail').modal('show');
+    });
+
+    $('#service-requets').on('click', ".refund", function(e) {
+        e.preventDefault();
+
+        id = $(this).attr('id');
+        $('#refundmodal .refundamount').attr('id', id);
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=ServiceDetailForModel",
+            data: {
+                'servicerequestid': id,
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('.paid').text(response[8]);
+                $('.refunded').text(response[9]);
+
+                balance = response[8] - response[9];
+                balance = balance.toFixed(2);
+                $('.accountbalance').text(balance);
+
+                $('#refundmodal .refundamount').addClass('disabled');
+            }
+        });
+    });
+
+    $('.calculate').on('click', function(e) {
+        e.preventDefault();
+        amount = $('.percentage option:selected').val();
+        inputamount = $('.pricesinput').val();
+        accountbalance = $('.accountbalance').text();
+        accountbalance = parseFloat(accountbalance);
+
+        if (amount == 'Percentage') {
+            if (inputamount < 0) {
+                $('.amountError').text('Percentage must be greater than 0');
+                $('#refundmodal .refundamount').addClass('disabled');
+                $('#refundmodal .finalValue').val(null);
+
+            } else if (inputamount > 100) {
+                $('.amountError').text('Percentage must be less than 100');
+                $('#refundmodal .refundamount').addClass('disabled');
+                $('#refundmodal .finalValue').val(null);
+
+            } else {
+                $('.amountError').text('');
+                $('#refundmodal .refundamount').removeClass('disabled');
+
+                finalamout = accountbalance * (inputamount / 100);
+                finalamout = parseFloat(finalamout.toFixed(2));
+                $('#refundmodal .finalValue').val(finalamout);
+            }
+        }
+
+        if (amount == 'Fixed') {
+            if (inputamount > accountbalance) {
+                $('.amountError').text('Amount must be less than Balance Amount');
+                $('#refundmodal .refundamount').addClass('disabled');
+                $('#refundmodal .finalValue').val(null);
+
+            } else {
+                $('.amountError').text('');
+                $('#refundmodal .refundamount').removeClass('disabled');
+                $('#refundmodal .finalValue').val(inputamount);
+            }
+        }
+    });
+
+    $('.refundamount').on('click', function() {
+        id = $(this).attr('id');
+        refundComment = $('.refundComment').val();
+
+        refundamount = $('#refundmodal .finalValue').val();
+
+        if (refundamount != '' || refundamount != null) {
+            $.ajax({
+                type: 'POST',
+                url: URL + "?controller=Admin&function=RefundAmount",
+                data: {
+                    'servicerequestid': id,
+                    'refundamount': refundamount,
+                    'refundComment': refundComment,
+                },
+                success: function(response) {
+                    if ($.trim(response) == "Refund success") {
+                        Swal.fire({
+                            title: 'Refund Succeffully',
+                            text: '',
+                            icon: 'success',
+                            confirmButtonText: 'Done'
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Refund not done',
+                            text: '',
+                            icon: 'error',
+                            confirmButtonText: 'Done'
+                        });
+                    }
+                }
+            });
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=ServiceRequestList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                showServiceRequest(response);
+            }
+        });
+
+    });
+
+    $('#refundmodal .close').click(function() {
+        $('.finalValue').val(null);
+        $('.pricesinput').val(null);
+    });
+
+    $('#service-requets').on('click', ".Cancel", function(e) {
+        e.preventDefault;
+        id = $(this).attr('id');
+
+        $("#iframeloading").show();
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=CancelService",
+            data: {
+                'servicerequestid': id,
+            },
+            success: function(response) {
+                $("#iframeloading").hide();
+                if ($.trim(response) == "Service cancelled successfully") {
+
+                    Swal.fire({
+                        position: 'center',
+                        title: 'Service cancelled successfully',
+                        text: '',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        title: 'Service not cancelled',
+                        text: '',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=ServiceRequestList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                showServiceRequest(response);
+            }
+        });
+    });
+
+
+    // user management admin
+
+    if (window.location.href.indexOf('UserManagement.php') != -1) {
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=UserManagementList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                // alert(response)
+                // console.log(response)
+                showUserManagement(response);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: URL + "?controller=Admin&function=GetUserRole",
+            success: function(response) {
+                // alert(response)
+                $("#username").append(response);
+            }
+        });
+    }
+
+    $('#searchUM').on('click', function() {
+        username = $('#username option:selected').val();
+        userrole = $('#userrole option:selected').val();
+        MobileNumber = $('#MobileNumber').val();
+        Postal = $('#Postal').val();
+        email = $('#email').val();
+        Fromdate = $('#FromDate').val();
+        Todate = $('#ToDate').val();
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=GetSearchedUM",
+            data: {
+                'username': username,
+                'userrole': userrole,
+                'mobilenumber': MobileNumber,
+                'postal': Postal,
+                'email': email,
+                'fromdate': Fromdate,
+                'todate': Todate
+            },
+            dataType: 'json',
+            success: function(response) {
+                showUserManagement(response);
+            }
+        });
+    });
+
+    $('#cleanUM').on('click', function() {
+        $('#username').val(null).trigger("change");
+        $('#userrole').val(null).trigger("change");
+        $('#MobileNumber').val(null);
+        $('#Postal').val(null);
+        $('#FromDate').val(null);
+        $('#ToDate').val(null);
+        $('#email').val(null);
+    });
+
+    $('#user-management').on('click', ".Deactivate", function(e) {
+        e.preventDefault();
+        id = $(this).attr('id');
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=DeactivateUser",
+            data: {
+                'uid': id,
+            },
+            // dataType: 'json',
+            success: function(response) {
+                if ($.trim(response) == "deactive successfully") {
+                    Swal.fire({
+                        title: 'Deactivation Succefully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Deactivation not done',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=UserManagementList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                showUserManagement(response);
+            }
+        });
+    });
+
+    $('#user-management').on('click', ".Activate", function(e) {
+        e.preventDefault();
+        id = $(this).attr('id');
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=ActivateUser",
+            data: {
+                'uid': id,
+            },
+            // dataType: 'json',
+            success: function(response) {
+                if ($.trim(response) == "active successfully") {
+                    Swal.fire({
+                        title: 'Activation Succefully',
+                        text: '',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Deactivation not done',
+                        text: '',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                    });
+                }
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=Admin&function=UserManagementList",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(response) {
+                showUserManagement(response);
+            }
+        });
     });
 
 });
@@ -3650,8 +4057,8 @@ function showCustomerServiceHistory(data) {
     myTable.clear().draw();
     data.forEach(function(dt) {
         myTable.row.add($(
+            // ` + dt.serviceid + `
             `<tr>
-                    ` + dt.serviceid + `
                     ` + dt.datetime + `
                     ` + dt.spDetails + `
                     ` + dt.totalcost + `
@@ -3659,5 +4066,145 @@ function showCustomerServiceHistory(data) {
                     ` + dt.action + `
             </tr>`
         )).draw();
+    });
+}
+
+// admin
+
+function showServiceRequest(data) {
+    var myTable = $('#service-requets').DataTable();
+    myTable.clear().draw();
+    data.forEach(function(dt) {
+        myTable.row.add($(
+            `<tr>
+                    ` + dt.serviceid + `
+                    ` + dt.datetime + `
+                    ` + dt.nameaddress + `
+                    ` + dt.SPdeatil + `
+                    ` + dt.rowstatus + `
+                    ` + dt.rowaction + `
+            </tr>`
+        )).draw();
+    });
+}
+
+function showUserManagement(data) {
+    var myTable = $('#user-management').DataTable();
+    myTable.clear().draw();
+    data.forEach(function(dt) {
+        myTable.row.add($(
+            // ` + dt.city + `
+            // ` + dt.radious + `
+            `<tr>
+                    ` + dt.name + `
+                    ` + dt.userrole + `
+                    ` + dt.date + `
+                    ` + dt.usertype + `
+                    ` + dt.phone + `
+                    ` + dt.pincode + `
+                    ` + dt.userstatus + `
+                    ` + dt.action + `
+            </tr>`
+        )).draw();
+    });
+}
+
+
+// axaj list fill common method
+
+// coustomer
+
+function customerAddressList() {
+    $.ajax({
+        url: URL + "?controller=Customer&function=AddressList",
+        data: {
+
+        },
+        success: function(response) {
+            $('#allAddress').html(response);
+        }
+    });
+}
+
+function ListCustomerServiceDashboard() {
+    $.ajax({
+        url: URL + "?controller=Customer&function=ListCustomerServiceDashboard",
+        data: {
+
+        },
+        dataType: 'json',
+        success: function(response) {
+            // $('#DashboardData').html(response);
+            showCustomerServiceDashboard(response);
+        }
+    });
+}
+
+function ListCustomerServiceHistory() {
+    $.ajax({
+        url: URL + "?controller=Customer&function=ListCustomerServiceHistory",
+        data: {
+
+        },
+        dataType: 'json',
+        success: function(response) {
+            // $('#HistoryData').html(response);
+            showCustomerServiceHistory(response);
+        }
+    });
+}
+
+function FavouritePronsList() {
+    $.ajax({
+        url: URL + "?controller=Customer&function=FavouritePronsList",
+        data: {
+
+        },
+        success: function(response) {
+            $('#favouritePron').html(response);
+        }
+    });
+}
+
+// service provider
+
+function NewServiceRequest() {
+    $.ajax({
+        url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
+        data: {
+
+        },
+        dataType: 'json',
+        success: function(response) {
+            // $('.new-service-request').html(response);
+            // console.log(response);
+            showNewServiceRequests(response);
+        }
+    });
+}
+
+function UpcominngServiceList() {
+    $.ajax({
+        url: URL + "?controller=ServiceProvider&function=UpcominngServiceList",
+        data: {
+
+        },
+        dataType: 'json',
+        success: function(response) {
+            // $('#upcomingService').html(response);
+            showUpcomingService(response);
+        }
+    });
+}
+
+function BlockCoustomerList() {
+    $.ajax({
+        url: URL + "?controller=ServiceProvider&function=BlockCoustomerList",
+        data: {
+
+        },
+        success: function(response) {
+            $('#blockCoustomer').html(response);
+        }
     });
 }

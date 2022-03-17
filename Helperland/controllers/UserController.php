@@ -331,7 +331,7 @@ class UserController{
     {
         $base_urlCoustomer = "?controller=Helperland&function=ServiceHistory";
         $base_urlService = "?controller=Helperland&function=UpcomingServices";
-        $base_urlAdmin = "?controller=Helperland&function=UserManagement";
+        $base_urlAdmin = "?controller=Helperland&function=ServiceRequets";
         $base_urlLoginModal = $_SESSION['base_url'].'#LoginModal';
 
         if (isset($_POST)) {
@@ -349,6 +349,7 @@ class UserController{
             $UserTypeId = $result[1];
             $Name = $result[2];
             $IsActive = $result[3];
+            $status = $result[4];
 
             if ($count == 1){
 
@@ -374,10 +375,18 @@ class UserController{
                     }
                 }
                 else{
-                    $_SESSION['user_title'] = "Please Active your Account";
-                    $_SESSION['user_text'] = "Mail sent in ".$EmailAddress;
-                    $_SESSION['user_icon'] = "error";
-                    header('Location: '. $base_urlLoginModal);
+                    if($status == "Accept"){
+                        $_SESSION['user_title'] = "Admin will accept very soon";
+                        $_SESSION['user_text'] = "Or Admin deactivate You";
+                        $_SESSION['user_icon'] = "error";
+                        header('Location: '. $base_urlLoginModal);
+                    }
+                    else{
+                        $_SESSION['user_title'] = "Please Active your Account";
+                        $_SESSION['user_text'] = "Mail sent in ".$EmailAddress;
+                        $_SESSION['user_icon'] = "error";
+                        header('Location: '. $base_urlLoginModal);
+                    }
                 }
             }
             else {

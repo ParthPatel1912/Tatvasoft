@@ -21,7 +21,7 @@
                             <input type="email" class="form-control check_emailForgot" id="emailAddressForgot" placeholder="Email" name="EmailAddress">
                         </div>
                         <div class="container text-center">
-                            <button type="submit" class="btn rounded-pill active font-white" style="width: 100%;">Send</button>
+                            <button type="submit" data-dismiss="modal" class="btn rounded-pill active font-white" style="width: 100%;">Send</button>
                         </div>
                     </form>
                     <div class="form-group mb-2 text-center pt-2">
@@ -31,10 +31,10 @@
                         </div>
                 </div>
             </div>
-            <div class="modal-footer justify-content-between">
+            <!-- <div class="modal-footer justify-content-between">
                 <button type="button" class="close btn btn-secondary" data-dismiss="modal">Close</button>
-                <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
-            </div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div> -->
         </div>
     </div>
 </div>

@@ -74,6 +74,13 @@ class BookModel{
         return $count;
     }
 
+    function UpdateZipcodebyUserId($table,$PostalCode, $UserId)
+    {
+        $sql_query = "UPDATE $table SET ZipCode = $PostalCode WHERE $table.UserId = $UserId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+    }
+
     function SelectFavouriteServiceProvider($table,$UserId){
         $sql_query = "SELECT $table.FavouriteBlockId,$table.UserId,$table.IsFavorite,$table.IsBlocked,user.FirstName,user.LastName,$table.TargetUserId
         FROM $table

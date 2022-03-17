@@ -29,6 +29,11 @@ $(document).ready(function() {
             'aTargets': [-1] /* 1st one, start by the right */
         }],
         pagingType: "full_numbers",
+        "dom": '<"top">Brt<"bottom"flpi><"clear">',
+        "processing": true,
+        lengthMenu: [10, 5, 20, 50, 100, 200, 500],
+        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        responsive: true,
     });
 
 
@@ -43,6 +48,11 @@ $(document).ready(function() {
             'aTargets': [-1] /* 1st one, start by the right */
         }],
         pagingType: "full_numbers",
+        "dom": '<"top">Brt<"bottom"flpi><"clear">',
+        "processing": true,
+        lengthMenu: [10, 5, 20, 50, 100, 200, 500],
+        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        responsive: true,
     });
 
 
@@ -57,6 +67,11 @@ $(document).ready(function() {
             'aTargets': [-1] /* 1st one, start by the right */
         }],
         pagingType: "full_numbers",
+        "dom": '<"top">Brt<"bottom"flpi><"clear">',
+        "processing": true,
+        lengthMenu: [10, 5, 20, 50, 100, 200, 500],
+        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        responsive: true,
     });
 
     var option = {
@@ -85,6 +100,11 @@ $(document).ready(function() {
             'aTargets': [-1] /* 1st one, start by the right */
         }],
         pagingType: "full_numbers",
+        "dom": '<"top">Brt<"bottom"flpi><"clear">',
+        "processing": true,
+        lengthMenu: [10, 5, 20, 50, 100, 200, 500],
+        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        responsive: true,
     });
 
 
@@ -92,13 +112,18 @@ $(document).ready(function() {
 
     $('#user-management').dataTable({
         "bPaginate": true,
-        "bFilter": true,
+        "bFilter": false,
         "bInfo": true,
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
         }],
         pagingType: "full_numbers",
+        "dom": '<"top">Brt<"bottom"flpi><"clear">',
+        "processing": true,
+        lengthMenu: [10, 5, 20, 50, 100, 200, 500],
+        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        responsive: true,
     });
 
 
@@ -114,6 +139,11 @@ $(document).ready(function() {
             'aTargets': [0] /* 1st one, start by the right */
         }],
         pagingType: "full_numbers",
+        "dom": '<"top">Brt<"bottom"flpi><"clear">',
+        "processing": true,
+        lengthMenu: [10, 5, 20, 50, 100, 200, 500],
+        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        responsive: true,
     });
 
 
@@ -121,13 +151,21 @@ $(document).ready(function() {
 
     $('#service-requets').dataTable({
         "bPaginate": true,
-        "bFilter": true,
+        "bFilter": false,
         "bInfo": true,
         'aoColumnDefs': [{
             'bSortable': false,
             'aTargets': [-1] /* 1st one, start by the right */
         }],
         pagingType: "full_numbers",
+        "dom": '<"top">Brt<"bottom"flpi><"clear">',
+        "processing": true,
+        lengthMenu: [10, 5, 20, 50, 100, 200, 500],
+        processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        responsive: true,
+        "order": [
+            [0, "desc"]
+        ]
     });
 
 
@@ -178,135 +216,135 @@ $(document).ready(function() {
 
 });
 
-$(function() {
-    $.contextMenu({
-        selector: '.context-menu_active',
-        trigger: 'left',
-        callback: function(key, options) {},
-        items: {
-            "edit": {
-                name: "Edit"
-            },
-            "deactivate": {
-                name: "Deactivate"
-            }
-        }
-    });
-    $.contextMenu({
-        selector: '.context-menu_inactive',
-        trigger: 'left',
-        callback: function(key, options) {},
-        items: {
-            "edit": {
-                name: "Edit"
-            },
-            "deactivate": {
-                name: "Deactivate"
-            },
-            "servicereques": {
-                name: "Service Request"
-            }
-        }
-    });
-});
+// $(function() {
+//     $.contextMenu({
+//         selector: '.context-menu_active',
+//         trigger: 'left',
+//         callback: function(key, options) {},
+//         items: {
+//             "edit": {
+//                 name: "Edit"
+//             },
+//             "deactivate": {
+//                 name: "Deactivate"
+//             }
+//         }
+//     });
+//     $.contextMenu({
+//         selector: '.context-menu_inactive',
+//         trigger: 'left',
+//         callback: function(key, options) {},
+//         items: {
+//             "edit": {
+//                 name: "Edit"
+//             },
+//             "deactivate": {
+//                 name: "Deactivate"
+//             },
+//             "servicereques": {
+//                 name: "Service Request"
+//             }
+//         }
+//     });
+// });
 
 
-$(function() {
-    $.contextMenu({
-        selector: '.context-menu_new',
-        trigger: 'left',
-        callback: function(key, options) {},
-        items: {
-            "edit_rechedule": {
-                name: "Edit & Rechedule"
-            },
-            "inquery": {
-                name: "Inquiry"
-            },
-            "historylog": {
-                name: "History Log"
-            },
-            "downloadinvoice": {
-                name: "Download Invoice"
-            },
-            "othertransaction": {
-                name: "Other Transaction"
-            }
-        }
-    });
-    $.contextMenu({
-        selector: '.context-menu_pending',
-        trigger: 'left',
-        callback: function(key, options) {},
-        items: {
-            "edit_rechedule": {
-                name: "Edit & Rechedule"
-            },
-            "refund": {
-                name: "Refund"
-            },
-            "cancle": {
-                name: "Cancle"
-            },
-            "changeSP": {
-                name: "Change SP"
-            },
-            "escalate": {
-                name: "Escalate"
-            },
-            "historylog": {
-                name: "History Log"
-            },
-            "downloadinvoice": {
-                name: "Download Invoice"
-            }
-        }
-    });
-    $.contextMenu({
-        selector: '.context-menu_cancelled',
-        trigger: 'left',
-        callback: function(key, options) {},
-        items: {
-            "edit_rechedule": {
-                name: "Edit & Rechedule"
-            },
-            "refund": {
-                name: "Refund"
-            },
-            "inquery": {
-                name: "Inquiry"
-            },
-            "historylog": {
-                name: "History Log"
-            },
-            "downloadinvoice": {
-                name: "Download Invoice"
-            },
-            "othertransaction": {
-                name: "Other Transaction"
-            }
-        }
-    });
-    $.contextMenu({
-        selector: '.context-menu_completed',
-        trigger: 'left',
-        callback: function(key, options) {},
-        items: {
-            "refund": {
-                name: "Refund"
-            },
-            "escalate": {
-                name: "Escalate"
-            },
-            "historylog": {
-                name: "History Log"
-            },
-            "downloadinvoice": {
-                name: "Download Invoice"
-            }
-        }
-    });
-});
+// $(function() {
+//     $.contextMenu({
+//         selector: '.context-menu_new',
+//         trigger: 'left',
+//         callback: function(key, options) {},
+//         items: {
+//             "edit_rechedule": {
+//                 name: "Edit & Rechedule",
+//             },
+//             "inquery": {
+//                 name: "Inquiry"
+//             },
+//             "historylog": {
+//                 name: "History Log"
+//             },
+//             "downloadinvoice": {
+//                 name: "Download Invoice"
+//             },
+//             "othertransaction": {
+//                 name: "Other Transaction"
+//             }
+//         }
+//     });
+//     $.contextMenu({
+//         selector: '.context-menu_pending',
+//         trigger: 'left',
+//         callback: function(key, options) {},
+//         items: {
+//             "edit_rechedule": {
+//                 name: "Edit & Rechedule"
+//             },
+//             "refund": {
+//                 name: "Refund"
+//             },
+//             "cancle": {
+//                 name: "Cancle"
+//             },
+//             "changeSP": {
+//                 name: "Change SP"
+//             },
+//             "escalate": {
+//                 name: "Escalate"
+//             },
+//             "historylog": {
+//                 name: "History Log"
+//             },
+//             "downloadinvoice": {
+//                 name: "Download Invoice"
+//             }
+//         }
+//     });
+//     $.contextMenu({
+//         selector: '.context-menu_cancelled',
+//         trigger: 'left',
+//         callback: function(key, options) {},
+//         items: {
+//             "edit_rechedule": {
+//                 name: "Edit & Rechedule"
+//             },
+//             "refund": {
+//                 name: "Refund"
+//             },
+//             "inquery": {
+//                 name: "Inquiry"
+//             },
+//             "historylog": {
+//                 name: "History Log"
+//             },
+//             "downloadinvoice": {
+//                 name: "Download Invoice"
+//             },
+//             "othertransaction": {
+//                 name: "Other Transaction"
+//             }
+//         }
+//     });
+//     $.contextMenu({
+//         selector: '.context-menu_completed',
+//         trigger: 'left',
+//         callback: function(key, options) {},
+//         items: {
+//             "refund": {
+//                 name: "Refund"
+//             },
+//             "escalate": {
+//                 name: "Escalate"
+//             },
+//             "historylog": {
+//                 name: "History Log"
+//             },
+//             "downloadinvoice": {
+//                 name: "Download Invoice"
+//             }
+//         }
+//     });
+// });
 
 
 $(document).ready(function() {
@@ -421,6 +459,12 @@ $(document).ready(function() {
         show: false
     });
 
+    $('#ServiceAllDetail').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
+
 });
 
 function LoginModal() {
@@ -438,3 +482,13 @@ function ForgotModal() {
         window.location.href = "";
     });
 }
+
+$(document).ready(function() {
+    $("input[type=number]").on("focus", function() {
+        $(this).on("keydown", function(event) {
+            if (event.keyCode === 38 || event.keyCode === 40) {
+                event.preventDefault();
+            }
+        });
+    });
+});

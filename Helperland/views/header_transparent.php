@@ -90,12 +90,12 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item-nav" href="#">
                                             <img src="../assets/img/ic-flag.png" alt="united kingdom flag" class="county-flag">India
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item-nav" href="#">
                                             <img src="../assets/img/ic-flag.png" alt="united kingdom flag" class="county-flag">USA
                                         </a>
                                     </li>

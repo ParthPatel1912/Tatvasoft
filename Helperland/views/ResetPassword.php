@@ -28,15 +28,15 @@
                             <input type="password" class="form-control" minlength="8" maxlength="14" name="ConfirmPassword" id="ConfirmPassword-reset" placeholder="Confirm Password">
                         </div>
                         <div class="container text-center">
-                            <button type="submit" class="btn rounded-pill active font-white" style="width: 100%;">Reset Password</button>
+                            <button type="submit" data-dismiss="modal" class="btn rounded-pill active font-white" style="width: 100%;">Reset Password</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="modal-footer justify-content-between">
+            <!-- <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button>
-                <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
-            </div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div> -->
         </div>
     </div>
 </div>

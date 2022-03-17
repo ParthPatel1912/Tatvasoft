@@ -3,13 +3,13 @@
     $to = $SPEmail;
     $subject = "Your coustomer Service Request $ServiceRequestsId has been Rescheduled, Please accept";
 
-    $body = "<h4 style='font-size:17px;'>Service Request Id is : <span style='color:blue;'>$ServiceRequestId</span></h4>
+    $body = "<h4 style='font-size:17px;'>Service Request Id is : <span style='color:blue;'>$ServiceRequestsId</span></h4>
 
-               New Date And Time is : <span style='color:red;'>$newTime </span>
+               New Date And Time is : <span style='color:red;'>$newTime and $newDate </span>
                <br>
                More Details you can show from ServiceHistory Section.
                <br>
-               Please Check Service Details And Accept The Service Request for Service ID : $ServiceRequestId";
+               Please Check Service Details And Accept The Service Request for Service ID : $ServiceRequestsId";
 
        //Set content-type header for sending HTML email
     $headers[] = 'From: Parth Shobhana';

@@ -5,7 +5,7 @@
 
     $body = "<h4 style='font-size:17px;'>Service Request Id is : <span style='color:blue;'>$ServiceRequestId</span></h4>
 
-             <h4 style='font-size:17px;'> New Time is : <span style='color:red;'> $newTime </span>
+             <h4 style='font-size:17px;'> New Time and Date is : <span style='color:red;'> $newTime and $newDate </span>
              <br>
              More Reschedule Details You can show from Customer Dashboard Section.
             <br>

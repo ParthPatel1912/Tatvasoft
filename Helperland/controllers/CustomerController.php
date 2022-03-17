@@ -291,6 +291,7 @@ class CustomerController{
                 ];
 
                 $result = $this->model->UpdateAddressbyUserId('useraddress', $array, $UserId, $AddressId);
+                $this->model->UpdateZipcodebyUserId('user',$PostalCode , $UserId);
 
                 if($result){
                     echo 'Address updated successfully';
@@ -308,6 +309,7 @@ class CustomerController{
 
     public function InsertAddress()
     {
+        $UserId = $_SESSION['UserId'];
         if(isset($_POST)){
             
             $AddressLine1  = trim($_POST['AddressLine1']);
@@ -363,6 +365,7 @@ class CustomerController{
                 ];
 
                 $result = $this->model->AddAddress('useraddress', $array);
+                $this->model->UpdateZipcodebyUserId('user',$PostalCode , $UserId);
 
                 if($result){
                     echo 'Address added successfully';
