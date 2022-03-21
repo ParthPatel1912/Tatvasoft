@@ -1999,6 +1999,38 @@ $(document).ready(function() {
         NewServiceRequest();
     });
 
+    $("#chkPets").on('input', function() {
+        if ($('input[type=checkbox]:checked').length == 1) {
+            $.ajax({
+                type: 'POST',
+                url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
+                data: {
+                    'Pets': 0,
+                },
+                dataType: 'json',
+                success: function(response) {
+                    // $('.new-service-request').html(response);
+                    // console.log(response);
+                    showNewServiceRequests(response);
+                }
+            });
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
+                data: {
+                    'Pets': 1,
+                },
+                dataType: 'json',
+                success: function(response) {
+                    // $('.new-service-request').html(response);
+                    // console.log(response);
+                    showNewServiceRequests(response);
+                }
+            });
+        }
+    });
+
 
     // upcoming services
 
@@ -2210,10 +2242,12 @@ $(document).ready(function() {
     // service Provide requests rating
 
     if (window.location.href.indexOf('ServiceProviderRating.php') != -1) {
+        rating = $('#Rating option:selected').val();
         $.ajax({
+            type: 'POST',
             url: URL + "?controller=ServiceProvider&function=ServiceRequestRating",
             data: {
-
+                'rating': rating,
             },
             dataType: 'json',
             success: function(response) {
@@ -2222,6 +2256,22 @@ $(document).ready(function() {
             }
         });
     }
+
+    $('#Rating').on('click change', function() {
+        rating = $('#Rating option:selected').val();
+        $.ajax({
+            type: 'POST',
+            url: URL + "?controller=ServiceProvider&function=ServiceRequestRating",
+            data: {
+                'rating': rating,
+            },
+            dataType: 'json',
+            success: function(response) {
+                // $('#SPrating').html(response);
+                showSPRting(response);
+            }
+        });
+    });
 
 
     // service history for service provider SP
@@ -4169,10 +4219,12 @@ function FavouritePronsList() {
 // service provider
 
 function NewServiceRequest() {
+
     $.ajax({
+        type: 'POST',
         url: URL + "?controller=ServiceProvider&function=NewServiceRequest",
         data: {
-
+            'Pets': 0,
         },
         dataType: 'json',
         success: function(response) {

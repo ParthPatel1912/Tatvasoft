@@ -117,6 +117,11 @@ class HelperlandController{
         header('Location: views/BlockCustomer.php');
     }
 
+    public function ServiceScheduling()
+    {
+        header('Location: views/ServiceScheduling.php');
+    }
+
     public function BookServiceCheckLogin()
     {
         $base_urlLoginModal = '?controller=Helperland&function=HomePage#LoginModal';

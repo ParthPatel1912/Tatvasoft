@@ -49,7 +49,10 @@
                         </a>
                     </div>
                     <div class="side-menu-item">
-                        Service Schedule
+                        <a href="<?= $base_url."?controller=Helperland&function=ServiceScheduling"?>"
+                                        class="style-none text-white">
+                            Service Schedule
+                        </a>
                     </div>
                     <div class="side-menu-item side-menu-item-active">
                        Service History 

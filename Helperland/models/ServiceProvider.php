@@ -188,7 +188,7 @@ class ServiceProviderModel{
         return $row;
     }
 
-    function NewServiceListByFavouriteSP($table,$UserId)
+    function NewServiceListByFavouriteSP($table,$UserId,$Pets)
     {
         $sql_query = "SELECT 
                     $table.ServiceRequestId,
@@ -204,7 +204,8 @@ class ServiceProviderModel{
                     AddressLine2, 
                     City, 
                     State,
-                    PostalCode
+                    PostalCode,
+                    $table.UserId
                 FROM $table
                 left outer join user
                     on user.UserId = $table.Userid
@@ -213,7 +214,8 @@ class ServiceProviderModel{
                 WHERE $table.Status NOT IN ('Completed','Cancelled','Approved')
                 AND ($table.FavouriteServiceProviderId LIKE '%$UserId%'
                     OR $table.FavouriteServiceProviderId is NULL
-                    OR $table.FavouriteServiceProviderId = '')";
+                    OR $table.FavouriteServiceProviderId = '')
+                    AND $table.HasPets $Pets";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
         $row = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -358,14 +360,14 @@ class ServiceProviderModel{
 
     }
 
-    function GetSPRattings($table,$UserId)
+    function GetSPRattings($table,$UserId,$condition)
     {
         $sql_query = "SELECT *,$table.Comments as comment FROM $table 
                         left outer join user
                             on user.UserId = $table.RatingFrom
                         left outer join servicerequest
                             on servicerequest.ServiceRequestId = $table.ServiceRequestId
-                        WHERE RatingTo = $UserId";
+                        WHERE RatingTo = $UserId AND $condition";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
         $result  = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -421,7 +423,7 @@ class ServiceProviderModel{
                     on user.UserId = $table.UserId
                 LEFT OUTER JOIN servicerequestaddress
                     ON servicerequestaddress.ServiceRequestId = $table.ServiceRequestId
-                WHERE $table.Status = 'Completed'
+                WHERE $table.Status IN ('Completed','Refunded')
                 AND $table.ServiceProviderId = $UserId";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
@@ -447,6 +449,36 @@ class ServiceProviderModel{
         $result = $statement->execute();
 
         return $result;
+    }
+
+    function ServiceSchedule($table,$UserId){
+        $sql_query = "SELECT 
+                    $table.ServiceRequestId,
+                    ServiceStartDate,
+                    SelectTime,
+                    TotalHour,
+                    ServiceProviderId,
+                    TotalCost,
+                    servicerequest.Status,
+                    user.FirstName,
+                    user.LastName,
+                    AddressLine1, 
+                    AddressLine2, 
+                    City, 
+                    State,
+                    PostalCode
+                FROM $table
+                left outer join user
+                    on user.UserId = $table.UserId
+                LEFT OUTER JOIN servicerequestaddress
+                    ON servicerequestaddress.ServiceRequestId = $table.ServiceRequestId
+                WHERE $table.Status = 'Approved'
+                AND $table.ServiceProviderId = $UserId";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+        $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $row;
     }
 
 }

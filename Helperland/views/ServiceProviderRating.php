@@ -49,7 +49,10 @@
                     </a>
                 </div>
                 <div class="side-menu-item">
-                    Service Schedule
+                    <a href="<?= $base_url."?controller=Helperland&function=ServiceScheduling"?>"
+                                        class="style-none text-white">
+                        Service Schedule
+                    </a>
                 </div>
                 <div class="side-menu-item">
                     <a href="<?= $base_url."?controller=Helperland&function=ServiceHistoryforSP"?>"
@@ -111,6 +114,20 @@
                         </div>
                     </div> -->
                 <!-- </div> -->
+
+                <div class="form-row">
+                    <div class="col-md-3">
+                    <label class="col-form-label">Rating</label>
+                    <select name="rating" class="form-control" id="Rating">
+                        <option value="All" selected>All</option>
+                        <option value="VeryBad" >Very Bad</option>
+                        <option value="Bad" >Bad</option>
+                        <option value="Good" >Good</option>
+                        <option value="VeryGood" >Very Good</option>
+                        <option value="Excellent" >Excellent</option>
+                    </select>
+                    </div>
+                </div>
                 <table id="sp-rating" class="container table-responsive-lg table-responsive-md table-responsive-sm table-responsive" style="width:100%; border:0; border-collapse: separate;">
 
                     <thead>

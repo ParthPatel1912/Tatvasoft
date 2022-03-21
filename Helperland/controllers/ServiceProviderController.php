@@ -307,114 +307,199 @@ class ServiceProviderController{
     public function NewServiceRequest()
     {
         $UserId = $_SESSION['UserId'];
-        $result = $this->model->findFavouriteSPservicerequest('servicerequest');
+        if(isset($_POST)){
+            $Pets = $_POST['Pets'];
+            $result = $this->model->findFavouriteSPservicerequest('servicerequest');
 
-        $json = array();
-        $block = array();
-        $uniqueblock = array();
-
-        foreach($result as $data){
-
-            $favouriteblock = $this->model->ListBlocked('favoriteandblocked',$UserId);
-
-            foreach ($favouriteblock as $row) {
-                $blockuserid = $row['TargetUserId'];
-                
-                array_push($block, $blockuserid);
+            if($Pets == 0){
+                $petscheck = "= 0";
+            }
+            else{
+                $petscheck = "IN (0,1)";
             }
 
-            $uniqueblock = array_unique($block);
+            $json = array();
+            $block = array();
+            $uniqueblock = array();
 
-            foreach($uniqueblock as $data){
+            foreach($result as $data){
+
+                $favouriteblock = $this->model->ListBlocked('favoriteandblocked',$UserId);
+
+                foreach ($favouriteblock as $row) {
+                    $blockuserid = $row['TargetUserId'];
+                    
+                    array_push($block, $blockuserid);
+                }
+
+                $uniqueblock = array_unique($block);
+
+                foreach($uniqueblock as $data){
+                    if(!empty($uniqueblock)){
+                        // $result3 = $this->model->NewServiceListByFavouriteSPwithBlock('servicerequest',$UserId,$data);
+                    }
+                }
+
+                // if($data['FavouriteServiceProviderId']!=null or $data['FavouriteServiceProviderId']!=""){
+                    
+                //     $result2 = $this->model->NewServiceList('servicerequest');
+
+                // }
+
+                // else{
+                    $result3 = $this->model->NewServiceListByFavouriteSP('servicerequest',$UserId,$petscheck);
+
+                // }
+
+            }
+            
+            foreach($result3 as $row){
+
                 if(!empty($uniqueblock)){
-                    // $result3 = $this->model->NewServiceListByFavouriteSPwithBlock('servicerequest',$UserId,$data);
+                    foreach($uniqueblock as $data){
+                        if($data != $row['UserId']){
+                            
+                                $startTime = $row['SelectTime'];
+                                $totalhour = $row['TotalHour'];
+                                $starttime = explode(":",$startTime);
+                                $totaltime = number_format($totalhour,1);
+                                $endtime = explode(".",$totaltime);
+                
+                                $hour = $starttime[0] + $endtime[0];
+                                $minute = $starttime[1] + $endtime[1]*6;
+                
+                                if($minute == 60){
+                                    $hour = $hour + 1;
+                                    $minute = '00';
+                                }
+                                else if($minute == 0){
+                                    $minute = '00';
+                                }
+                
+                                $EndTime = $hour.':'.$minute;
+                                $fulltime = $row['SelectTime'] . " - " . $EndTime;
+                
+                                $SPfirstname = $row['FirstName'];
+                                $SPlastname = $row['LastName'];
+                                $Name = $SPfirstname." ".$SPlastname;
+                
+                                $Address = " ".$row['AddressLine1']."  ".$row['AddressLine2'].", ".$row['City']."  ".$row['State']." - ".$row['PostalCode']." ";
+                
+                
+                                    $serviceid = '<td id="'.$row['ServiceRequestId'].'">'.$row['ServiceRequestId'].'</td>';
+                                    $datetime = '<td id="'.$row['ServiceRequestId'].'" class="flex">
+                                        <div class="bold"><img src="../assets/img/calendar2.png">
+                                            <span class="padding">'.$row['ServiceStartDate'].'</span>
+                                        </div>
+                                        <div><img src="../assets/img/layer-14.png">
+                                            <span class="padding">
+                                            '.$fulltime.'
+                                            </span>
+                                        </div>
+                                    </td>';
+                                    $nameaddress = '<td id="'.$row['ServiceRequestId'].'">
+                                            '.$Name.'
+                                        <div><img src="../assets/img/layer-719.png">
+                                            <span class="padding">
+                                                '.$Address.'
+                                            </span>
+                                        </div>
+                                    </td>';
+                                    $totalcost = '<td id="'.$row['ServiceRequestId'].'">€ '.$row['TotalCost'].'</td>';
+                                    $conflicttime = '<td id="'.$row['ServiceRequestId'].'">
+                                        
+                                    </td>';
+                                    $action = '<td>
+                                        <input type="button" id="'.$row['ServiceRequestId'].'" class="btn dark-blue btn-sm rounded-pill Accept" value="Accept">
+                                    </td>';
+                
+                                
+                                    $results = array();
+                                    $results['serviceid'] = $serviceid;
+                                    $results['datetime'] = $datetime;
+                                    $results['nameaddress'] = $nameaddress;
+                                    $results['totalcost'] = $totalcost;
+                                    $results['conflicttime'] = $conflicttime;
+                                    $results['action'] = $action;
+                
+                                    array_push($json, $results);
+                        }
+                        else{
+                            return;
+                        }
+                    }
+                }
+
+                else{
+                    $startTime = $row['SelectTime'];
+                    $totalhour = $row['TotalHour'];
+                    $starttime = explode(":",$startTime);
+                    $totaltime = number_format($totalhour,1);
+                    $endtime = explode(".",$totaltime);
+
+                    $hour = $starttime[0] + $endtime[0];
+                    $minute = $starttime[1] + $endtime[1]*6;
+
+                    if($minute == 60){
+                        $hour = $hour + 1;
+                        $minute = '00';
+                    }
+                    else if($minute == 0){
+                        $minute = '00';
+                    }
+
+                    $EndTime = $hour.':'.$minute;
+                    $fulltime = $row['SelectTime'] . " - " . $EndTime;
+
+                    $SPfirstname = $row['FirstName'];
+                    $SPlastname = $row['LastName'];
+                    $Name = $SPfirstname." ".$SPlastname;
+
+                    $Address = " ".$row['AddressLine1']."  ".$row['AddressLine2'].", ".$row['City']."  ".$row['State']." - ".$row['PostalCode']." ";
+
+
+                        $serviceid = '<td id="'.$row['ServiceRequestId'].'">'.$row['ServiceRequestId'].'</td>';
+                        $datetime = '<td id="'.$row['ServiceRequestId'].'" class="flex">
+                            <div class="bold"><img src="../assets/img/calendar2.png">
+                                <span class="padding">'.$row['ServiceStartDate'].'</span>
+                            </div>
+                            <div><img src="../assets/img/layer-14.png">
+                                <span class="padding">
+                                '.$fulltime.'
+                                </span>
+                            </div>
+                        </td>';
+                        $nameaddress = '<td id="'.$row['ServiceRequestId'].'">
+                                '.$Name.'
+                            <div><img src="../assets/img/layer-719.png">
+                                <span class="padding">
+                                    '.$Address.'
+                                </span>
+                            </div>
+                        </td>';
+                        $totalcost = '<td id="'.$row['ServiceRequestId'].'">€ '.$row['TotalCost'].'</td>';
+                        $conflicttime = '<td id="'.$row['ServiceRequestId'].'">
+                            
+                        </td>';
+                        $action = '<td>
+                            <input type="button" id="'.$row['ServiceRequestId'].'" class="btn dark-blue btn-sm rounded-pill Accept" value="Accept">
+                        </td>';
+
+                    
+                        $results = array();
+                        $results['serviceid'] = $serviceid;
+                        $results['datetime'] = $datetime;
+                        $results['nameaddress'] = $nameaddress;
+                        $results['totalcost'] = $totalcost;
+                        $results['conflicttime'] = $conflicttime;
+                        $results['action'] = $action;
+
+                        array_push($json, $results);
                 }
             }
 
-            // if($data['FavouriteServiceProviderId']!=null or $data['FavouriteServiceProviderId']!=""){
-                
-            //     $result2 = $this->model->NewServiceList('servicerequest');
-
-            // }
-
-            // else{
-                $result3 = $this->model->NewServiceListByFavouriteSP('servicerequest',$UserId);
-
-            // }
-
+            echo json_encode($json);
         }
-        
-        foreach($result3 as $row){
-
-
-            $startTime = $row['SelectTime'];
-            $totalhour = $row['TotalHour'];
-            $starttime = explode(":",$startTime);
-            $totaltime = number_format($totalhour,1);
-            $endtime = explode(".",$totaltime);
-
-            $hour = $starttime[0] + $endtime[0];
-            $minute = $starttime[1] + $endtime[1]*6;
-
-            if($minute == 60){
-                $hour = $hour + 1;
-                $minute = '00';
-            }
-            else if($minute == 0){
-                $minute = '00';
-            }
-
-            $EndTime = $hour.':'.$minute;
-            $fulltime = $row['SelectTime'] . " - " . $EndTime;
-
-            $SPfirstname = $row['FirstName'];
-            $SPlastname = $row['LastName'];
-            $Name = $SPfirstname." ".$SPlastname;
-
-            $Address = " ".$row['AddressLine1']."  ".$row['AddressLine2'].", ".$row['City']."  ".$row['State']." - ".$row['PostalCode']." ";
-
-
-                $serviceid = '<td id="'.$row['ServiceRequestId'].'">'.$row['ServiceRequestId'].'</td>';
-                $datetime = '<td id="'.$row['ServiceRequestId'].'" class="flex">
-                    <div class="bold"><img src="../assets/img/calendar2.png">
-                        <span class="padding">'.$row['ServiceStartDate'].'</span>
-                    </div>
-                    <div><img src="../assets/img/layer-14.png">
-                        <span class="padding">
-                        '.$fulltime.'
-                        </span>
-                    </div>
-                </td>';
-                $nameaddress = '<td id="'.$row['ServiceRequestId'].'">
-                        '.$Name.'
-                    <div><img src="../assets/img/layer-719.png">
-                        <span class="padding">
-                            '.$Address.'
-                        </span>
-                    </div>
-                </td>';
-                $totalcost = '<td id="'.$row['ServiceRequestId'].'">€ '.$row['TotalCost'].'</td>';
-                $conflicttime = '<td id="'.$row['ServiceRequestId'].'">
-                    
-                </td>';
-                $action = '<td>
-                    <input type="button" id="'.$row['ServiceRequestId'].'" class="btn dark-blue btn-sm rounded-pill Accept" value="Accept">
-                </td>';
-
-            
-                $results = array();
-                $results['serviceid'] = $serviceid;
-                $results['datetime'] = $datetime;
-                $results['nameaddress'] = $nameaddress;
-                $results['totalcost'] = $totalcost;
-                $results['conflicttime'] = $conflicttime;
-                $results['action'] = $action;
-
-                array_push($json, $results);
-
-        }
-
-        echo json_encode($json);
     }
 
     public function ServiceDetailForModel()
@@ -825,118 +910,142 @@ class ServiceProviderController{
     public function ServiceRequestRating()
     {
         $UserId = $_SESSION['UserId'];
-        $SPRating = $this->model->GetSPRattings('rating',$UserId);
+        if(isset($_POST)){
+            $ratingValue = $_POST['rating'];
 
-        $json = array();
-
-        foreach($SPRating as $row){ 
-            
-            $firstname = $row['FirstName'];
-            $lastname = $row['LastName'];
-            $name = $firstname." ".$lastname;
-
-            $startTime = $row['SelectTime'];
-            $totalhour = $row['TotalHour'];
-            $starttime = explode(":",$startTime);
-            $totaltime = number_format($totalhour,1);
-            $endtime = explode(".",$totaltime);
-
-            $hour = $starttime[0] + $endtime[0];
-            $minute = $starttime[1] + $endtime[1]*6;
-
-            if($minute == 60){
-                $hour = $hour + 1;
-                $minute = '00';
+            if($ratingValue == 'All'){
+                $query = "rating.Ratings BETWEEN '1.0' AND '5.0'";
             }
-            else if($minute == 0){
-                $minute = '00';
+            elseif($ratingValue == 'VeryBad'){
+                $query = "rating.Ratings BETWEEN '0.0' AND '1.0'";
+            }
+            elseif($ratingValue == 'Bad'){
+                $query = "rating.Ratings BETWEEN '1.1' AND '2.0'";
+            }
+            elseif($ratingValue == 'Good'){
+                $query = "rating.Ratings BETWEEN '2.1' AND '3.0'";
+            }
+            elseif($ratingValue == 'VeryGood'){
+                $query = "rating.Ratings BETWEEN '3.1' AND '4.0'";
+            }
+            elseif($ratingValue == 'Excellent'){
+                $query = "rating.Ratings BETWEEN '4.1' AND '5.0'";
             }
 
-            $EndTime = $hour.':'.$minute;
-            $fulltime = $row['SelectTime'] . " - " . $EndTime;
+            $SPRating = $this->model->GetSPRattings('rating',$UserId,$query);
 
-            $values = '';
-            $ratestatus = '';
+            $json = array();
 
-            $sprate =  $row['Ratings'];
-            $spratings = ceil($sprate);
-            $halfstar = $spratings-$sprate;
-            $blankstar = 5-$spratings;
+            foreach($SPRating as $row){
+                
+                $firstname = $row['FirstName'];
+                $lastname = $row['LastName'];
+                $name = $firstname." ".$lastname;
 
-            for($i=1; $i<=$sprate; $i++){
-                $values = $values.'<i class="bi bi-star-fill golden-star" id=""></i> ';
+                $startTime = $row['SelectTime'];
+                $totalhour = $row['TotalHour'];
+                $starttime = explode(":",$startTime);
+                $totaltime = number_format($totalhour,1);
+                $endtime = explode(".",$totaltime);
 
-            }
+                $hour = $starttime[0] + $endtime[0];
+                $minute = $starttime[1] + $endtime[1]*6;
 
-            if($halfstar > 0){ 
-                for($i=0; $i<$halfstar; $i++){
-            
-                    $values = $values.'<i class="bi bi-star-half golden-star" id=""></i> ';
+                if($minute == 60){
+                    $hour = $hour + 1;
+                    $minute = '00';
                 }
-            }
-
-            if($blankstar > 0){ 
-                for($i=0; $i<$blankstar; $i++){
-            
-                    $values = $values.'<i class="bi bi-star-fill" id=""></i> ';
+                else if($minute == 0){
+                    $minute = '00';
                 }
-            }
 
-            if ($sprate > 0.0 && $sprate <= 1.0 ) {
-                $ratestatus = 'Very Bad';
-            }
-            else if ($sprate > 1.0 && $sprate <= 2.0 ) {
-                $ratestatus =  'Bad';
-            }
-            else if ($sprate > 2.0 && $sprate <= 3.0 ) {
-                $ratestatus =  'Good';
-            }
-            else if ($sprate > 3.0 && $sprate <= 4.0 ) {
-                $ratestatus =  'Very Good';
-            }
-            else if ($sprate > 4.0 && $sprate <= 5.0 ) {
-                $ratestatus =  'Excellent';
-            }
+                $EndTime = $hour.':'.$minute;
+                $fulltime = $row['SelectTime'] . " - " . $EndTime;
+
+                $values = '';
+                $ratestatus = '';
+
+                $sprate =  $row['Ratings'];
+                $spratings = ceil($sprate);
+                $halfstar = $spratings-$sprate;
+                $blankstar = 5-$spratings;
+
+                for($i=1; $i<=$sprate; $i++){
+                    $values = $values.'<i class="bi bi-star-fill golden-star" id=""></i> ';
+
+                }
+
+                if($halfstar > 0){ 
+                    for($i=0; $i<$halfstar; $i++){
+                
+                        $values = $values.'<i class="bi bi-star-half golden-star" id=""></i> ';
+                    }
+                }
+
+                if($blankstar > 0){ 
+                    for($i=0; $i<$blankstar; $i++){
+                
+                        $values = $values.'<i class="bi bi-star-fill" id=""></i> ';
+                    }
+                }
+
+                if ($sprate > 0.0 && $sprate <= 1.0 ) {
+                    $ratestatus = 'Very Bad';
+                }
+                else if ($sprate > 1.0 && $sprate <= 2.0 ) {
+                    $ratestatus =  'Bad';
+                }
+                else if ($sprate > 2.0 && $sprate <= 3.0 ) {
+                    $ratestatus =  'Good';
+                }
+                else if ($sprate > 3.0 && $sprate <= 4.0 ) {
+                    $ratestatus =  'Very Good';
+                }
+                else if ($sprate > 4.0 && $sprate <= 5.0 ) {
+                    $ratestatus =  'Excellent';
+                }
 
 
-                $ratingrow = '<td>
-                    <div class="row p-2 mb-3" style="border:1px solid grey">
-                        <div class="col-md-3 mb-2">
-                            <span class="bold">'.$row['ServiceRequestId'].'</span> <br />
-                            <span class="bold"> 
-                            '. $name.'   
-                            </span>
-                        </div>
-                        <div class="col-md-5 mb-2">
-                            <div><img src="../assets/img/calendar2.png"><b><span class="padding">'.$row['ServiceStartDate'].'</span></b> </div>
-                            <div><img src="../assets/img/layer-14.png"> 
-                                <span class="padding">
-                                '.$fulltime.'
-                                </span> 
+                    $ratingrow = '<td>
+                        <div class="row p-2 mb-3" style="border:1px solid grey">
+                            <div class="col-md-3 mb-2">
+                                <span class="bold">'.$row['ServiceRequestId'].'</span> <br />
+                                <span class="bold"> 
+                                '. $name.'   
+                                </span>
+                            </div>
+                            <div class="col-md-5 mb-2">
+                                <div><img src="../assets/img/calendar2.png"><b><span class="padding">'.$row['ServiceStartDate'].'</span></b> </div>
+                                <div><img src="../assets/img/layer-14.png"> 
+                                    <span class="padding">
+                                    '.$fulltime.'
+                                    </span> 
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <span class="bold">Ratings </span><br />
+                                <div>
+                                    '.$values . $ratestatus.'
+                                </div>
+                            </div>
+                            <hr class="mt-2" />
+                            <div class="col-md-12">
+                                <span class="bold"> Customer Comments: </span> '.$row['comment'].'
                             </div>
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <span class="bold">Ratings </span><br />
-                            <div>
-                                '.$values . $ratestatus.'
-                            </div>
-                        </div>
-                        <hr class="mt-2" />
-                        <div class="col-md-12">
-                            <span class="bold"> Customer Comments: </span> '.$row['comment'].'
-                        </div>
-                    </div>
-                </td>';
+                    </td>';
 
 
-                $results = array();
-                $results['raterow'] = $ratingrow;
+                    $results = array();
+                    $results['raterow'] = $ratingrow;
 
-                array_push($json, $results);
+                    array_push($json, $results);
+
+            }
+
+            echo json_encode($json);
 
         }
-
-        echo json_encode($json);
     }
     
     public function ServiceHistory()

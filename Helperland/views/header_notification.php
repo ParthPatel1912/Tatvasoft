@@ -118,7 +118,12 @@
                                     ?>"> Service History</a>
                             </li>
                             <li class="nav-item display-sm">
-                                <a class="nav-link" href="#"> Service Schedule</a>
+                                <a class="nav-link" href="
+                                    <?php 
+                                    if ($_SESSION['UserTypeId'] == 2) { 
+                                        echo $base_url."?controller=Helperland&function=ServiceScheduling";
+                                    }
+                                    ?>"> Service Schedule</a>
                             </li>
                             <li class="nav-item display-sm">
                                 <a class="nav-link" href="<?= $base_url."?controller=Helperland&function=FavouriteProns"?>">  Favourite Pros </a>

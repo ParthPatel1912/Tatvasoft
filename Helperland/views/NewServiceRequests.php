@@ -46,7 +46,10 @@
                         </a>
                     </div>
                     <div class="side-menu-item">
-                        Service Schedule
+                        <a href="<?= $base_url."?controller=Helperland&function=ServiceScheduling"?>"
+                                    class="style-none text-white">
+                            Service Schedule
+                        </a>
                     </div>
                     <div class="side-menu-item">
                     <a href="<?= $base_url."?controller=Helperland&function=ServiceHistoryforSP"?>" class="style-none text-white border-0">Service History</a> 
@@ -59,6 +62,11 @@
                     </div>
                 </div>
                 <div class="col-md-8 table-responsive-lg table-responsive-md table-responsive-sm table-responsive">
+
+                    <div class="col-4">
+                        <label><input type="checkbox" id="chkPets" name="chkPets"> Include pets at home</label>
+                    </div>
+
                     <table id="new-service" class="display table-responsive-lg table-responsive-md table-responsive-sm table-responsive" style="width:100%">
                         <thead>
                             <tr>

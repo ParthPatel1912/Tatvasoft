@@ -983,6 +983,10 @@ class CustomerController{
                     $servicestatus = '<td id="'.$address['ServiceRequestId'].'" ><span class="completed"> Completed </span></td>';
 
                 }
+                if ($address['Status'] == "Refunded") {
+                    $servicestatus = '<td id="'.$address['ServiceRequestId'].'" ><span class="completed"> Refunded </span></td>';
+
+                }
                 if ($address['Status'] == "Cancelled") {
                     $servicestatus = '<td id="'.$address['ServiceRequestId'].'" ><span class="cancelled"> Cancelled </span></td>';
 

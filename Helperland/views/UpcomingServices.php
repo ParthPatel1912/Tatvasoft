@@ -47,7 +47,10 @@
                             Upcoming Services
                     </div>
                     <div class="side-menu-item">
-                        Service Schedule
+                        <a href="<?= $base_url."?controller=Helperland&function=ServiceScheduling"?>"
+                                        class="style-none text-white">
+                            Service Schedule
+                        </a>
                     </div>
                     <div class="side-menu-item">
                     <a href="<?= $base_url."?controller=Helperland&function=ServiceHistoryforSP"?>" class="style-none text-white border-0">Service History</a> 

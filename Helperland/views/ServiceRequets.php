@@ -285,11 +285,11 @@
 
                     </div>
 
-                    <div class="form-row row">
+                    <div class="form-row row mt-2">
                         <label for="" class="mb-2">Why do you want to reschedule the service</label>
                         <div class="row">
                             <div class="me-3">
-                                <textarea id="rescheduleComment" cols="55" rows="3"></textarea>
+                                <textarea id="rescheduleComment" cols="55" rows="3" placeholder="Why do you want to reschedule service request?"></textarea>
                             </div>
                         </div>
                     </div>
@@ -415,9 +415,9 @@
 
                     </div>
                     <div class="form-group mt-2">
-                        <label>Why do you want to reschedule service request?</label>
+                        <label>Why do you want to refund this service request?</label>
                         <textarea class="form-control refundComment"
-                            placeholder="Why do you want to reschedule service request?" rows="3"></textarea>
+                            placeholder="Why do you want to refund this service request?" rows="3"></textarea>
                     </div>
                     <div class="form-row">
                         <button type="submit" data-dismiss="modal" class="btn rounded-pill active font-white mt-3 col-md-12 refundamount">Refund</button>
