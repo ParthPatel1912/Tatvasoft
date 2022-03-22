@@ -1189,7 +1189,7 @@ $(document).ready(function() {
             },
             success: function(response) {
 
-                $("#iframeloading").hide();
+                $("iframeloading").hide();
 
                 if ($.trim(response) == "Update successfully") {
 
@@ -1209,6 +1209,8 @@ $(document).ready(function() {
                     });
 
                 }
+
+                $("iframeloading").hide();
             }
         });
 
@@ -1800,12 +1802,12 @@ $(document).ready(function() {
                     $('.status').addClass('text-green').text('Active');
                 }
 
-                var hidden = document.getElementsByClassName("hidden-input-avtar");
+                var hidden7 = document.getElementsByClassName("hidden-input-avtar");
                 var imgs = document.getElementById("img-avtar-main");
 
                 for (i = 1; i <= 6; i++) {
-                    if (hidden[i].id == photo) {
-                        hidden[i].value = "selected";
+                    if (hidden7[i].id == photo) {
+                        hidden7[i].value = "selected";
                         avtar[i].style.border = "3px solid #146371";
                         var path = "../assets/img/" + photo + ".jpeg";
                         imgs.src = path;
@@ -3187,10 +3189,10 @@ function gotomakepayment() {
 function checkIfSelected(para) {
     var btns = document.getElementsByClassName("circle");
     var imgs = document.getElementsByClassName("img-book-service");
-    var hidden = document.getElementsByClassName("hidden-input");
+    var hidden1 = document.getElementsByClassName("hidden-input");
 
-    if (hidden[para].value == "notselected") {
-        hidden[para].value = "selected";
+    if (hidden1[para].value == "notselected") {
+        hidden1[para].value = "selected";
         btns[para].style.border = "3px solid #146371";
         var path = "../assets/img/" + (para + 1) + "-green.png";
         imgs[para].src = path;
@@ -3223,7 +3225,7 @@ function checkIfSelected(para) {
         }
 
     } else {
-        hidden[para].value = "notselected";
+        hidden1[para].value = "notselected";
         btns[para].style.border = "1px solid gray";
         var path = "../assets/img/" + (para + 1) + ".png";
         imgs[para].src = path;
@@ -3258,21 +3260,21 @@ function checkIfSelected(para) {
 }
 
 function checkFavouriteSelected(para) {
-    var btns = document.getElementsByClassName("round");
-    var hidden = document.getElementsByClassName("hidden-input-favourite");
+    var btns1 = document.getElementsByClassName("round");
+    var hidden2 = document.getElementsByClassName("hidden-input-favourite");
     var favourite = document.getElementsByClassName("border-info");
 
     para = para - 1;
 
-    if (hidden[para].value == "notselected") {
-        hidden[para].value = "selected";
-        btns[para].style.border = "3px solid #146371";
+    if (hidden2[para].value == "notselected") {
+        hidden2[para].value = "selected";
+        btns1[para].style.border = "3px solid #146371";
         favourite[para].style.backgroundColor = "#5bc0de";
         // favouriteServiceProvider.push(favourite[para].id);
 
     } else {
-        hidden[para].value = "notselected";
-        btns[para].style.border = "1px solid gray";
+        hidden2[para].value = "notselected";
+        btns1[para].style.border = "1px solid gray";
         favourite[para].style.backgroundColor = "transparent";
     }
 }
@@ -3769,22 +3771,22 @@ function addValidAddress() {
 // service provider setting 
 
 function checkavtar(para) {
-    var hidden = document.getElementsByClassName("hidden-input-avtar");
+    var hidden3 = document.getElementsByClassName("hidden-input-avtar");
     var avtar = document.getElementsByClassName("img-avtar");
     var imgs = document.getElementById("img-avtar-main");
 
     para = para + 1;
 
-    if (hidden[para].value == "notselected") {
+    if (hidden3[para].value == "notselected") {
 
         for (i = 1; i <= 6; i++) {
-            if (hidden[i].value == "selected") {
-                hidden[i].value = "notselected";
+            if (hidden3[i].value == "selected") {
+                hidden3[i].value = "notselected";
                 avtar[i].style.border = "2px solid gray";
             }
         }
 
-        hidden[para].value = "selected";
+        hidden3[para].value = "selected";
         avtar[para].style.border = "3px solid #146371";
         var path = "../assets/img/" + (para) + "-avtar.jpeg";
         imgs.src = path;
@@ -3841,11 +3843,11 @@ function ValidAddressMatchServiceProvider() {
 }
 
 function updateServiceProviderData() {
-    var hidden = document.getElementsByClassName("hidden-input-avtar");
+    var hidden4 = document.getElementsByClassName("hidden-input-avtar");
 
     for (i = 1; i <= 6; i++) {
-        if (hidden[i].value == "selected") {
-            photoid = hidden[i].id;
+        if (hidden4[i].value == "selected") {
+            photoid = hidden4[i].id;
         }
     }
 
@@ -3911,11 +3913,11 @@ function updateServiceProviderData() {
         }
     });
 
-    var hidden = document.getElementsByClassName("hidden-input-avtar");
+    var hidden5 = document.getElementsByClassName("hidden-input-avtar");
     var avtar = document.getElementsByClassName("img-avtar");
 
     for (i = 0; i <= 6; i++) {
-        if (hidden[i].value == "notselected") {
+        if (hidden5[i].value == "notselected") {
             $('.Selectavtar').addClass('invalid-inputBorder').removeClass('valid-inputBorder');
             $('.avtar-error').addClass('text-red').text('Please profile picture');
         }
@@ -3964,12 +3966,12 @@ function updateServiceProviderData() {
 
             $('.status').text(response[15]);
 
-            var hidden = document.getElementsByClassName("hidden-input-avtar");
+            var hidden6 = document.getElementsByClassName("hidden-input-avtar");
             var imgs = document.getElementById("img-avtar-main");
 
             for (i = 1; i <= 6; i++) {
-                if (hidden[i].id == photo) {
-                    hidden[i].value = "selected";
+                if (hidden6[i].id == photo) {
+                    hidden6[i].value = "selected";
                     avtar[i].style.border = "3px solid #146371";
                     var path = "../assets/img/" + photo + ".jpeg";
                     imgs.src = path;

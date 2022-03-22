@@ -156,9 +156,11 @@ class BookserviceController{
     {
         $result = $this->model->SelectFavouriteServiceProvider('favoriteandblocked',$_SESSION['UserId']);
 
-        foreach($result as $favourite){ ?>
+        $i = 1;
+        foreach($result as $favourite){ 
+            ?>
 
-            <div class="service-box col-md-2" onclick="checkFavouriteSelected(<?= $favourite['FavouriteBlockId']?>)">
+            <div class="service-box col-md-2" onclick="checkFavouriteSelected(<?php echo $i; $i++;?>)">
                 <div class="btn round">
                     <input type="hidden" value="notselected" class="hidden-input-favourite">
                     <img src="../assets/img/cap.png" width="75%" alt="" class="">
@@ -258,6 +260,8 @@ class BookserviceController{
             $MobileNo = " ".$UserAddress['Mobile']." ";
             $allExtraServices = implode(", ",$ExtraServices);
 
+            $block = array();
+
             if($result){
                 $this->model->InsertAddressIdByServiceRequestId('servicerequestaddress',$result,$AddressId);
 
@@ -269,13 +273,37 @@ class BookserviceController{
                 include('BookingMailUser.php');
 
                 if(sizeof($ServiceProvider)>0){
+
+                    $favouriteblock = $this->model->ListBlocked('favoriteandblocked',$UserId);
+
+                    foreach ($favouriteblock as $row) {
+                        $blockuserid = $row['UserId'];
+                        
+                        array_push($block, $blockuserid);
+                    }
+
+                    $uniqueblock = array_unique($block);
+
                     $userServiceprovider = $this->model->GetUsersServiceproviderList('user',$ServiceProvider);
 
                     if(count($userServiceprovider)){
                         foreach($userServiceprovider as $usp){
                             $ServiceRequestsId = $result;
-                            $SPEmail = $usp['Email'];
-                            include('BookingMailServiceProvider.php');
+                            if(!empty($uniqueblock)){
+                                foreach($uniqueblock as $data){
+                                    if($data != $usp['UserId']){
+                                        $SPEmail = $usp['Email'];
+                                        include('BookingMailServiceProvider.php');
+                                    }
+                                    // else{
+                                    //     return;
+                                    // }
+                                }
+                            }
+                            else{
+                                $SPEmail = $usp['Email'];
+                                include('BookingMailServiceProvider.php');
+                            }
                         }
                     }
 
@@ -284,10 +312,34 @@ class BookserviceController{
 
                 else{
                     if(count($Activeserviceprovider)){
+
+                        $favouriteblock = $this->model->ListBlocked('favoriteandblocked',$UserId);
+
+                        foreach ($favouriteblock as $row) {
+                            $blockuserid = $row['UserId'];
+                            
+                            array_push($block, $blockuserid);
+                        }
+
+                        $uniqueblock = array_unique($block);
+
                         foreach($Activeserviceprovider as $asp){
                             $ServiceRequestsId = $result;
-                            $SPEmail = $asp['Email'];
-                            include('BookingMailServiceProvider.php');
+                            if(!empty($uniqueblock)){
+                                foreach($uniqueblock as $data){
+                                    if($data != $asp['UserId']){
+                                        $SPEmail = $asp['Email'];
+                                        include('BookingMailServiceProvider.php');
+                                    }
+                                    // else{
+                                    //     return;
+                                    // }
+                                }
+                            }
+                            else{
+                                $SPEmail = $asp['Email'];
+                                include('BookingMailServiceProvider.php');
+                            }
                         }
                     }
 

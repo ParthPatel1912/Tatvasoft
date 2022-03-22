@@ -22,7 +22,8 @@ class BookModel{
        }
     }
 
-    function checkZipcode($table,$Zipcode){
+    function checkZipcode($table,$Zipcode)
+    {
         $sql_query = "SELECT * FROM $table WHERE ZipcodeValue = '$Zipcode'";
         $statement= $this->conn->prepare($sql_query);
         $statement->execute();
@@ -31,7 +32,8 @@ class BookModel{
         return $count;
     }
 
-    function findCityUsingZipcode($table,$Zipcode){
+    function findCityUsingZipcode($table,$Zipcode)
+    {
         $sql_query = "SELECT * FROM $table
             left OUTER JOIN city
             on city.CityId = zipcode.CityId
@@ -48,7 +50,8 @@ class BookModel{
         return array($CityId,$CityName,$StateId);
     }
 
-    function ListAddress($table,$UserId){
+    function ListAddress($table,$UserId)
+    {
         $sql_query = "SELECT AddressId,UserId,AddressLine1,AddressLine2,PostalCode,Mobile,useraddress.CityId,useraddress.StateId,city.CityName,state.StateName 
         FROM $table 
         LEFT OUTER JOIN city
@@ -65,7 +68,8 @@ class BookModel{
         return $row;
     }
 
-    function AddAddress($table,$array){
+    function AddAddress($table,$array)
+    {
         $sql_query = "INSERT INTO $table (UserId, AddressLine1, AddressLine2, CityId, StateId, PostalCode, Mobile) 
         VALUES (:UserId, :AddressLine1, :AddressLine2, :CityId, :StateId, :PostalCode, :Mobile)";
         $statement = $this->conn->prepare($sql_query);
@@ -81,7 +85,8 @@ class BookModel{
         $statement->execute();
     }
 
-    function SelectFavouriteServiceProvider($table,$UserId){
+    function SelectFavouriteServiceProvider($table,$UserId)
+    {
         $sql_query = "SELECT $table.FavouriteBlockId,$table.UserId,$table.IsFavorite,$table.IsBlocked,user.FirstName,user.LastName,$table.TargetUserId
         FROM $table
         LEFT OUTER JOIN user
@@ -96,7 +101,8 @@ class BookModel{
         return $row;
     }
 
-    function InsertServiceRequest($table,$array){
+    function InsertServiceRequest($table,$array)
+    {
         $sql_query = "INSERT INTO $table(UserId, ServiceStartDate, SelectTime, TotalHour, ZipCode, ServiceHourlyRate, ServiceHours, ExtraHours, SubTotal, Discount, TotalCost, Comments, PaymentTransactionRefNo, PaymentDue, ExtraServicesCount, HasPets, Status, CreatedDate, ModifiedDate, ModifiedBy, RefundedAmount, PaymentDone, RecordVersion, Bed, Bath, FavouriteServiceProviderId) 
                     VALUES (:UserId, :ServiceStartDate, :SelectTime, :TotalHour, :ZipCode, :ServiceHourlyRate, :ServiceHours, :ExtraHours, :SubTotal, :Discount, :TotalCost, :Comments, :PaymentTransactionRefNo, :PaymentDue, :ExtraServicesCount, :HasPets, :Status, now(), now(), :UserId, :RefundedAmount, :PaymentDone, :RecordVersion, :Bed, :Bath, :Favourite)";
 
@@ -107,7 +113,8 @@ class BookModel{
         return $ServiceRequestId;
     }
 
-    function InsertAddressIdByServiceRequestId($table,$ServiceRequestId,$AddressId){
+    function InsertAddressIdByServiceRequestId($table,$ServiceRequestId,$AddressId)
+    {
 
         $sql_query = "SELECT AddressId,useraddress.UserId,user.Email,AddressLine1,AddressLine2,PostalCode,useraddress.Mobile,useraddress.CityId,useraddress.StateId,city.CityName,state.StateName 
         FROM useraddress 
@@ -137,7 +144,8 @@ class BookModel{
         $statement2->execute();
     }
 
-    function InsertExtraServiceByServiceRequesstId($table,$ServiceRequestId,$ServiceExtra){
+    function InsertExtraServiceByServiceRequesstId($table,$ServiceRequestId,$ServiceExtra)
+    {
         
         // foreach($ServiceExtra as $array){
             $sql_query = "INSERT INTO $table (ServiceRequestId, ServiceExtra) 
@@ -147,7 +155,8 @@ class BookModel{
         // }
     }
 
-    function ActiveServiceProviderList($table){
+    function ActiveServiceProviderList($table)
+    {
         $sql_query = "SELECT * FROM $table WHERE UserTypeId = 2 AND `IsActive`='Yes'";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
@@ -155,7 +164,8 @@ class BookModel{
         return $result;
     }
 
-    function GetUsersServiceproviderList($table,$ServiceProvider){
+    function GetUsersServiceproviderList($table,$ServiceProvider)
+    {
         $ListServiceProvider = array();
         foreach($ServiceProvider as $array){
             $sql_query = "SELECT * FROM $table WHERE UserId = {$array}";
@@ -167,7 +177,8 @@ class BookModel{
         return $ListServiceProvider;
     }
 
-    function GetUserDetails($table,$UserId){
+    function GetUserDetails($table,$UserId)
+    {
         $sql_query = "SELECT * FROM $table WHERE UserId = $UserId";
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
@@ -175,7 +186,8 @@ class BookModel{
         return $result;
     }
 
-    function GetUserAddress($table,$AddressId){
+    function GetUserAddress($table,$AddressId)
+    {
         $sql_query = "SELECT AddressId,UserId,AddressLine1,AddressLine2,PostalCode,Mobile,useraddress.CityId,useraddress.StateId,city.CityName,state.StateName 
         FROM $table 
         LEFT OUTER JOIN city
@@ -187,6 +199,16 @@ class BookModel{
         $statement =  $this->conn->prepare($sql_query);
         $statement->execute();
         $result  = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function ListBlocked($table,$UserId)
+    {
+        $sql_query = "SELECT * FROM $table WHERE TargetUserId = $UserId AND IsBlocked = '1'";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+
+        $result  = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 }

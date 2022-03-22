@@ -700,11 +700,14 @@ class CustomerController{
 
     public function UpdateServiceRequestTime()
     {
+        $UID = $_SESSION['UserId'];
         if(isset($_POST)){
 
             $ServiceRequestId = $_POST['serviceid'];
             $newTime = trim($_POST['newtime']);
             $newDate = trim($_POST['newdate']);
+
+            $block = array();
 
             $result = $this->model->GetServiceHistoryUser('servicerequest',$ServiceRequestId);
 
@@ -740,13 +743,36 @@ class CustomerController{
                 ];
                 $updatedresult = $this->model->UpdateServiceTime('servicerequest',$array,$ServiceRequestId);
 
+                $favouriteblock = $this->model->ListBlocked('favoriteandblocked',$UID);
+
+                foreach ($favouriteblock as $row) {
+                    $blockuserid = $row['UserId'];
+                    
+                    array_push($block, $blockuserid);
+                }
+
+                $uniqueblock = array_unique($block);
+
                 if (!empty($ServiceProviderId)) {
                     $spDetails = $this->model->GetUserDetails('user',$ServiceProviderId);
                     if (count($spDetails)) {
                         foreach ($spDetails as $spemail) {
                             $ServiceRequestsId = $ServiceRequestId;
-                            $SPEmail  = $spemail['Email'];
-                            include('ServiceProviderReschedulMail.php');
+                            if(!empty($uniqueblock)){
+                                foreach($uniqueblock as $data){
+                                    if($data != $spemail['UserId']){
+                                        $SPEmail  = $spemail['Email'];
+                                        include('ServiceProviderReschedulMail.php');
+                                    }
+                                    // else{
+                                    //     return;
+                                    // }
+                                }
+                            }
+                            else{
+                                $SPEmail  = $spemail['Email'];
+                                include('ServiceProviderReschedulMail.php');
+                            }
                         }
                     }
                 }
@@ -761,8 +787,21 @@ class CustomerController{
                         if(count($userServiceprovider)){
                             foreach($userServiceprovider as $usp){
                                 $ServiceRequestsId = $ServiceRequestId;
-                                $SPEmail = $usp['Email'];
-                                include('ServiceProviderReschedulMail.php');
+                                if(!empty($uniqueblock)){
+                                    foreach($uniqueblock as $data){
+                                        if($data != $usp['UserId']){
+                                            $SPEmail = $usp['Email'];
+                                            include('ServiceProviderReschedulMail.php');
+                                        }
+                                        // else{
+                                        //     return;
+                                        // }
+                                    }
+                                }
+                                else{
+                                    $SPEmail = $usp['Email'];
+                                    include('ServiceProviderReschedulMail.php');
+                                }
                             }
                         }
                     }
@@ -773,8 +812,21 @@ class CustomerController{
                         if(count($Activeserviceprovider)){
                             foreach($Activeserviceprovider as $asp){
                                 $ServiceRequestsId = $ServiceRequestId;
-                                $SPEmail = $asp['Email'];
-                                include('ServiceProviderReschedulMail.php');
+                                if(!empty($uniqueblock)){
+                                    foreach($uniqueblock as $data){
+                                        if($data != $asp['UserId']){
+                                            $SPEmail = $asp['Email'];
+                                            include('ServiceProviderReschedulMail.php');
+                                        }
+                                        // else{
+                                        //     return;
+                                        // }
+                                    }
+                                }
+                                else{
+                                    $SPEmail = $asp['Email'];
+                                    include('ServiceProviderReschedulMail.php');
+                                }
                             }
                         }
                     }
@@ -795,6 +847,7 @@ class CustomerController{
 
     public function CancelServiceRequest()
     {
+        $UID = $_SESSION['UserId'];
         if(isset($_POST)){
 
             $ServiceRequestId = $_POST['serviceid'];
@@ -828,13 +881,38 @@ class CustomerController{
                 ];
                 $updatedresult = $this->model->CancelService('servicerequest',$array,$ServiceRequestId);
 
+                $block = array();
+
+                $favouriteblock = $this->model->ListBlocked('favoriteandblocked',$UserId);
+
+                foreach ($favouriteblock as $row) {
+                    $blockuserid = $row['UserId'];
+                    
+                    array_push($block, $blockuserid);
+                }
+
+                $uniqueblock = array_unique($block);
+
                 if (!empty($ServiceProviderId)) {
                     $Spemail = $this->model->GetUserDetails('user',$ServiceProviderId);
                     if (count($Spemail)) {
                         foreach ($Spemail as $spemail) {
                             $ServiceRequestsId = $ServiceRequestId;
-                            $SPEmail  = $spemail['Email'];
-                            include('ServiceProviderCancelMail.php');
+                            if(!empty($uniqueblock)){
+                                foreach($uniqueblock as $data){
+                                    if($data != $spemail['UserId']){
+                                        $SPEmail  = $spemail['Email'];
+                                        include('ServiceProviderCancelMail.php');
+                                    }
+                                    // else{
+                                    //     return;
+                                    // }
+                                }
+                            }
+                            else{
+                                $SPEmail  = $spemail['Email'];
+                                include('ServiceProviderCancelMail.php');
+                            }
                         }
                     }
                 }
@@ -849,8 +927,21 @@ class CustomerController{
                         if(count($userServiceprovider)){
                             foreach($userServiceprovider as $usp){
                                 $ServiceRequestsId = $ServiceRequestId;
-                                $SPEmail = $usp['Email'];
-                                include('ServiceProviderCancelMail.php');
+                                if(!empty($uniqueblock)){
+                                    foreach($uniqueblock as $data){
+                                        if($data != $asp['UserId']){
+                                            $SPEmail = $usp['Email'];
+                                            include('ServiceProviderCancelMail.php');
+                                        }
+                                        // else{
+                                        //     return;
+                                        // }
+                                    }
+                                }
+                                else{
+                                    $SPEmail = $usp['Email'];
+                                    include('ServiceProviderCancelMail.php');
+                                }
                             }
                         }
                     }
@@ -861,8 +952,21 @@ class CustomerController{
                         if(count($Activeserviceprovider)){
                             foreach($Activeserviceprovider as $asp){
                                 $ServiceRequestsId = $ServiceRequestId;
-                                $SPEmail = $asp['Email'];
-                                include('ServiceProviderCancelMail.php');
+                                if(!empty($uniqueblock)){
+                                    foreach($uniqueblock as $data){
+                                        if($data != $asp['UserId']){
+                                            $SPEmail = $asp['Email'];
+                                            include('ServiceProviderCancelMail.php');
+                                        }
+                                        // else{
+                                        //     return;
+                                        // }
+                                    }
+                                }
+                                else{
+                                    $SPEmail = $asp['Email'];
+                                    include('ServiceProviderCancelMail.php');
+                                }
                             }
                         }
                     }

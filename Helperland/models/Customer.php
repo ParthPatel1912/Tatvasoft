@@ -305,6 +305,16 @@ class CustomerModel{
         return $result;
     }
 
+    function ListBlocked($table,$UserId)
+    {
+        $sql_query = "SELECT * FROM $table WHERE TargetUserId = $UserId AND IsBlocked = '1'";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+
+        $result  = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
 
 ?>
