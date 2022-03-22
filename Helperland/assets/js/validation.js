@@ -1189,7 +1189,7 @@ $(document).ready(function() {
             },
             success: function(response) {
 
-                $("iframeloading").hide();
+                $("#iframeloading").hide();
 
                 if ($.trim(response) == "Update successfully") {
 
@@ -1209,8 +1209,6 @@ $(document).ready(function() {
                     });
 
                 }
-
-                $("iframeloading").hide();
             }
         });
 
@@ -1237,9 +1235,9 @@ $(document).ready(function() {
             },
             success: function(response) {
 
-                if ($.trim(response) == "Cancelled successfully") {
+                $("#iframeloading").hide();
 
-                    $("#iframeloading").hide();
+                if ($.trim(response) == "Cancelled successfully") {
 
                     Swal.fire({
                         title: 'Your Booking Has Been Cancel Successfully',
@@ -1594,6 +1592,25 @@ $(document).ready(function() {
                 // alert(response);
             }
         });
+
+        let ratings1 = $('.ratings1 .bi');
+        let ratings2 = $('.ratings2 .bi');
+        let ratings3 = $('.ratings3 .bi');
+        var value = '';
+        for (i = 0; i < 5; i++) {
+            ratings1[i].style.removeProperty("color");
+            ratings2[i].style.removeProperty("color");
+            ratings3[i].style.removeProperty("color");
+            value += `<i class="bi bi-star-fill"></i>`;
+        }
+
+        $('#RateSP .STAR-AVG').html(value);
+
+        $('.timemsg').empty();
+        $('.friendlymsg').empty();
+        $('.qualitymsg').empty();
+        $('#feedbackcomment').val('');
+        $('#RateSP .info').text('');
 
         ListCustomerServiceHistory();
     });
