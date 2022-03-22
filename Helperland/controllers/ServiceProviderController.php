@@ -425,7 +425,7 @@ class ServiceProviderController{
                                     array_push($json, $results);
                         }
                         else{
-                            return;
+                            
                         }
                     }
                 }
