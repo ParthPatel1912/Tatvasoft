@@ -142,6 +142,10 @@ class BookModel{
                     VALUES ($ServiceRequestId,$AddressId,'$AddressLine1','$AddressLine2','$CityName','$StateName','$PostalCode','$Mobile','$Email')";
         $statement2 = $this->conn->prepare($sql_query2);
         $statement2->execute();
+
+        $sql_query3 = "UPDATE servicerequest SET ZipCode= $PostalCode WHERE servicerequest.ServiceRequestId = $ServiceRequestId";
+        $statement3 = $this->conn->prepare($sql_query3);
+        $statement3->execute();
     }
 
     function InsertExtraServiceByServiceRequesstId($table,$ServiceRequestId,$ServiceExtra)

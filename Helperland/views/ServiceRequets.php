@@ -88,9 +88,14 @@
 
                         <div class="row ">
                             <div class="col-md-2">
-                                <input type="text" class="form-control" id="ServiceID" placeholder="Service ID">
+                                <input type="number" class="form-control" id="ServiceID" placeholder="Service ID">
                             </div>
-                            <div class="col-md-2 selectdiv">
+                            <div class="col-md-2">
+                                <input type="number" class="form-control" id="pincode" placeholder="Zipcode"
+                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="6">
+                            </div>
+                            <div class="col-md-3 selectdiv">
                                 <select id="customername" name="Customer" class="form-control text-color-gray">
                                     <option selected="true" value="" disabled="disabled">Customer </option>
                                     <!-- <option value="saab">Saab</option>
@@ -98,7 +103,7 @@
                                         <option value="audi">Audi</option> -->
                                 </select>
                             </div>
-                            <div class="col-md-2 selectdiv">
+                            <div class="col-md-3 selectdiv">
                                 <select id="serviceprovider" name="Service Provider"
                                     class="form-control text-color-gray">
                                     <option selected="true" value="" disabled="disabled">Service Provider </option>
@@ -117,6 +122,8 @@
 
                                 </select>
                             </div>
+                        </div>
+                        <div class="row mt-2">
                             <div class="col-md-2">
                                 <!-- <input type="date" name="fromdate" value="" class="form-control text-color-gray" placeholder="From Date"> -->
                                 <input type="text" id="fromDate" placeholder="From Date" class="form-control"
@@ -127,8 +134,6 @@
                                 <input type="text" id="toDate" placeholder="To Date" class="form-control"
                                     onfocus="(this.type='date')" onblur="(this.type='text')">
                             </div>
-                        </div>
-                        <div class="row mt-3">
                             <div class="col-md-1">
                                 <button type="submit" id="searchSR" class="btn btn-md btn-admin">Search</button>
                             </div>
@@ -279,7 +284,7 @@
                             <label class="location">Location</label>
                             <select class='form-control' name='CityId' id='CityName' readonly>
                             </select>
-                            <select class='form-control' name='StateId' id='StateName' readonly>
+                            <select class='form-control' name='StateId' id='StateName' readonly hidden>
                             </select>
                         </div>
 

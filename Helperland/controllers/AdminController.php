@@ -223,20 +223,21 @@ class AdminController{
             $states = trim($_POST['statues']);
             $fromdate = trim($_POST['fromdate']);
             $todate = trim($_POST['todate']);
+            $Pincode = trim($_POST['pincode']);
 
-            if($todate == '' || $todate == null){
-                $todate = date("Y-m-d");
-            }
-            if($fromdate == '' || $fromdate == null){
-                $fromdate = '2020-01-01';
-            }
-
-            if($sid == '' && $uid == '' && $spid == '' && $states == ''){
+            if($sid == '' && $uid == '' && $spid == '' && $states == '' && $fromdate == '' && $todate == '' && $Pincode == ''){
                 $result = $this->model->ListAllRequest('servicerequest');
             }
 
             else{
-                $result = $this->model->SearchServiceRequestList('servicerequest',$sid,$uid,$spid,$states,$fromdate,$todate);
+                if($todate == '' || $todate == null){
+                    $todate = date("Y-m-d", strtotime(' +1 day'));
+                }
+                if($fromdate == '' || $fromdate == null){
+                    $fromdate = '2020-01-01';
+                }
+
+                $result = $this->model->SearchServiceRequestList('servicerequest',$sid,$uid,$spid,$states,$Pincode,$fromdate,$todate);
             }
 
             $json = array();
@@ -828,7 +829,7 @@ class AdminController{
                 }
 
                 $result = $this->model->updateDateTime('servicerequest',$arrayServicerequest,$serviceRequestId);
-                $result2 = $this->model->updateServiceAddress('servicerequestaddress',$arrayServiceaddress,$serviceRequestId);
+                $result2 = $this->model->updateServiceAddress('servicerequestaddress',$arrayServiceaddress,$serviceRequestId,$zipcode);
 
                 $UserDetails = $this->model->GetUserDetails('user',$UserId);
                 if (count($UserDetails)) {
@@ -859,7 +860,7 @@ class AdminController{
 
                         if(count($userServiceprovider)){
                             foreach($userServiceprovider as $usp){
-                                $ServiceRequestsId = $ServiceRequestId;
+                                $ServiceRequestsId = $serviceRequestId;
                                 $SPEmail = $usp['Email'];
                                 $newTime = $dateNew;
                                 $newDate = $newAdminTime;
@@ -873,7 +874,7 @@ class AdminController{
 
                         if(count($Activeserviceprovider)){
                             foreach($Activeserviceprovider as $asp){
-                                $ServiceRequestsId = $ServiceRequestId;
+                                $ServiceRequestsId = $serviceRequestId;
                                 $SPEmail = $asp['Email'];
                                 $newTime = $dateNew;
                                 $newDate = $newAdminTime;

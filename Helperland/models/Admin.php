@@ -108,7 +108,7 @@ class AdminModel{
         return $row;
     }
 
-    function SearchServiceRequestList($table,$sid,$uid,$spid,$states,$fromdate,$todate)
+    function SearchServiceRequestList($table,$sid,$uid,$spid,$states,$Pincode,$fromdate,$todate)
     {
         $sql_query = "SELECT 
                     *,$table.Status as ServiceStatus
@@ -117,7 +117,7 @@ class AdminModel{
                     on user.UserId = $table.UserId
                 LEFT OUTER JOIN servicerequestaddress
                     ON servicerequestaddress.ServiceRequestId = $table.ServiceRequestId
-                WHERE $table.ServiceRequestId LIKE '%$sid%' AND $table.UserId LIKE '%$uid%' AND $table.ServiceProviderId LIKE '%$spid%' AND $table.Status LIKE '%$states%'
+                WHERE $table.ServiceRequestId LIKE '%$sid%' AND $table.UserId LIKE '%$uid%' AND $table.ServiceProviderId LIKE '%$spid%' AND $table.Status LIKE '%$states%' AND $table.ZipCode LIKE '%$Pincode%'
                         AND(STR_TO_DATE(servicerequest.ServiceStartDate,'%d-%m-%Y') BETWEEN '$fromdate' AND '$todate')
                 ORDER BY $table.ServiceRequestId DESC";
 
@@ -199,11 +199,15 @@ class AdminModel{
         return $result;
     }
 
-    function updateServiceAddress($table,$array,$serviceRequestId)
+    function updateServiceAddress($table,$array,$serviceRequestId,$zipcode)
     {
         $sql_query = "UPDATE $table SET AddressLine1 = :addressline1, AddressLine2 = :addressline2, PostalCode = :zipcode, City = :cityname, State = :statename WHERE ServiceRequestId = $serviceRequestId";
         $statement =  $this->conn->prepare($sql_query);
         $result = $statement->execute($array);
+
+        $sql_query3 = "UPDATE servicerequest SET ZipCode= $zipcode WHERE servicerequest.ServiceRequestId = $serviceRequestId";
+        $statement3 = $this->conn->prepare($sql_query3);
+        $statement3->execute();
 
         return $result;
     }
@@ -232,6 +236,26 @@ class AdminModel{
         $statement =  $this->conn->prepare($sql_query);
         $result = $statement->execute();
 
+        return $result;
+    }
+
+    function GetUsersServiceproviderList($table,$ServiceProvider){
+        $ListServiceProvider = array();
+        foreach($ServiceProvider as $array){
+            $sql_query = "SELECT * FROM $table WHERE UserId = {$array}";
+            $statement =  $this->conn->prepare($sql_query);
+            $statement->execute();
+            $result  = $statement->fetch(PDO::FETCH_ASSOC);
+            array_push($ListServiceProvider,$result);
+        }
+        return $ListServiceProvider;
+    }
+
+    function ActiveServiceProviderList($table){
+        $sql_query = "SELECT * FROM $table WHERE UserTypeId = 2 AND `IsActive`='Yes'";
+        $statement =  $this->conn->prepare($sql_query);
+        $statement->execute();
+        $result  = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 }

@@ -2457,6 +2457,7 @@ $(document).ready(function() {
         statues = $('#status option:selected').val();
         fromdate = $('#fromDate').val();
         todate = $('#toDate').val();
+        ppincode = $('#pincode').val();
 
         // fromdate = fromdate.split("-").reverse().join("-");
         // todate = todate.split("-").reverse().join("-");
@@ -2471,6 +2472,7 @@ $(document).ready(function() {
                 "statues": statues,
                 "fromdate": fromdate,
                 "todate": todate,
+                "pincode": ppincode,
             },
             dataType: 'json',
             success: function(response) {
@@ -2484,6 +2486,7 @@ $(document).ready(function() {
         $('#ServiceID').val(null);
         $('#fromDate').val(null);
         $('#toDate').val(null);
+        $('#pincode').val(null);
         $('#customername').val(null).trigger("change");
         $('#serviceprovider').val(null).trigger("change");
         $("#status").val(null).trigger("change");
@@ -2625,7 +2628,9 @@ $(document).ready(function() {
                 'serviceRequestId': id,
             },
             success: function(response) {
+
                 $("#iframeloading").hide();
+
                 if ($.trim(response) == "updated successfully") {
                     Swal.fire({
                         title: 'Updated Succefully',
