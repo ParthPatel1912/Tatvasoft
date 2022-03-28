@@ -117,9 +117,9 @@
                                     <option value="" selected="true" disabled="disabled">Status</option>
                                     <option value='Pending'>New</option>
                                     <option value='Approved'>Pending</option>
+                                    <option value='Refunded'>Refunded</option>
                                     <option value='Completed'>Completed</option>
                                     <option value='Cancelled'>Cancelled</option>
-
                                 </select>
                             </div>
                         </div>
